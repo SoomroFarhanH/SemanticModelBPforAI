@@ -3,9 +3,13 @@
 A scored Scorecard (0–100) with a rating (AI Ready / Mostly Ready / Needs Improvement / Not Ready) and a prioritised action list (Critical → Important → Recommended).
 
 How to use
+
 Upload to a Microsoft Fabric workspace notebook
+
 Set dataset and workspace parameters in cell 5
+
 Run all cells
 
 Limitation:
+
 It can not able to access Prep Data AI setup 
