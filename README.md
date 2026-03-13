@@ -1,5 +1,7 @@
 # SemanticModelBPforAI
 
+<img width="539" height="331" alt="image" src="https://github.com/user-attachments/assets/9135d99d-077c-4ca3-b0b4-a8f9e9c40eae" />
+
 A scored Scorecard (0–100) with a rating (AI Ready / Mostly Ready / Needs Improvement / Not Ready) and a prioritised action list (Critical → Important → Recommended).
 
 How to use
@@ -44,3 +46,4 @@ It is checking the best practices documented at https://learn.microsoft.com/en-u
 
 +	Bonus: Measure Dependencies — shows what each measure depends on for AI Schema config	—
   
+
