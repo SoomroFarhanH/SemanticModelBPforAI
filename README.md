@@ -2,6 +2,12 @@
 
 <img width="539" height="331" alt="image" src="https://github.com/user-attachments/assets/9135d99d-077c-4ca3-b0b4-a8f9e9c40eae" />
 
+📋 Prerequisites
+- Run inside a **Microsoft Fabric** workspace notebook
+- The semantic model must be published to the same (or an accessible) Fabric workspace
+- You need **Build** (or higher) permissions on the semantic model
+- `semantic-link-labs` will be installed automatically in the next cell
+
 A scored Scorecard (0–100) with a rating (AI Ready / Mostly Ready / Needs Improvement / Not Ready) and a prioritised action list (Critical → Important → Recommended).
 
 How to use
