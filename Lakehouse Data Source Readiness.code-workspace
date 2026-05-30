@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"name": "Lakehouse Data Source Readiness",
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/038ae573-10b6-4e1d-a4db-5c49f7b755a6/Lakehouse Data Source Readiness"
+		},
+		{
+			"name": "Lakehouse Data Agent Readiness",
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/22104bfb-2242-4c49-a290-3e1c43ca408b/Lakehouse Data Agent Readiness"
+		},
+		{
+			"name": "Set Service Principal as Pipeline Owner",
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/0ad19965-fa7d-470c-b685-e15597fb3393/Set Service Principal as Pipeline Owner"
+		},
+		{
+			"name": "Agent Quality Evaluator",
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/2becec5e-396a-4503-823d-a802d15ba6d1/Agent Quality Evaluator"
+		},
+		{
+			"name": "OneLake Shortcut Auditor",
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/51f36a3e-c5cf-412c-b1a0-d905fd096099/OneLake Shortcut Auditor"
+		},
+		{
+			"path": "../../../../../PowerBI/f2adc10e-785a-4d71-91ec-ce4ee3aefef6/SynapseNotebook/4e76e684-385e-4f0e-b63a-a86a77670874/CFO Dashboard"
+		}
+	],
+	"settings": {
+		"chat.agentSkillsLocations": {
+			".github/skills": true,
+			".agents/skills": true,
+			".claude/skills": true,
+			"~/.copilot/skills": true,
+			"~/.agents/skills": true,
+			"~/.claude/skills": true,
+			"~/.vscode/extensions/synapsevscode.synapse-1.22.0/copilot/skills": true
+		}
+	}
+}

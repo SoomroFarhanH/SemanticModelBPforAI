@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Backups
+*.backup
+*.bak
+
+# Fabric / Synapse local artifacts
+.artifact-info
+
+# OS / editor
+.DS_Store
+Thumbs.db

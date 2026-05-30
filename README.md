@@ -1,55 +1,193 @@
-# SemanticModelBPforAI
+# Power BI Semantic Readiness Remediation Agent
 
-<img width="539" height="331" alt="image" src="https://github.com/user-attachments/assets/9135d99d-077c-4ca3-b0b4-a8f9e9c40eae" />
+This guide helps end users run the Semantic AI Readiness Analyzer and remediate findings with natural language.
 
-📋 Prerequisites
-- Run inside a **Microsoft Fabric** workspace notebook
-- The semantic model must be published to the same (or an accessible) Fabric workspace
-- You need **Build** (or higher) permissions on the semantic model
-- `semantic-link-labs` will be installed automatically in the next cell
+## 30-second start
 
-A scored Scorecard (0–100) with a rating (AI Ready / Mostly Ready / Needs Improvement / Not Ready) and a prioritised action list (Critical → Important → Recommended).
+1. Connect
+- Connect to 'ContosoSalesData.pbix' in Power BI Desktop
 
-How to use
+2. Analyze
+- Run semantic AI readiness analyzer, parse the report, and show a remediation queue.
 
-Upload to a Microsoft Fabric workspace notebook
+3. Remediate
+- Remediate all safe issues.
 
-Set dataset and workspace parameters in cell 5
+4. Validate
+- Re-run analyzer and show what changed.
 
-Run all cells
+Alternate connect one-liners:
+- Fabric: Connect to semantic model 'Sales Semantic Model' in Fabric Workspace 'Sales Analytics'
+- PBIP: Open semantic model from PBIP folder 'C:\Projects\SalesModel\SalesModel.SemanticModel\definition'
 
-Limitation:
+## What this agent does
 
-It can not able to access Prep Data AI setup 
+1. Connects to a semantic model in one of three modes:
+- Power BI Desktop
+- Fabric workspace semantic model
+- PBIP semantic model folder
 
-It is checking the best practices documented at https://learn.microsoft.com/en-us/fabric/data-science/semantic-model-best-practices#prep-for-ai-make-semantic-model-ai-ready
+2. Runs readiness analysis and generates structured findings.
 
-11 Checks + 1 Bonus
+3. Builds a remediation queue sorted by severity.
 
-#	Check	Max Score
+4. Applies remediations one-by-one or in bulk for safe fixes.
 
-1	Star Schema — M:M relationships, bidirectional cross-filter, isolated tables	15
+5. Re-runs validation and reports deltas.
 
-2	Business-friendly naming — detects DIM_, FACT_, _AMT, all-caps, abbreviations	10
+## Included files in this folder
 
-3	Object descriptions — coverage % across tables, columns, measures	15
+- [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
+- [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
+- [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
 
-4	Synonyms — inspects TOM for synonyms on tables/columns/measures	5
+## Prerequisites
 
-5	Implicit measures — numeric columns with Summarize By ≠ None	10
+### Required for full automation (analyze plus remediate)
 
-6	Duplicate/overlapping measures — semantic groups + near-identical names	5
+1. Visual Studio Code with GitHub Copilot Chat.
+2. Power BI Modeling MCP tools available in your Copilot environment.
+3. Access to one model source:
+- Open PBIX in Power BI Desktop, or
+- Semantic model in Fabric workspace, or
+- PBIP definition folder.
+4. Permissions:
+- Read/Build access to analyze
+- Write-level access to apply remediation changes
 
-7	Ambiguous date fields — multiple date columns without guidance	5
+### Required for analyzer only (no automatic remediation)
 
-8	Hidden objects risk — hidden columns that break Verified Answers	5
+1. Access to [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
+2. Fabric notebook runtime with semantic-link-labs package available
 
-9	Model complexity/bloat — visible helper measures, column/measure counts	5
+## Do I need the Power BI Modeling MCP server extension?
 
-10	Prep for AI — annotation scan for AI Schema, Instructions, Verified Answers + full manual checklist	15
+Short answer: Yes for automatic remediation.
 
-11	Best Practice Analyzer — runs the full 60+ rule BPA	10
+- If MCP tools are available, the agent can create, rename, and update semantic model objects.
+- If MCP tools are not available, the agent can still analyze and produce a remediation plan, but cannot apply changes automatically.
 
-+	Bonus: Measure Dependencies — shows what each measure depends on for AI Schema config	—
-  
+## Quick start
 
+### Step 1: Start with a connection command
+
+Power BI Desktop:
+- Connect to 'ContosoSalesData.pbix' in Power BI Desktop
+
+Fabric workspace:
+- Connect to semantic model 'Sales Semantic Model' in Fabric Workspace 'Sales Analytics'
+
+PBIP folder:
+- Open semantic model from PBIP folder 'C:\Projects\SalesModel\SalesModel.SemanticModel\definition'
+
+### Step 2: Run analysis
+
+- Run semantic AI readiness analyzer, parse the report, and show a remediation queue.
+
+### Step 3: Apply remediations
+
+- Remediate next issue.
+- Remediate all safe issues.
+- Remediate only rule MEASURE_NAMING.
+- Show dry-run changes for R004 and R005 before applying.
+
+### Step 4: Validate
+
+- Re-run analyzer and show what changed.
+
+## Recommended end-user command templates
+
+### Full workflow in one command
+
+Connect to semantic model 'Sales Semantic Model' in Fabric Workspace 'Sales Analytics', run semantic AI readiness analyzer, remediate all safe issues using Power BI Modeling MCP server, then re-run analyzer and show deltas.
+
+### Safe iterative workflow
+
+1. Connect to 'ContosoSalesData.pbix' in Power BI Desktop.
+2. Run semantic AI readiness analyzer and show remediation queue.
+3. Show dry-run changes for the next two items.
+4. Apply one remediation at a time.
+5. Re-run analyzer after each batch.
+
+## Typical remediation categories
+
+1. Naming consistency
+- Rename technical names to business-friendly names.
+
+2. Measure coverage
+- Add canonical measures such as Total Sales, Total Cost, Gross Margin, Margin %, Return Rate %, Discount Rate %.
+
+3. Descriptions and metadata quality
+- Add missing descriptions and synonyms.
+
+4. Model design findings
+- Star schema and date-table simplification are often manual or approval-based.
+
+## Safety and approval model
+
+Auto-apply by default for low-risk deterministic updates:
+- Add missing descriptions
+- Add safe measures
+- Add synonyms
+- Simple naming cleanups
+
+Require explicit approval for potentially business-impacting changes:
+- Relationship redesign
+- Measure logic changes that affect KPI meaning
+- Deleting objects
+- Broad rename operations with uncertain downstream impact
+
+## Dependency and health checks
+
+Before production use, validate:
+
+1. Connectivity
+- Agent can connect and list model objects.
+
+2. Read operations
+- Agent can list tables, columns, measures, relationships.
+
+3. Write operations
+- Agent can perform one controlled test update in a development model.
+
+4. Validation loop
+- Agent can re-run analysis and report delta changes.
+
+## Troubleshooting
+
+1. Connection not found in Desktop
+- Ensure PBIX is open.
+- Retry connection discovery.
+
+2. Fabric connection errors
+- Verify workspace and model names.
+- Confirm tenant and permission scope.
+
+3. Remediation command fails
+- Confirm MCP tools are enabled.
+- Confirm write permissions to the model.
+
+4. Analyzer works but remediation does not
+- This usually means MCP execution is unavailable while read access is available.
+
+## Best practices for end users
+
+1. Start in a dev or test workspace.
+2. Run dry-run first for medium and high severity items.
+3. Apply safe fixes in batch, then validate.
+4. Apply higher-impact changes one-by-one with approval.
+5. Keep a before/after summary for each remediation session.
+
+## Suggested workflow for teams
+
+1. Analyst runs analyzer and generates queue.
+2. Model owner reviews dry-run plan.
+3. Agent applies approved fixes.
+4. Agent re-runs analyzer and publishes delta report.
+5. Team promotes to production after validation.
+
+## Related resources in this folder
+
+- [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
+- [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
+- [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
