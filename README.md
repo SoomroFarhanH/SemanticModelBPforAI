@@ -39,7 +39,7 @@ Alternate connect one-liners:
 
 - [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
 - [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
-- [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
+- [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Alternate connect one-liners:
 
 ### Required for analyzer only (no automatic remediation)
 
-1. Access to [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
+1. Access to [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
 2. Fabric notebook runtime with semantic-link-labs package available
 
 ## Do I need the Power BI Modeling MCP server extension?
@@ -190,4 +190,4 @@ Before production use, validate:
 
 - [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
 - [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
-- [SemanticModel_DataAgent_Readiness_Automated.ipynb](SemanticModel_DataAgent_Readiness_Automated.ipynb)
+- [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
