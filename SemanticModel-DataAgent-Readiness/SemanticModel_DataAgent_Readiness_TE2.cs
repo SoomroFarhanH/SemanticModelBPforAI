@@ -1,5 +1,7 @@
 // Semantic Model Data Agent Readiness Analyzer
 // Tabular Editor 2.28.0 - Advanced Scripting compatible script
+// Aligned with: Optimize your semantic model for Copilot in Power BI
+//   https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data
 
 var checkScores = new Dictionary<string, int[]>(); // key -> [achieved, max, weight]
 var findings = new List<string[]>();               // [severity, check, description]
@@ -322,6 +324,152 @@ logInfo("Relationships: " + relationships.Count);
     }
 
     checkScores["1.15_duplicate_cols"] = new[] { score, 5, 1 };
+    logInfo("Score: " + score + "/5");
+}
+
+// ------------------------------------------------------------
+// 1.17 Hierarchies (logical groupings)
+// Ref: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data (Model structure)
+// ------------------------------------------------------------
+{
+    separator();
+    logInfo("CHECK 1.17: HIERARCHIES (LOGICAL GROUPINGS)");
+    var score = 5;
+
+    var drillPattern = new System.Text.RegularExpressions.Regex(
+        "(date|calendar|time|geography|geo|location|product|organi[sz]ation|org|customer|employee|account)",
+        System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+    var tablesWithHier = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    var hierCount = 0;
+    foreach (var t in userTables)
+    {
+        var hc = t.Hierarchies.Count;
+        if (hc > 0)
+        {
+            hierCount += hc;
+            tablesWithHier.Add(t.Name ?? "");
+        }
+    }
+
+    if (hierCount > 0)
+        logInfo(hierCount + " hierarchy(ies) found across " + tablesWithHier.Count + " table(s).");
+    else
+        logWarn("No hierarchies found in the model.");
+
+    var missingHier = visibleTables
+        .Where(t => drillPattern.IsMatch(t.Name ?? "") && !tablesWithHier.Contains(t.Name ?? ""))
+        .Select(t => t.Name)
+        .ToList();
+
+    if (missingHier.Count > 0)
+    {
+        logWarn(missingHier.Count + " drill-down candidate table(s) without a hierarchy: " + string.Join(", ", missingHier.Take(10)));
+        logInfo("ACTION: Add hierarchies (e.g., Date: Year > Quarter > Month > Day; Geography: Country/Region > State > City) so Copilot can drill down.");
+        addFinding("recommended", "1.17 Hierarchies", missingHier.Count + " drill-down table(s) without a hierarchy");
+        score = Math.Max(2, score - 2);
+    }
+    else if (hierCount > 0)
+    {
+        logInfo("Key dimension tables have hierarchies configured.");
+    }
+
+    logInfo("Reference: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data");
+    checkScores["1.17_hierarchies"] = new[] { score, 5, 1 };
+    logInfo("Score: " + score + "/5");
+}
+
+// ------------------------------------------------------------
+// 1.18 Description length - Copilot 200-character window
+// Ref: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data (DAX query considerations)
+// ------------------------------------------------------------
+{
+    separator();
+    logInfo("CHECK 1.18: DESCRIPTION LENGTH - COPILOT 200-CHARACTER WINDOW");
+    var score = 5;
+    var limit = 200;
+
+    var longTables = visibleTables.Where(t => !isBlank(t.Description) && t.Description.Trim().Length > limit).ToList();
+    var longColumns = visibleColumns.Where(c => !isBlank(c.Description) && c.Description.Trim().Length > limit).ToList();
+    var longMeasures = visibleMeasures.Where(m => !isBlank(m.Description) && m.Description.Trim().Length > limit).ToList();
+    var totalLong = longTables.Count + longColumns.Count + longMeasures.Count;
+
+    if (totalLong == 0)
+    {
+        logInfo("PASSED: All descriptions fit within the " + limit + "-character Copilot grounding window.");
+    }
+    else
+    {
+        logWarn(totalLong + " description(s) exceed " + limit + " characters - Copilot reads only the first " + limit + ".");
+        foreach (var t in longTables.Take(8)) logInfo(" - Table " + t.Name + " (" + t.Description.Trim().Length + " chars)");
+        foreach (var c in longColumns.Take(8)) logInfo(" - Column " + c.Table.Name + "[" + c.Name + "] (" + c.Description.Trim().Length + " chars)");
+        foreach (var m in longMeasures.Take(8)) logInfo(" - Measure " + m.Table.Name + "[" + m.Name + "] (" + m.Description.Trim().Length + " chars)");
+        logInfo("ACTION: Front-load the business meaning + intended usage in the first " + limit + " characters.");
+        addFinding("recommended", "1.18 Desc Length", totalLong + " description(s) exceed the " + limit + "-char Copilot window");
+        score = Math.Max(2, 5 - Math.Min(3, totalLong));
+    }
+
+    logInfo("Reference: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data");
+    checkScores["1.18_desc_length"] = new[] { score, 5, 1 };
+    logInfo("Score: " + score + "/5");
+}
+
+// ------------------------------------------------------------
+// 1.19 Calculation group descriptions
+// Ref: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data (DAX query considerations)
+// ------------------------------------------------------------
+{
+    separator();
+    logInfo("CHECK 1.19: CALCULATION GROUP DESCRIPTIONS");
+    var score = 5;
+    var limit = 200;
+
+    var cgTotal = 0;
+    var cgIssues = new List<string>();
+
+    foreach (var t in userTables)
+    {
+        var cgt = t as CalculationGroupTable;
+        if (cgt == null) continue;
+        cgTotal++;
+
+        var items = cgt.CalculationItems.Select(ci => ci.Name ?? "").ToList();
+        var desc = (t.Description ?? "").Trim();
+
+        if (isBlank(desc))
+        {
+            cgIssues.Add(t.Name + " -> no description (list the calculation item names)");
+        }
+        else
+        {
+            var descLower = desc.ToLowerInvariant();
+            var listsAny = items.Any(it => !isBlank(it) && descLower.Contains(it.ToLowerInvariant()));
+            if (items.Count > 0 && !listsAny)
+                cgIssues.Add(t.Name + " -> description doesn't list any item: " + string.Join(", ", items.Take(5)));
+            else if (desc.Length > limit)
+                cgIssues.Add(t.Name + " -> description exceeds " + limit + " chars (" + desc.Length + ") - item names may be cut off");
+        }
+    }
+
+    if (cgTotal == 0)
+    {
+        logInfo("No calculation groups found - nothing to check.");
+    }
+    else if (cgIssues.Count == 0)
+    {
+        logInfo("PASSED: All " + cgTotal + " calculation group(s) list their item names within the " + limit + "-char window.");
+    }
+    else
+    {
+        logWarn(cgIssues.Count + "/" + cgTotal + " calculation group(s) need better descriptions.");
+        foreach (var s in cgIssues.Take(8)) logInfo(" - " + s);
+        logInfo("ACTION: In the calculation group description, list the item names (e.g., 'YTD: year to date, MTD: month to date, PY: prior year') within the first " + limit + " characters.");
+        addFinding("important", "1.19 Calc Groups", cgIssues.Count + " calculation group(s) without item names in description");
+        score = Math.Max(1, 5 - Math.Min(3, cgIssues.Count));
+    }
+
+    logInfo("Reference: https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data");
+    checkScores["1.19_calc_groups"] = new[] { score, 5, 1 };
     logInfo("Score: " + score + "/5");
 }
 
