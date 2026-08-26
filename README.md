@@ -1,6 +1,23 @@
 # Semantic Model Best Practices for AI
 
-A collection of tools and guidance to make **Power BI semantic models** and **Fabric Data Agents** ready for AI / Copilot. Each tool lives in its own folder with a dedicated README.
+Toolkit to make Power BI semantic models and Fabric Data Agents AI/Copilot-ready: semantic model AI-readiness analyzers, a Data Agent config validator, a natural-language remediation agent, a Copilot diagnostics troubleshooter, and lakehouse data-source readiness checks.
+
+Each tool lives in its own folder with a dedicated README.
+
+## What this toolkit offers
+
+- Semantic model AI-readiness analysis for naming, descriptions, DAX quality, schema clarity, and performance signals.
+- Fabric Data Agent configuration validation against practical best practices.
+- Natural-language remediation assets (agent + prompt + script) to translate findings into fix actions.
+- Copilot diagnostics parsing and troubleshooting guidance to connect symptoms to model-level fixes.
+- Lakehouse data-source readiness checks for agent and Copilot scenarios.
+
+## Tooling formats included
+
+- Jupyter notebooks for analyzers, diagnostics, assessments, and guided workflows.
+- PowerShell scripts for repeatable semantic model setting changes and utilities.
+- Agent and prompt definition files for remediation workflows.
+- Markdown playbooks and checklists for implementation guidance.
 
 ## Tools
 
@@ -18,10 +35,13 @@ A collection of tools and guidance to make **Power BI semantic models** and **Fa
 - **Configuring a Fabric Data Agent?** Use [Agent-Readiness-Validator](Agent-Readiness-Validator/) and [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
 - **Copilot answering incorrectly?** Download the diagnostics and run [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/).
 
-## Additional resources
+## Docs included
 
-- [`PowerBI_Report_Authoring_Unified_Checklist.md`](PowerBI_Report_Authoring_Unified_Checklist.md) — report-authoring checklist.
-- [`Docs/`](Docs/) — background reading on Fabric Data Agents and agentic analytics.
+- [PowerBI_Report_Authoring_Unified_Checklist.md](PowerBI_Report_Authoring_Unified_Checklist.md) - Report-authoring checklist.
+- [Docs/A Practical Guide to Building and Deploying Data Agents.pdf](Docs/A%20Practical%20Guide%20to%20Building%20and%20Deploying%20Data%20Agents.pdf) - Practical implementation guide for data agents.
+- [Docs/autonomous_fabric_-_agentic_data_quality_using_fabric_data_agents.pdf](Docs/autonomous_fabric_-_agentic_data_quality_using_fabric_data_agents.pdf) - Agentic data-quality architecture and workflows.
+- [Docs/build_smarter_analytics_assistants_with_fabric_data_agents_and_copilot_studio.pdf](Docs/build_smarter_analytics_assistants_with_fabric_data_agents_and_copilot_studio.pdf) - Building analytics assistants with Data Agents and Copilot Studio.
+- [Docs/mastering_fabric_data_agents_from_setup_to_success.pdf](Docs/mastering_fabric_data_agents_from_setup_to_success.pdf) - End-to-end setup and adoption guidance.
 
 ## Repository organization
 
