@@ -4,6 +4,8 @@ Toolkit to make Power BI semantic models and Fabric Data Agents AI/Copilot-ready
 
 Each tool lives in its own folder with a dedicated README.
 
+This repository is built for teams searching for: Power BI Copilot readiness, Fabric Data Agent best practices, semantic model optimization for AI, Copilot diagnostics troubleshooting, DirectQuery tuning, and OneLake data-source readiness.
+
 ## What this toolkit offers
 
 - Semantic model AI-readiness analysis for naming, descriptions, DAX quality, schema clarity, and performance signals.
@@ -12,12 +14,35 @@ Each tool lives in its own folder with a dedicated README.
 - Copilot diagnostics parsing and troubleshooting guidance to connect symptoms to model-level fixes.
 - Lakehouse data-source readiness checks for agent and Copilot scenarios.
 
+## Search-friendly use cases
+
+- Power BI Copilot semantic model best practices
+- How to prepare semantic model for Copilot and AI
+- Fabric Data Agent configuration validator and readiness checklist
+- Copilot diagnostics export analyzer for Power BI
+- Natural-language remediation for semantic model issues
+- DirectQuery best practices checker and max connection tuning
+- OneLake shortcut audit and automation for Fabric
+- DAX export to Excel paginated-style reporting workflow
+- Fabric AI readiness tools and docs for analytics teams
+
+## Keywords
+
+Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readiness, Copilot readiness, semantic model analyzer, data agent validator, diagnostics troubleshooter, DirectQuery best practices, DAX optimization, OneLake shortcut automation, lakehouse readiness, Tabular Editor, model governance, analytics engineering.
+
 ## Tooling formats included
 
 - Jupyter notebooks for analyzers, diagnostics, assessments, and guided workflows.
 - PowerShell scripts for repeatable semantic model setting changes and utilities.
 - Agent and prompt definition files for remediation workflows.
 - Markdown playbooks and checklists for implementation guidance.
+
+## Who this is for
+
+- Power BI developers optimizing semantic models for Copilot.
+- Fabric data engineers building or validating Data Agents.
+- Analytics platform teams troubleshooting Copilot response quality.
+- BI governance teams standardizing AI-readiness checks and documentation.
 
 ## Tools
 
