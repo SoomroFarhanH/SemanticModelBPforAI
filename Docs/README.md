@@ -2,6 +2,10 @@
 
 This folder contains implementation guides and reference material for Microsoft Fabric Data Agents, Copilot, and semantic model AI-readiness workflows.
 
+Keywords: Power BI Copilot, Microsoft Fabric Data Agents, semantic model AI readiness, Copilot diagnostics, OneLake readiness, DirectQuery best practices, AI analytics governance.
+
+Hashtags: #PowerBI #MicrosoftFabric #Copilot #DataAgents #SemanticModel #AIReadiness #DirectQuery #OneLake #AnalyticsEngineering
+
 ## Documents
 
 - [A Practical Guide to Building and Deploying Data Agents.pdf](A%20Practical%20Guide%20to%20Building%20and%20Deploying%20Data%20Agents.pdf) - End-to-end implementation guidance for building and deploying Fabric Data Agents.

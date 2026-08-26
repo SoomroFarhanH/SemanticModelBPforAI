@@ -8,6 +8,7 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 
 ## Table of contents
 
+- [Start here](#start-here)
 - [What this toolkit offers](#what-this-toolkit-offers)
 - [Search-friendly use cases](#search-friendly-use-cases)
 - [Keywords](#keywords)
@@ -18,7 +19,16 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 - [Docs included](#docs-included)
 - [Repository organization](#repository-organization)
 - [Suggested GitHub topics](#suggested-github-topics)
+- [Suggested GitHub about text](#suggested-github-about-text)
 - [Reference documentation](#reference-documentation)
+
+## Start here
+
+1. Run [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/) to score semantic model readiness.
+2. Run [SemanticModel-DataAgent-Readiness](SemanticModel-DataAgent-Readiness/) to validate agent-facing model quality and use remediation assets.
+3. Run [Agent-Readiness-Validator](Agent-Readiness-Validator/) to validate Data Agent configuration.
+4. If Copilot answers are poor, run [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/).
+5. For lakehouse-backed scenarios, run [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
 
 ## What this toolkit offers
 
@@ -118,6 +128,12 @@ Add these topics in repository settings to improve GitHub search visibility:
 - tabular-editor
 - analytics-engineering
 - business-intelligence
+
+## Suggested GitHub about text
+
+Use this repository subtitle/About text in GitHub settings for search visibility:
+
+Power BI and Microsoft Fabric toolkit for Copilot and AI readiness: semantic model analyzers, Fabric Data Agent validator, natural-language remediation agent, Copilot diagnostics troubleshooter, DirectQuery tuning, and OneLake/lakehouse readiness checks.
 
 ## Reference documentation
 
