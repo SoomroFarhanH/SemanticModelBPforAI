@@ -6,6 +6,13 @@ Each tool lives in its own folder with a dedicated README.
 
 This repository is built for teams searching for: Power BI Copilot readiness, Fabric Data Agent best practices, semantic model optimization for AI, Copilot diagnostics troubleshooting, DirectQuery tuning, and OneLake data-source readiness.
 
+## Find your path
+
+- For Power BI semantic model optimization: start at [Start here](#start-here), then review [Tools](#tools) and [Search-friendly use cases](#search-friendly-use-cases).
+- For Fabric Data Agent validation and remediation: go to [What this toolkit offers](#what-this-toolkit-offers), [How to pick a tool](#how-to-pick-a-tool), and [Docs included](#docs-included).
+- For Copilot troubleshooting and diagnostics: jump to [Tools](#tools), [How to pick a tool](#how-to-pick-a-tool), and [Reference documentation](#reference-documentation).
+- For OneLake and lakehouse readiness: use [How to pick a tool](#how-to-pick-a-tool) and [Repository organization](#repository-organization).
+
 ## Table of contents
 
 - [Start here](#start-here)
