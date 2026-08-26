@@ -6,6 +6,20 @@ Each tool lives in its own folder with a dedicated README.
 
 This repository is built for teams searching for: Power BI Copilot readiness, Fabric Data Agent best practices, semantic model optimization for AI, Copilot diagnostics troubleshooting, DirectQuery tuning, and OneLake data-source readiness.
 
+## Table of contents
+
+- [What this toolkit offers](#what-this-toolkit-offers)
+- [Search-friendly use cases](#search-friendly-use-cases)
+- [Keywords](#keywords)
+- [Tooling formats included](#tooling-formats-included)
+- [Who this is for](#who-this-is-for)
+- [Tools](#tools)
+- [How to pick a tool](#how-to-pick-a-tool)
+- [Docs included](#docs-included)
+- [Repository organization](#repository-organization)
+- [Suggested GitHub topics](#suggested-github-topics)
+- [Reference documentation](#reference-documentation)
+
 ## What this toolkit offers
 
 - Semantic model AI-readiness analysis for naming, descriptions, DAX quality, schema clarity, and performance signals.
@@ -72,21 +86,38 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 
 The repository now separates packaged tools from supporting assets:
 
-- [`SemanticModel-AI-Readiness-Analyzer/`](SemanticModel-AI-Readiness-Analyzer/) and related tool folders: production analyzers and validators.
-- [`Notebooks/`](Notebooks/) — working notebooks grouped by scenario (semantic model optimization, OneLake, Copilot/agent insights, business demos).
-- [`Scripts/`](Scripts/) — reusable automation scripts grouped by purpose (model settings and utilities).
+- [SemanticModel-AI-Readiness-Analyzer/](SemanticModel-AI-Readiness-Analyzer/) and related tool folders: production analyzers and validators.
+- [Notebooks/](Notebooks/) - Working notebooks grouped by scenario (semantic model optimization, OneLake, Copilot/agent insights, business demos).
+- [Scripts/](Scripts/) - Reusable automation scripts grouped by purpose (model settings and utilities).
 
 ### New notebook catalog
 
-- [`Notebooks/SemanticModel-Optimization/`](Notebooks/SemanticModel-Optimization/) — model quality, performance, and schema-shaping notebooks.
-- [`Notebooks/Lakehouse-OneLake/`](Notebooks/Lakehouse-OneLake/) — OneLake shortcut governance and automation.
-- [`Notebooks/Copilot-Agent-Insights/`](Notebooks/Copilot-Agent-Insights/) — Copilot usage mining and agent quality analysis.
-- [`Notebooks/Business-Demos/`](Notebooks/Business-Demos/) — architecture and dashboard-oriented demos.
+- [Notebooks/SemanticModel-Optimization/](Notebooks/SemanticModel-Optimization/) - Model quality, performance, and schema-shaping notebooks.
+- [Notebooks/Lakehouse-OneLake/](Notebooks/Lakehouse-OneLake/) - OneLake shortcut governance and automation.
+- [Notebooks/Copilot-Agent-Insights/](Notebooks/Copilot-Agent-Insights/) - Copilot usage mining and agent quality analysis.
+- [Notebooks/Business-Demos/](Notebooks/Business-Demos/) - Architecture and dashboard-oriented demos.
 
 ### New script catalog
 
-- [`Scripts/PowerBI-Model-Settings/`](Scripts/PowerBI-Model-Settings/) — semantic model connectivity and DirectQuery tuning scripts.
-- [`Scripts/Utilities/`](Scripts/Utilities/) — helper scripts for operational tasks.
+- [Scripts/PowerBI-Model-Settings/](Scripts/PowerBI-Model-Settings/) - Semantic model connectivity and DirectQuery tuning scripts.
+- [Scripts/Utilities/](Scripts/Utilities/) - Helper scripts for operational tasks.
+
+## Suggested GitHub topics
+
+Add these topics in repository settings to improve GitHub search visibility:
+
+- power-bi
+- microsoft-fabric
+- copilot
+- semantic-model
+- fabric-data-agent
+- ai-readiness
+- directquery
+- onelake
+- dax
+- tabular-editor
+- analytics-engineering
+- business-intelligence
 
 ## Reference documentation
 
