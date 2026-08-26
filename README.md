@@ -23,6 +23,26 @@ A collection of tools and guidance to make **Power BI semantic models** and **Fa
 - [`PowerBI_Report_Authoring_Unified_Checklist.md`](PowerBI_Report_Authoring_Unified_Checklist.md) — report-authoring checklist.
 - [`Docs/`](Docs/) — background reading on Fabric Data Agents and agentic analytics.
 
+## Repository organization
+
+The repository now separates packaged tools from supporting assets:
+
+- [`SemanticModel-AI-Readiness-Analyzer/`](SemanticModel-AI-Readiness-Analyzer/) and related tool folders: production analyzers and validators.
+- [`Notebooks/`](Notebooks/) — working notebooks grouped by scenario (semantic model optimization, OneLake, Copilot/agent insights, business demos).
+- [`Scripts/`](Scripts/) — reusable automation scripts grouped by purpose (model settings and utilities).
+
+### New notebook catalog
+
+- [`Notebooks/SemanticModel-Optimization/`](Notebooks/SemanticModel-Optimization/) — model quality, performance, and schema-shaping notebooks.
+- [`Notebooks/Lakehouse-OneLake/`](Notebooks/Lakehouse-OneLake/) — OneLake shortcut governance and automation.
+- [`Notebooks/Copilot-Agent-Insights/`](Notebooks/Copilot-Agent-Insights/) — Copilot usage mining and agent quality analysis.
+- [`Notebooks/Business-Demos/`](Notebooks/Business-Demos/) — architecture and dashboard-oriented demos.
+
+### New script catalog
+
+- [`Scripts/PowerBI-Model-Settings/`](Scripts/PowerBI-Model-Settings/) — semantic model connectivity and DirectQuery tuning scripts.
+- [`Scripts/Utilities/`](Scripts/Utilities/) — helper scripts for operational tasks.
+
 ## Reference documentation
 
 - [Use Copilot with semantic models](https://learn.microsoft.com/power-bi/create-reports/copilot-semantic-models)
