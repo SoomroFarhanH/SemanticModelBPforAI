@@ -16,8 +16,12 @@
  *   2  Dimension tables in Dual storage mode
  *   3  Assume Referential Integrity on relationships
  *   4  Relationship columns are Integer (Int64)
- *   5  Auto Aggregations = MANUAL (AlternateOf isn't exposed by the TE2 wrapper)
+ *   5  Aggregation strategy (prefer targeted User-Defined Aggregations)
+ *      Auto Aggregations = MANUAL and informational (AlternateOf isn't exposed by the TE2 wrapper)
  *   5b SSO vs Auto Aggregations = MANUAL (SSO lives on the gateway/connection, not in TOM)
+ *   5c Calendar-based time intelligence and Visual Calculations = MANUAL
+ *   5d Hybrid Tables / dataCoverageDefinition = INFO (coverage verification is manual)
+ *   5e Discourage Implicit Measures = PASS / WARN / MANUAL
  *   6  MaxParallelismPerQuery = MANUAL (not exposed by the TE2 wrapper)
  *   7  Data source MaxConnections vs SKU cap = MANUAL (MaxConnections not exposed by the TE2 wrapper)
  *
@@ -160,16 +164,64 @@ Add("Relationship keys are Integer",
     rels.Count == 0 ? "INFO" : (badTypes.Count == 0 ? "PASS" : "FAIL"),
     badTypes.Count + " relationship(s) use non-integer join keys");
 
-// ---- Check 5: Auto Aggregations ------------------------------------------
-// AlternateOf (aggregation binding) is not surfaced by the TE2 wrapper, so this is a manual check.
-Add("Auto Aggregations enabled", "MANUAL",
-    "Not detectable in TE2 - verify in Semantic model settings > Aggregations training: " +
+// ---- Check 5: Aggregation strategy ---------------------------------------
+Add("Aggregation strategy (prefer User-Defined Aggregations)", "INFO",
+    "Prefer targeted aggregations based on known report workloads: " +
+    "https://learn.microsoft.com/power-bi/transform-model/aggregations-advanced");
+
+// AlternateOf (aggregation binding) is not surfaced by the TE2 wrapper, so this is informational.
+Add("Auto Aggregations (informational, not a default recommendation)", "MANUAL",
+    "Not detectable in TE2. Their absence is acceptable; if enabled, retain them only when measured query " +
+    "benefits justify CU consumption. Configuration reference: " +
     "https://learn.microsoft.com/power-bi/enterprise/aggregations-auto-configure");
 
 // ---- Check 5b: SSO vs Auto Aggregations (cannot detect in TE2) ------------
 Add("SSO vs Auto Aggregations (use User-Defined Aggregations if SSO)", "MANUAL",
-    "SSO is on the gateway/connection, not in TOM. If SSO is ON, Auto-Agg skips those tables - " +
+    "SSO is on the gateway/connection, not in TOM. If SSO is ON, Auto Aggregations skip those tables - " +
     "use User-Defined Aggregations: https://learn.microsoft.com/power-bi/transform-model/aggregations-advanced");
+
+// ---- Check 5c: Calendar time intelligence and Visual Calculations --------
+Add("Calendar-based time intelligence and Visual Calculations", "MANUAL",
+    "Benchmark calendar-based time intelligence for duration, DQ rows, SQL request count, CPU, and memory: " +
+    "https://blog.crossjoin.co.uk/2025/11/30/a-look-at-the-impact-of-calendar-based-time-intelligence-on-power-bi-directquery-performance/ " +
+    "Use Visual Calculations for suitable visual-local calculations over aggregated results: " +
+    "https://learn.microsoft.com/power-bi/transform-model/desktop-visual-calculations-overview");
+
+// ---- Check 5d: Hybrid Tables / dataCoverageDefinition --------------------
+var hybridTables = Model.Tables
+    .Where(t => t.Partitions.Any(p => p.Mode.ToString() == "Import")
+             && t.Partitions.Any(p => p.Mode.ToString() == "DirectQuery"))
+    .Select(t => t.Name).ToList();
+Add("Hybrid Tables / dataCoverageDefinition (advanced)", "INFO",
+    hybridTables.Count == 0
+                ? "No hybrid tables detected. Consider them only for a suitable hot/cold data pattern: " +
+                    "https://blog.crossjoin.co.uk/2024/02/25/datacoveragedefinition-a-new-optimisation-for-hybrid-tables-in-power-bi/"
+        : "Hybrid tables detected: " + string.Join(", ", hybridTables) +
+          ". Verify an accurate dataCoverageDefinition on each DirectQuery partition: " +
+          "https://blog.crossjoin.co.uk/2024/02/25/datacoveragedefinition-a-new-optimisation-for-hybrid-tables-in-power-bi/");
+
+// ---- Check 5e: Discourage Implicit Measures ------------------------------
+try
+{
+    var discourageProperty = Model.GetType().GetProperty("DiscourageImplicitMeasures");
+    if (discourageProperty == null)
+        Add("Discourage Implicit Measures", "MANUAL",
+            "Property is not exposed by this TE2 wrapper; verify Model.DiscourageImplicitMeasures manually.");
+    else
+    {
+        bool discourageImplicit = System.Convert.ToBoolean(discourageProperty.GetValue(Model, null));
+        Add("Discourage Implicit Measures", discourageImplicit ? "PASS" : "WARN",
+            discourageImplicit
+                ? "Model.DiscourageImplicitMeasures is enabled."
+                : "Consider enabling Model.DiscourageImplicitMeasures after testing report-authoring and filter-pane behavior: " +
+                  "https://blog.crossjoin.co.uk/2023/04/16/disabling-filter-pane-aggregates-in-power-bi/");
+    }
+}
+catch
+{
+    Add("Discourage Implicit Measures", "MANUAL",
+        "Could not read Model.DiscourageImplicitMeasures; verify it manually.");
+}
 
 // ---- Check 6: MaxParallelismPerQuery -------------------------------------
 // Model.MaxParallelismPerQuery is not surfaced by the TE2 wrapper - manual/scripted check.
