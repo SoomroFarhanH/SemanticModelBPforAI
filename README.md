@@ -44,9 +44,12 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 - Natural-language remediation assets (agent + prompt + script) to translate findings into fix actions.
 - Copilot diagnostics parsing and troubleshooting guidance to connect symptoms to model-level fixes.
 - Lakehouse data-source readiness checks for agent and Copilot scenarios.
+- Power BI Performance Analyzer JSON diagnostics: slow-visual root causes, DAX/DirectQuery/Direct Lake fallback analysis, data-quality checks, and a self-contained HTML report.
 
 ## Search-friendly use cases
 
+- Power BI Performance Analyzer JSON export analyzer and slow report troubleshooting
+- Direct Lake fallback to DirectQuery detection from Performance Analyzer
 - Power BI Copilot semantic model best practices
 - How to prepare semantic model for Copilot and AI
 - Fabric Data Agent configuration validator and readiness checklist
@@ -59,7 +62,7 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 
 ## Keywords
 
-Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readiness, Copilot readiness, semantic model analyzer, data agent validator, diagnostics troubleshooter, DirectQuery best practices, DAX optimization, OneLake shortcut automation, lakehouse readiness, Tabular Editor, model governance, analytics engineering.
+Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readiness, Copilot readiness, semantic model analyzer, data agent validator, diagnostics troubleshooter, DirectQuery best practices, DAX optimization, Performance Analyzer, report performance, Direct Lake fallback, OneLake shortcut automation, lakehouse readiness, Tabular Editor, model governance, analytics engineering.
 
 ## Tooling formats included
 
@@ -84,12 +87,14 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 | [Agent-Readiness-Validator](Agent-Readiness-Validator/) | Validates a Fabric Data Agent's configuration (benchmarks, instructions, examples, join risk, failure diagnosis) against Microsoft best practices. |
 | [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/) | Parses a Copilot diagnostic export into a prioritized troubleshooting report and a shareable Markdown report, mapping each signal to a model fix. |
 | [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/) | Assesses a Fabric Lakehouse data source for agent/Copilot readiness. *(Work in progress.)* |
+| [PowerBI-Performance-Analyzer-Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/) | Turns a Power BI Performance Analyzer JSON export into a prioritized root-cause report (DAX, DirectQuery / Direct Lake fallback, rendering, waiting) with overlap-safe timings, data-quality rules, event trees, a timeline, and HTML/Markdown/CSV/JSON outputs. |
 
 ## How to pick a tool
 
 - **Preparing a semantic model for Copilot?** Start with [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/), then use [SemanticModel-DataAgent-Readiness](SemanticModel-DataAgent-Readiness/) to analyze and remediate.
 - **Configuring a Fabric Data Agent?** Use [Agent-Readiness-Validator](Agent-Readiness-Validator/) and [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
 - **Copilot answering incorrectly?** Download the diagnostics and run [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/).
+- **Report page is slow?** Export a Performance Analyzer capture and run [PowerBI-Performance-Analyzer-Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/).
 
 ## Docs included
 
