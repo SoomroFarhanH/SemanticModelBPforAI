@@ -1,6 +1,24 @@
 # Power BI Semantic Readiness Remediation Agent
 
-This guide helps end users run the Semantic AI Readiness Analyzer and remediate findings with natural language.
+This guide helps end users run the readiness analyzer and remediate findings with natural language.
+
+## Fabric Data Agent Analyzer (v3.0.0)
+
+[FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) (formerly `SemanticModel_DataAgent_Readiness.ipynb`) assesses a **Fabric data agent and every connected source** (up to five), not just a semantic model:
+
+| Source family | Sources | Rule IDs |
+|---|---|---|
+| Common agent checks | Scope, instructions, routing, schema selection, runtime, preview risk, read-only contract | `DA-001` … `DA-026`, `EXQ-001` |
+| SQL | Lakehouse, Warehouse, Fabric SQL Database, Mirrored Database | `SQL-*`, `LH-*`, `WH-*`, `SQLDB-*`, `MIR-*` |
+| KQL | Eventhouse KQL Database | `KQL-*` |
+| Semantic | Power BI semantic model (all v2.2.2 checks, stable IDs) | `SM-000` … `SM-027` |
+| Preview | Graph Model, Fabric Ontology, Azure AI Search | `GRAPH-*`, `ONT-*`, `AIS-*` |
+| Cross-source | Routing, metric/time/key consistency | `XSR-*` |
+
+- **Collection modes:** `LIVE_SDK` (fabric-data-agent-sdk, preview), `GIT_EXPORT` (data agent Git item definition), and `MANUAL_MANIFEST` (JSON/YAML). Leave `DATA_AGENT_NAME_OR_ID` blank and set `dataset` + `workspace` to run the v2.x standalone semantic-model analysis.
+- **Read-only by default.** Live smoke tests, example-query execution, and SDK evaluation are opt-in (`RUN_LIVE_QUERY_TESTS`, `RUN_EVALUATION`).
+- **Statuses:** `PASS · WARN · FAIL · MANUAL · NOT_APPLICABLE · NOT_EVALUATED · UNKNOWN`. Readiness and evaluation coverage are reported separately, and blocker-based release gates override the average.
+- **Exports** (in `OUTPUT_ROOT`): an HTML report, a Markdown report, a findings CSV, and a JSON evidence bundle. The bundle's `findings[]` has one row per rule/object, with `rule_id`, `severity`, `status`, `source_name`, `object_path`, `evidence`, `recommendation`, and `docs_url`.
 
 ## 30-second start
 
@@ -39,7 +57,8 @@ Alternate connect one-liners:
 
 - [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
 - [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
-- [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
+- [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb)
+- [FabricDataAgentAnalyzer_SemanticModel_TE2.cs](FabricDataAgentAnalyzer_SemanticModel_TE2.cs) (Tabular Editor 2 script for the semantic-model checks)
 
 ## Prerequisites
 
@@ -57,8 +76,8 @@ Alternate connect one-liners:
 
 ### Required for analyzer only (no automatic remediation)
 
-1. Access to [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
-2. Fabric notebook runtime with semantic-link-labs package available
+1. Access to [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb)
+2. Fabric notebook runtime (`semantic-link-labs`, `fabric-data-agent-sdk`, `httpx`, and `pyyaml` are installed by the first code cell). `GIT_EXPORT` and `MANUAL_MANIFEST` modes also run in plain Python for static analysis.
 
 ## Do I need the Power BI Modeling MCP server extension?
 
@@ -190,4 +209,4 @@ Before production use, validate:
 
 - [PowerBI_Semantic_Readiness_Remediation_Agent.agent.md](PowerBI_Semantic_Readiness_Remediation_Agent.agent.md)
 - [PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md](PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md)
-- [SemanticModel_DataAgent_Readiness.ipynb](SemanticModel_DataAgent_Readiness.ipynb)
+- [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb)

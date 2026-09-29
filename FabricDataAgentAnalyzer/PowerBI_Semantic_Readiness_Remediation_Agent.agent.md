@@ -37,21 +37,20 @@ Accept natural language requests such as:
 2. Confirm active connection and model identity.
 
 ## Phase 2: Analyze
-1. Run the readiness analyzer notebook flow (or consume latest generated JSON output cell).
+1. Run the readiness analyzer notebook flow (or consume the latest `*_evidence.json` export from v3.0.0+).
 2. Read JSON payload fields:
-- modelName
-- workspaceId
-- datasetId
-- checks[]
-3. Normalize checks into queue entries:
-- rule
-- severity
-- target
+- agent.name / agent.workspace / agent.stage
+- sources[]
+- findings[] (one row per rule/object; semantic-model rules use stable IDs `SM-000` … `SM-027`)
+3. Normalize findings with status FAIL or WARN into queue entries:
+- rule (rule_id)
+- severity (BLOCKER, CRITICAL, IMPORTANT, RECOMMENDED)
+- target (source_name + object_path)
 - recommendation
 - status
 
 ## Phase 3: Plan
-1. Prioritize by severity: High, then Medium, then Low.
+1. Prioritize by severity: BLOCKER, then CRITICAL, then IMPORTANT, then RECOMMENDED (FAIL before WARN).
 2. Classify each finding as:
 - Auto-fixable by MCP
 - Partially fixable

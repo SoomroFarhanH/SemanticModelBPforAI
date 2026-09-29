@@ -1,4 +1,4 @@
-// Semantic Model Data Agent Readiness Analyzer
+// Fabric Data Agent Analyzer — semantic model checks (Tabular Editor 2)
 // Tabular Editor 2.28.0 - Advanced Scripting compatible script
 // Aligned with: Optimize your semantic model for Copilot in Power BI
 //   https://learn.microsoft.com/power-bi/create-reports/copilot-evaluate-data
@@ -68,7 +68,7 @@ var visibleMeasures = visibleTables.SelectMany(t => t.Measures).Where(m => !m.Is
 var relationships = Model.Relationships.ToList();
 
 separator();
-logInfo("Semantic Model Data Agent Readiness Analyzer (TE2)");
+logInfo("Fabric Data Agent Analyzer — semantic model checks (TE2)");
 separator();
 logInfo("Model: " + Model.Database.Name);
 logInfo("Visible tables: " + visibleTables.Count + " (total incl. hidden: " + userTables.Count + ")");
