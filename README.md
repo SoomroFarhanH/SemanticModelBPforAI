@@ -31,8 +31,10 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 
 ## Start here
 
-1. Run [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/) to score semantic model readiness.
-2. Run [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) to assess a Fabric Data Agent and every connected source, and use the remediation assets.
+> 🚀 **New: [Fabric Data Agent Analyzer v3](FabricDataAgentAnalyzer/)** assesses a Fabric data agent and every connected source in one notebook. Import it into Fabric, set the agent name, and run through section 4. The **Source Run Plan** then shows which sources the agent actually uses and which source sections to run. See [How to use the analyzer](FabricDataAgentAnalyzer/README.md#how-to-use-the-analyzer).
+
+1. Run [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) to assess a Fabric Data Agent and every connected source, then use the remediation assets to fix the findings.
+2. Run [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/) to score semantic model readiness.
 3. Run [Agent-Readiness-Validator](Agent-Readiness-Validator/) to validate Data Agent configuration.
 4. If Copilot answers are poor, run [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/).
 5. For lakehouse-backed scenarios, run [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
@@ -82,8 +84,8 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 
 | Tool | What it does |
 |------|--------------|
+| [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) | **Fabric Data Agent Analyzer (v3)**. Assesses a data agent and every connected source (Lakehouse, Warehouse, SQL DB, Mirrored DB, Eventhouse, semantic model, Graph, Ontology, Azure AI Search) with readiness, coverage, and release gates. Its Source Run Plan shows which sources the agent uses and which sections to run. Also includes a natural-language remediation agent (agent + prompt + Tabular Editor script) for semantic-model findings. |
 | [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/) | Validates a Power BI semantic model for Copilot with 18+ severity-weighted checks (naming, descriptions, DAX, AI Data Schema, performance). |
-| [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) | **Fabric Data Agent Analyzer (v3)**. Assesses a data agent and every connected source (Lakehouse, Warehouse, SQL DB, Mirrored DB, Eventhouse, semantic model, Graph, Ontology, Azure AI Search) with readiness, coverage, and release gates. Also includes a natural-language remediation agent (agent + prompt + Tabular Editor script) for semantic-model findings. |
 | [Agent-Readiness-Validator](Agent-Readiness-Validator/) | Validates a Fabric Data Agent's configuration (benchmarks, instructions, examples, join risk, failure diagnosis) against Microsoft best practices. |
 | [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/) | Parses a Copilot diagnostic export into a prioritized troubleshooting report and a shareable Markdown report, mapping each signal to a model fix. |
 | [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/) | Assesses a Fabric Lakehouse data source for agent/Copilot readiness. *(Work in progress.)* |
@@ -91,8 +93,8 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 
 ## How to pick a tool
 
+- **Configuring a Fabric Data Agent?** Start with [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) for the whole agent and its sources, then use [Agent-Readiness-Validator](Agent-Readiness-Validator/) and [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
 - **Preparing a semantic model for Copilot?** Start with [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/), then use [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) to analyze and remediate.
-- **Configuring a Fabric Data Agent?** Run [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) for the whole agent and its sources, and use [Agent-Readiness-Validator](Agent-Readiness-Validator/) and [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/).
 - **Copilot answering incorrectly?** Download the diagnostics and run [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/).
 - **Report page is slow?** Export a Performance Analyzer capture and run [PowerBI-Performance-Analyzer-Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/).
 
