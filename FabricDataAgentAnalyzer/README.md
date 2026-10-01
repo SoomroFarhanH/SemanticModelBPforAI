@@ -17,6 +17,7 @@ This guide helps end users run the readiness analyzer and remediate findings wit
 
 - **Collection modes:** `LIVE_SDK` (fabric-data-agent-sdk, preview), `GIT_EXPORT` (data agent Git item definition), and `MANUAL_MANIFEST` (JSON/YAML). Leave `DATA_AGENT_NAME_OR_ID` blank and set `dataset` + `workspace` to run the v2.x standalone semantic-model analysis.
 - **Read-only by default.** Live smoke tests, example-query execution, and SDK evaluation are opt-in (`RUN_LIVE_QUERY_TESTS`, `RUN_EVALUATION`).
+- **Source run plan (section 4.1):** runs right after discovery and shows which sources the agent actually uses and which source sections (§6–§11, §16.2) to run or skip. You don't have to run the whole notebook to find out. Sources that are connected but have no objects selected are flagged, and `SKIP_UNSELECTED_SOURCES = True` (the default) skips their deep checks. Each source section can be skipped on its own. **Run all** is still safe.
 - **Statuses:** `PASS · WARN · FAIL · MANUAL · NOT_APPLICABLE · NOT_EVALUATED · UNKNOWN`. Readiness and evaluation coverage are reported separately, and blocker-based release gates override the average.
 - **Exports** (in `OUTPUT_ROOT`): an HTML report, a Markdown report, a findings CSV, and a JSON evidence bundle. The bundle's `findings[]` has one row per rule/object, with `rule_id`, `severity`, `status`, `source_name`, `object_path`, `evidence`, `recommendation`, and `docs_url`.
 
