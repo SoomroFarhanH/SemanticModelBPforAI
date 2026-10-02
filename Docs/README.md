@@ -16,3 +16,7 @@ Hashtags: #PowerBI #MicrosoftFabric #Copilot #DataAgents #SemanticModel #AIReadi
 ## Search terms
 
 Power BI Copilot, Fabric Data Agents, semantic model AI readiness, Copilot diagnostics, Fabric analytics assistant, OneLake readiness, DirectQuery best practices.
+
+---
+
+> 📄 **Third-party content:** the documents in this folder belong to their respective authors and publishers. They're linked here for reference only and aren't covered by this repository's [MIT License](../LICENSE). The toolkit is **developed by Farhan Soomro** and provided "AS IS", with no warranty or liability. See the [full disclaimer](../README.md#author-license--disclaimer).

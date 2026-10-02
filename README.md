@@ -6,6 +6,8 @@ Each tool lives in its own folder with a dedicated README.
 
 This repository is built for teams searching for: Power BI Copilot readiness, Fabric Data Agent best practices, semantic model optimization for AI, Copilot diagnostics troubleshooting, DirectQuery tuning, and OneLake data-source readiness.
 
+> **Developed by Farhan Soomro.** These are free community utilities, released under the [MIT License](LICENSE) and provided **"AS IS", with no warranty and no liability**. See [Author, license & disclaimer](#author-license--disclaimer).
+
 ## Find your path
 
 - For Power BI semantic model optimization: start at [Start here](#start-here), then review [Tools](#tools) and [Search-friendly use cases](#search-friendly-use-cases).
@@ -28,6 +30,7 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 - [Suggested GitHub topics](#suggested-github-topics)
 - [Suggested GitHub about text](#suggested-github-about-text)
 - [Reference documentation](#reference-documentation)
+- [Author, license & disclaimer](#author-license--disclaimer)
 
 ## Start here
 
@@ -154,3 +157,12 @@ Power BI and Microsoft Fabric toolkit for Copilot and AI readiness: semantic mod
 - [Use Copilot with semantic models](https://learn.microsoft.com/power-bi/create-reports/copilot-semantic-models)
 - [Prepare your data for AI (Power BI)](https://learn.microsoft.com/power-bi/create-reports/copilot-prepare-data-ai-faq)
 - [Best practices for configuring your data agent](https://learn.microsoft.com/fabric/data-science/data-agent-configuration-best-practices)
+
+## Author, license & disclaimer
+
+**Developed by Farhan Soomro** ([@SoomroFarhanH](https://github.com/SoomroFarhanH)). These notebooks, scripts, and agents are free utilities for the wider Power BI and Microsoft Fabric community.
+
+- **License:** the code is released under the [MIT License](LICENSE). You can use, copy, modify, and share it, as long as you keep the copyright notice.
+- **Disclaimer:** Provided "AS IS", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. This is a personal community project. It is not an official Microsoft product and is not supported or endorsed by Microsoft or any employer. Review the code and test it in a non-production environment before use. You use it at your own risk. In no event shall the author be liable for any claim, damages, data loss, service disruption, capacity or licensing cost, or other liability arising from its use. Results are guidance only and should be validated by a qualified person.
+- **Third-party content:** the PDFs in [Docs/](Docs/) and at the repository root, and any linked Microsoft Learn content, belong to their respective owners and aren't covered by the MIT License. Code adapted from community sources is credited inline (for example, the Prep for AI retrieval adapted from Sandeep Pawar, [Fabric.guru](https://fabric.guru)) and stays subject to its original terms.
+- **Trademarks:** Microsoft, Power BI, Microsoft Fabric, Copilot, and related names are trademarks of the Microsoft group of companies. They're used here only to identify the products these tools work with.
