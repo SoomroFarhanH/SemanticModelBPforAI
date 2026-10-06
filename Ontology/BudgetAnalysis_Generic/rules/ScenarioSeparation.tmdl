@@ -1,0 +1,9 @@
+rule ScenarioSeparation
+	lineageTag: c9205fe6-d6ff-5aa2-8207-45652991bbf6
+	statement: Every budget line belongs to exactly one scenario and version. Always filter or split by scenario (and version) before aggregating Amount; summing Actual with Budget or Forecast double counts. Exactly one scenario is flagged IsActual, and actual data must never be entered into a plan scenario. Source: Oracle EPM Scenario/Version dimensions; SAP SAC Version.
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty ScenarioId
+		ruleReferencedProperty Amount
+	ruleReferencedEntity Scenario
+	ruleReferencedRelationship 'Line In Scenario'

@@ -1,0 +1,36 @@
+/// Disconnected what-if input. Applies a uniform percentage adjustment to both budget revenue and budget expenses. Range -50% to +50%, 1 percentage-point steps; single selection.
+table 'Budget Adjustment'
+	lineageTag: fbb2a181-6214-537a-a01c-f93fe600eaa9
+	sourceLineageTag: 25ebc7ea-034b-4193-b434-9fbd84479792
+
+	/// Selected rate applied uniformly to original budget revenue and expenses. Defaults to 0% for no selection or multiple selections.
+	measure 'Selected Budget Adjustment (%)' = EXTERNALMEASURE("Selected Budget Adjustment (%)", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0%
+		displayFolder: Selected Assumption
+		lineageTag: e3e92d1f-ea60-5451-aa11-40b5f9e45593
+		sourceLineageTag: 8d649770-eea7-4fe7-94ab-374a325b7b68
+
+	/// Single-select uniform budget adjustment. No selection or multiple selections use 0%.
+	column 'Budget Adjustment (%)'
+		dataType: decimal
+		lineageTag: cbdca286-6371-5563-8bff-ce8cc2e06361
+		sourceLineageTag: 6ddf9918-e3f6-46e4-9a60-6a5946917e36
+		sourceColumn: Budget Adjustment (%)
+
+	partition 'Budget Adjustment-partition' = entity
+		mode: directQuery
+		source
+			entityName: Budget Adjustment
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

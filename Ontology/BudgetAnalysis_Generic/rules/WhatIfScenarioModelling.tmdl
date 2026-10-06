@@ -1,0 +1,7 @@
+rule WhatIfScenarioModelling
+	lineageTag: 8f0500a6-2292-5c0d-81df-ce71e748654c
+	statement: In this dataset revenue and expense amounts are both stored as positive numbers. Scenario Revenue, Scenario Expenses and Scenario Profit apply the selected Revenue Growth and Expense Change percentages to Actuals, and Adjusted Budget measures apply the selected Budget Adjustment percentage to Budget. With no selection the adjustment is 0 percent.
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty Amount
+		ruleReferencedProperty ScenarioId

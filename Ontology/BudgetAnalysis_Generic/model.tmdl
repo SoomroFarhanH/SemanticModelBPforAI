@@ -1,0 +1,26 @@
+model Model
+
+ref table Financials
+ref table Account
+ref table Department
+ref table Scenario
+ref table Date
+ref table 'Revenue Growth'
+ref table 'Expense Change'
+ref table 'Budget Adjustment'
+
+ref entity BudgetLine
+ref entity Account
+ref entity Scenario
+ref entity CalendarDate
+ref entity OrgUnit
+
+ref namespace default
+
+ref rule FavorableVariance
+ref rule ProfitDefinition
+ref rule ScenarioSeparation
+ref rule FiscalPeriodGrain
+ref rule ComparableBasis
+ref rule ExpenseUtilization
+ref rule WhatIfScenarioModelling

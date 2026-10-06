@@ -1,0 +1,29 @@
+/// Source scenarios, Actual and Budget. This connected dimension selects the source scenario for Amount; explicit Actual/Budget measures ignore this slicer.
+table Scenario
+	lineageTag: dc9b63fe-d0b0-50d8-847c-1d732ea86401
+	sourceLineageTag: 0ef1c106-3231-4bc0-9663-5d8233f49342
+
+	/// The original financial scenario: Actual or Budget.
+	column Scenario
+		dataType: string
+		lineageTag: 3767f4b0-df6e-567e-a450-51469344e0e5
+		sourceLineageTag: cb9543f2-7b64-4365-81ed-dca09ded4fbc
+		sourceColumn: Scenario
+
+	partition 'Scenario-partition' = entity
+		mode: directQuery
+		source
+			entityName: Scenario
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

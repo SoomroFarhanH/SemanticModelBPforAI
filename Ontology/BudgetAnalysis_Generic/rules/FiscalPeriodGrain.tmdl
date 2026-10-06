@@ -1,0 +1,8 @@
+rule FiscalPeriodGrain
+	lineageTag: 3dea38cc-e913-57a4-8d4d-ac9dec2a97db
+	statement: Budgets are planned at fiscal period grain (usually month). Analyse at period, quarter or year level; year-to-date totals accumulate from the first period of the fiscal year, which may differ from January. Flow accounts sum over time; balance accounts take the period-end value.
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty PeriodDate
+	ruleReferencedEntity Account
+	ruleReferencedRelationship 'Line On Date'

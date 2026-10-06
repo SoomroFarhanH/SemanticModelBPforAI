@@ -1,0 +1,100 @@
+/// A calendar day with year, quarter and month attributes.
+entity CalendarDate
+	lineageTag: 235a1261-c20d-59d0-b337-ccfb3ebf08f4
+	backingTable: Date
+	keyProperty: CalendarDay
+
+	/// Calendar date.
+	property CalendarDay
+		dataType: dateTime
+		lineageTag: 4d939e28-941d-5c05-9091-1732ee6427a0
+		synonym date
+		synonym day
+
+		backingConfiguration
+			valueColumn: Date.Date
+
+	/// Calendar year.
+	property CalendarYear
+		dataType: int64
+		lineageTag: 8cd1ade9-9292-5006-ad52-24eccdeb3242
+		synonym year
+
+		backingConfiguration
+			valueColumn: Date.Year
+
+	/// Calendar quarter 1-4.
+	property QuarterNumber
+		dataType: int64
+		lineageTag: 6e91b14e-ed26-526c-82df-448087fca083
+
+		backingConfiguration
+			valueColumn: Date.'Quarter Number'
+
+	/// Quarter label (Q1-Q4).
+	property QuarterName
+		dataType: string
+		lineageTag: 203d2c79-0728-5552-b2a3-60aa8002a3f6
+		synonym quarter
+
+		backingConfiguration
+			valueColumn: Date.Quarter
+
+	/// Month number 1-12.
+	property MonthNumber
+		dataType: int64
+		lineageTag: 6f0cb9bc-42da-5872-b566-6322a8b27584
+
+		backingConfiguration
+			valueColumn: Date.'Month Number'
+
+	/// Month name.
+	property MonthName
+		dataType: string
+		lineageTag: 2a73e354-cfb3-5ecf-9049-51b9fb7693f0
+		synonym month
+
+		backingConfiguration
+			valueColumn: Date.Month
+
+	/// Sortable year-month (YYYYMM).
+	property YearMonthNumber
+		dataType: int64
+		lineageTag: 6577943e-d743-5716-8f25-2d170912aec5
+
+		backingConfiguration
+			valueColumn: Date.'Year Month Number'
+
+	/// Year-month label (yyyy-MM).
+	property YearMonth
+		dataType: string
+		lineageTag: 62c3f42f-94e4-50cd-8ef5-a10e2a9b2646
+		synonym period
+		synonym 'reporting month'
+
+		backingConfiguration
+			valueColumn: Date.'Year Month'
+
+	/// Day of month.
+	property DayOfMonth
+		dataType: int64
+		lineageTag: 1ec789b1-33e7-58c9-8ce7-3f7fa23d2064
+		synonym 'day of month'
+
+		backingConfiguration
+			valueColumn: Date.Day
+
+	/// Budget Analysis Power BI report built on the same semantic model.
+	resourceLink
+
+		item
+			workspaceId: 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+			itemId: 5360e063-005d-49ca-b2f1-a58c9b63282f
+
+		synonym report
+
+	synonym date
+	synonym calendar
+	synonym day
+	synonym time
+	annotation Domain = Time

@@ -1,0 +1,7 @@
+rule ComparableBasis
+	lineageTag: d350cced-faad-56cb-847f-2bb35ba9f4c3
+	statement: Budget-to-actual comparisons must use the same accounting basis, classification, entity scope and period as the approved budget. Reconcile when the budget basis differs from the financial statements basis. Source: IPSAS 24 par. 31-32.
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty Amount
+		ruleReferencedProperty ScenarioId

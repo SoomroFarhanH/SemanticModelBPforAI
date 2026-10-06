@@ -1,0 +1,15 @@
+relationship 'Financials - Date'
+	fromColumn: Financials.Date
+	toColumn: Date.Date
+
+relationship 'Financials - Account'
+	fromColumn: Financials.'Account Key'
+	toColumn: Account.'Account Key'
+
+relationship 'Financials - Department'
+	fromColumn: Financials.'Department Key'
+	toColumn: Department.'Department Key'
+
+relationship 'Financials - Scenario'
+	fromColumn: Financials.Scenario
+	toColumn: Scenario.Scenario

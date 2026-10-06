@@ -1,0 +1,12 @@
+rule FavorableVariance
+	lineageTag: a9cdedcf-b75c-5737-a890-227b9629d9a8
+	statement: Variance is Actual minus Budget (or Forecast). For Revenue and other credit-nature accounts a positive variance is favorable; for Expense accounts a negative variance (underspend) is favorable. Favorable Variance = (Actual - Budget) x FavorableSign, so a positive value always means favorable. Use it when ranking performance across mixed account types. Source: Oracle EPM account type variance reporting.
+	ruleReferencedEntity Account
+		propertyScope: specific
+		ruleReferencedProperty AccountType
+		ruleReferencedProperty FavorableSign
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty Amount
+		ruleReferencedProperty ScenarioId
+	ruleReferencedRelationship 'Line Posted To Account'

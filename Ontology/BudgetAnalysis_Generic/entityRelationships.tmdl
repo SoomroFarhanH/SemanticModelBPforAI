@@ -1,0 +1,44 @@
+/// Each budget line is posted to one account.
+entityRelationship 'Line Posted To Account'
+	lineageTag: 2743346e-82a9-5326-9ba1-c90a78644b6e
+	label: posted to
+	fromEntity: BudgetLine
+	toEntity: Account
+	synonym 'for account'
+
+	backingConfiguration
+		relationship: 'Financials - Account'
+
+/// Each budget line belongs to one organizational unit.
+entityRelationship 'Line Owned By OrgUnit'
+	lineageTag: 8c3c2773-fd50-5cb1-8fd9-dfe0a73171c4
+	label: owned by
+	fromEntity: BudgetLine
+	toEntity: OrgUnit
+	synonym 'for department'
+	synonym 'for cost center'
+
+	backingConfiguration
+		relationship: 'Financials - Department'
+
+/// Each budget line belongs to one scenario (Actual, Budget, Forecast...).
+entityRelationship 'Line In Scenario'
+	lineageTag: 5ad2e002-d4a1-5208-80ca-408c8d3ef73d
+	label: in scenario
+	fromEntity: BudgetLine
+	toEntity: Scenario
+	synonym 'actual or budget'
+
+	backingConfiguration
+		relationship: 'Financials - Scenario'
+
+/// Calendar date of the line.
+entityRelationship 'Line On Date'
+	lineageTag: 36f82e97-0a44-5051-82b6-3e26bea595b0
+	label: on date
+	fromEntity: BudgetLine
+	toEntity: CalendarDate
+	synonym 'in month'
+
+	backingConfiguration
+		relationship: 'Financials - Date'

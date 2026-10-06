@@ -1,0 +1,82 @@
+/// Contiguous daily calendar covering full calendar years present in the monthly fact sheet. Source FY2026 runs January through December. Monthly facts are dated on the first day of the month.
+table Date
+	lineageTag: 66322167-5f95-58a4-9f6f-ce5b199f5aa3
+	sourceLineageTag: 716c79c3-365f-4092-8046-eac1e815f849
+
+	/// Unique calendar date. Monthly financial amounts are stored on month-start dates.
+	column Date
+		dataType: dateTime
+		lineageTag: d0bcbdc1-1a43-580f-ac07-8b76a74f5435
+		sourceLineageTag: c29e468a-e5c7-452a-987a-775b960e6263
+		sourceColumn: Date
+
+	/// Calendar year; matches the workbook fiscal year.
+	column Year
+		dataType: int64
+		lineageTag: 2ab2ad9f-7a4e-56dc-bf27-3e2c0ea65e9e
+		sourceLineageTag: cc5a732f-8c81-48e1-aa98-bbf13e1e5a26
+		sourceColumn: Year
+
+	column 'Quarter Number'
+		dataType: int64
+		lineageTag: 8772e457-c73a-5be9-a795-f99c816380d6
+		sourceLineageTag: 21d25b5a-b1ca-47c0-a73b-cf53a15035f4
+		sourceColumn: Quarter Number
+
+	/// Calendar quarter, ordered Q1 through Q4.
+	column Quarter
+		dataType: string
+		lineageTag: 938a3535-a23f-5ed6-9caa-1c43d4d59759
+		sourceLineageTag: 45e9480a-ce28-4d25-8ba3-85037b05093f
+		sourceColumn: Quarter
+
+	column 'Month Number'
+		dataType: int64
+		lineageTag: 60674188-7d58-5f49-a6c9-f71ce74e1ac3
+		sourceLineageTag: 96db5c8f-8969-4980-996e-4938d1162ff1
+		sourceColumn: Month Number
+
+	/// Month name sorted chronologically.
+	column Month
+		dataType: string
+		lineageTag: 83ebb8c6-22ac-5736-9d89-59065c7c24bb
+		sourceLineageTag: 3eb3e050-0b4e-45ae-9d05-2fa853d113b7
+		sourceColumn: Month
+
+	column 'Year Month Number'
+		dataType: int64
+		lineageTag: 1e1bed95-3675-5b5d-8256-67ac910cbbaa
+		sourceLineageTag: d16c46c7-7838-4eaf-bae3-595aee1969ca
+		sourceColumn: Year Month Number
+
+	/// Year-month label for monthly trends across years.
+	column 'Year Month'
+		dataType: string
+		lineageTag: ebbb4fc1-d44a-541d-bfef-a7883551b263
+		sourceLineageTag: c2bbd342-cc81-42e4-a18a-f0e19aec7861
+		sourceColumn: Year Month
+
+	/// Day of month; use Year Month for monthly fact analysis.
+	column Day
+		dataType: int64
+		lineageTag: 0b299bde-906b-5d3d-b791-45cb1a3bc1b7
+		sourceLineageTag: 6d2f59d9-76e9-4724-a5ed-1644f7138a37
+		sourceColumn: Day
+
+	partition 'Date-partition' = entity
+		mode: directQuery
+		source
+			entityName: Date
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

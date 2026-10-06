@@ -1,0 +1,45 @@
+/// Organizational unit that owns a budget: department, cost center, responsibility center or business unit. Supports hierarchies via ParentOrgUnitId.
+entity OrgUnit
+	lineageTag: 9a6e6b7d-ec7e-5120-a7a1-9950709b95d7
+	backingTable: Department
+	keyProperty: OrgUnitId
+
+	/// Organizational unit key.
+	property OrgUnitId
+		dataType: string
+		lineageTag: 9856ef0d-d49f-5130-aa72-ecf64f2940fc
+		synonym 'cost center code'
+		synonym 'department code'
+
+		backingConfiguration
+			valueColumn: Department.'Department Key'
+
+	/// Organizational unit name.
+	property OrgUnitName
+		dataType: string
+		lineageTag: 574fb0b8-404e-50ea-ab7c-0573b214663f
+		synonym department
+		synonym 'cost center'
+		synonym team
+
+		backingConfiguration
+			valueColumn: Department.Department
+
+	/// Budget Analysis Power BI report built on the same semantic model.
+	resourceLink
+
+		item
+			workspaceId: 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+			itemId: 5360e063-005d-49ca-b2f1-a58c9b63282f
+
+		synonym report
+
+	synonym 'cost center'
+	synonym department
+	synonym 'responsibility center'
+	synonym 'business unit'
+	synonym 'org unit'
+	synonym entity
+	synonym team
+	synonym function
+	annotation Domain = Organization

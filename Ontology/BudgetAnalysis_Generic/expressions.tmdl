@@ -1,0 +1,8 @@
+expression 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a' =
+		let
+		    Source = AnalysisServices.Database("powerbi://api.powerbi.com/v1.0/myorg/PBICopilot", "BudgetAnalysis"),
+		    Cubes = Table.Combine(Source[Data]),
+		    Cube = Cubes{[Id="Model", Kind="Cube"]}[Data]
+		in
+		    Cube
+	lineageTag: 72a93908-2b29-5d01-8b3d-06102a75486b

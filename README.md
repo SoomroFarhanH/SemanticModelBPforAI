@@ -93,6 +93,7 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 | [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/) | Parses a Copilot diagnostic export into a prioritized troubleshooting report and a shareable Markdown report, mapping each signal to a model fix. |
 | [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/) | Assesses a Fabric Lakehouse data source for agent/Copilot readiness. *(Work in progress.)* |
 | [PowerBI-Performance-Analyzer-Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/) | Turns a Power BI Performance Analyzer JSON export into a prioritized root-cause report (DAX, DirectQuery / Direct Lake fallback, rendering, waiting) with overlap-safe timings, data-quality rules, event trees, a timeline, and HTML/Markdown/CSV/JSON outputs. |
+| [Ontology/BudgetAnalysis_Generic](Ontology/BudgetAnalysis_Generic/) | **Fabric IQ ontology for budget vs. actual** (TMDL). Generic budgeting entity types (BudgetLine, Account, OrgUnit, Scenario, CalendarDate), relationships, business rules and 47 metrics, live-bound to a Power BI semantic model. Ready to deploy with the Fabric REST API or Git integration. |
 
 ## How to pick a tool
 
@@ -116,6 +117,7 @@ The repository now separates packaged tools from supporting assets:
 - [SemanticModel-AI-Readiness-Analyzer/](SemanticModel-AI-Readiness-Analyzer/) and related tool folders: production analyzers and validators.
 - [Notebooks/](Notebooks/) - Working notebooks grouped by scenario (semantic model optimization, OneLake, Copilot/agent insights, business demos).
 - [Scripts/](Scripts/) - Reusable automation scripts grouped by purpose (model settings and utilities).
+- [Ontology/](Ontology/) - Fabric IQ ontology definitions (TMDL) built from semantic models.
 
 ### New notebook catalog
 

@@ -1,0 +1,35 @@
+/// Unique departments derived from Financial Actuals & Budget, using the source's stable department codes.
+table Department
+	lineageTag: beb09049-e80a-5429-b44e-a47b02d3adbb
+	sourceLineageTag: f23702c7-a86e-4e30-809d-3c9271c5532f
+
+	column 'Department Key'
+		dataType: string
+		lineageTag: 8b69a2f5-fff5-5edd-a9b7-b182b2ffa43e
+		sourceLineageTag: 713b8f3f-56ff-41de-97fe-5565dc7ea2b0
+		sourceColumn: Department Key
+
+	/// Department or cost-center team responsible for the financial amount.
+	column Department
+		dataType: string
+		lineageTag: fda0f2d7-4e18-5401-9e3a-4959e7db1dcb
+		sourceLineageTag: 1567a21d-8e8a-4114-9c7c-e4b088a70f4e
+		sourceColumn: Department
+
+	partition 'Department-partition' = entity
+		mode: directQuery
+		source
+			entityName: Department
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

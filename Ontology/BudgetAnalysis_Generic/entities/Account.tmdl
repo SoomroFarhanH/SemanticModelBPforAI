@@ -1,0 +1,65 @@
+/// Chart-of-accounts element that classifies amounts (revenue, expense, asset, liability, equity or statistical). Determines the favorable direction of variances.
+entity Account
+	lineageTag: 3f969798-0e38-571d-b3b4-7db1d61929dd
+	backingTable: Account
+	keyProperty: AccountId
+
+	/// Account key or number.
+	property AccountId
+		dataType: int64
+		lineageTag: 1039c5d4-d0e4-554c-911e-27088fb4b9d5
+		synonym 'account number'
+		synonym 'GL code'
+		synonym 'main account'
+
+		backingConfiguration
+			valueColumn: Account.'Account Key'
+
+	/// Business name of the account.
+	property AccountName
+		dataType: string
+		lineageTag: 80eff663-5f05-576e-a360-76c4cda95681
+		synonym account
+		synonym 'line item'
+		synonym 'GL account name'
+
+		backingConfiguration
+			valueColumn: Account.Account
+
+	/// Revenue, Expense, Asset, Liability, Equity or Statistical.
+	property AccountType
+		dataType: string
+		lineageTag: 4743865c-e593-5349-9212-7d4f1eee2185
+		synonym 'account type'
+		synonym category
+		synonym 'P&L category'
+
+		backingConfiguration
+			valueColumn: Account.Category
+
+	/// +1 when a higher actual than budget is favorable (revenue), -1 when lower is favorable (expense).
+	property FavorableSign
+		dataType: int64
+		lineageTag: afc9d48d-cff4-585d-8558-ae528a0641d4
+		synonym 'variance sign'
+
+		backingConfiguration
+			valueColumn: Account.'Favorable Sign'
+
+	/// Budget Analysis Power BI report built on the same semantic model.
+	resourceLink
+
+		item
+			workspaceId: 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+			itemId: 5360e063-005d-49ca-b2f1-a58c9b63282f
+
+		synonym report
+
+	synonym 'GL account'
+	synonym 'ledger account'
+	synonym 'main account'
+	synonym 'cost element'
+	synonym 'line item'
+	synonym 'budget code'
+	synonym 'object account'
+	annotation Domain = Core

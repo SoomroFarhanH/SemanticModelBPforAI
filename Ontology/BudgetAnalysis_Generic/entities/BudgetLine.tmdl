@@ -1,0 +1,89 @@
+/// Atomic financial amount at one intersection of account, organizational unit, period, scenario and version (plus optional fund, project, grant, program, object class, entity and currency). Holds Actual, Budget, Forecast and other scenarios side by side; the scenario decides what the amount means.
+entity BudgetLine
+	lineageTag: 4e14e12b-525a-5e60-a8ff-69622eb1ef0a
+	backingTable: Financials
+	keyProperty: BudgetLineId
+
+	/// Unique identifier of the line (natural or composite key such as Period|Account|OrgUnit|Scenario).
+	property BudgetLineId
+		dataType: string
+		lineageTag: 181e0db4-c20e-5d9c-9b48-66a15e6fc516
+		synonym 'line id'
+		synonym 'entry id'
+
+		backingConfiguration
+			valueColumn: Financials.'Financial Entry Key'
+
+	/// Date the amount belongs to, usually the first day of the fiscal period.
+	property PeriodDate
+		dataType: dateTime
+		lineageTag: 77d9489e-25b4-5070-872b-977a6ada48ec
+		synonym 'posting date'
+		synonym 'period date'
+		synonym month
+
+		backingConfiguration
+			valueColumn: Financials.Date
+
+	/// Account (chart-of-accounts code) the amount is posted to.
+	property AccountId
+		dataType: int64
+		lineageTag: 831d451b-77df-556a-9330-a4341af10489
+		synonym 'GL code'
+		synonym 'account number'
+		synonym 'cost element'
+
+		backingConfiguration
+			valueColumn: Financials.'Account Key'
+
+	/// Organizational unit responsible for the amount.
+	property OrgUnitId
+		dataType: string
+		lineageTag: e4e16ff5-84ea-5230-b238-4b525f62641e
+		synonym 'cost center code'
+		synonym 'department code'
+
+		backingConfiguration
+			valueColumn: Financials.'Department Key'
+
+	/// Scenario of the amount (Actual, Budget, Forecast, ...).
+	property ScenarioId
+		dataType: string
+		lineageTag: 58110271-3eee-54c0-ad61-af60772c590c
+		synonym scenario
+		synonym category
+		synonym 'version type'
+
+		backingConfiguration
+			valueColumn: Financials.Scenario
+
+	/// Amount in transaction currency. Sign convention depends on the dataset; see the FavorableVariance rule.
+	property Amount
+		dataType: decimal
+		lineageTag: 68fe09c1-c2af-58ab-bdbc-f3938623da18
+		synonym value
+		synonym spend
+		synonym 'budget amount'
+		synonym 'actual amount'
+
+		backingConfiguration
+			valueColumn: Financials.Amount
+
+	/// Budget Analysis Power BI report built on the same semantic model.
+	resourceLink
+
+		item
+			workspaceId: 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+			itemId: 5360e063-005d-49ca-b2f1-a58c9b63282f
+
+		synonym report
+
+	synonym 'budget line'
+	synonym 'plan line'
+	synonym 'financial entry'
+	synonym 'ledger entry'
+	synonym 'budget register entry'
+	synonym 'data cell'
+	synonym fact
+	synonym 'line item amount'
+	annotation Domain = Core

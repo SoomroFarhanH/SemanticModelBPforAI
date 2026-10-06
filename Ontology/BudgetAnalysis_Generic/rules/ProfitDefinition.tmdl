@@ -1,0 +1,10 @@
+rule ProfitDefinition
+	lineageTag: 2972ef19-73c3-5fc4-b017-cfe3b4606713
+	statement: Profit (net result) equals Revenue minus Expense within the same scenario and version; Margin equals Profit divided by Revenue. Never add Amount across Revenue and Expense accounts unless the dataset stores expenses as negative values.
+	ruleReferencedEntity Account
+		propertyScope: specific
+		ruleReferencedProperty AccountType
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty Amount
+	ruleReferencedRelationship 'Line Posted To Account'

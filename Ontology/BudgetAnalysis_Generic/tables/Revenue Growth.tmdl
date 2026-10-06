@@ -1,0 +1,36 @@
+/// Disconnected what-if input. Applies a uniform percentage change to actual revenue in the current date, account, and department context. Range -50% to +100%, 1 percentage-point steps; single selection.
+table 'Revenue Growth'
+	lineageTag: b01d7fbf-b666-5a4e-b9ca-46e75c97d970
+	sourceLineageTag: d54842cb-eb0e-4ac4-836f-06931218e356
+
+	/// Selected revenue what-if rate; defaults to 0% for no selection or multiple selections.
+	measure 'Selected Revenue Growth (%)' = EXTERNALMEASURE("Selected Revenue Growth (%)", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0%
+		displayFolder: Selected Assumption
+		lineageTag: ed28f674-9501-5f54-87d2-66036cd2b3fb
+		sourceLineageTag: 78cc08d5-29fe-44b6-9438-a2157018b41f
+
+	/// Single-select scenario revenue change. No selection or multiple selections use 0%.
+	column 'Revenue Growth (%)'
+		dataType: decimal
+		lineageTag: 6aaeb04e-90ed-5da0-b7ed-a072549ad1ef
+		sourceLineageTag: a68ebb02-a19a-43c3-aaa4-7f193ee84d0c
+		sourceColumn: Revenue Growth (%)
+
+	partition 'Revenue Growth-partition' = entity
+		mode: directQuery
+		source
+			entityName: Revenue Growth
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

@@ -1,0 +1,367 @@
+/// Monthly financial observations at Date, Account, Department, and Scenario grain. Revenue and expenses are both positive in the source. Source: Financial Actuals & Budget worksheet.
+table Financials
+	lineageTag: adbbc4d0-2313-5571-9282-dd94b22a325a
+	sourceLineageTag: cc432905-53be-4bfd-b50d-b31805bb501a
+
+	/// Actual source amount, retaining account, department and date filters. Ignores the Scenario slicer. Mixed-category totals are gross activity, not profit.
+	measure 'Actual Amount' = EXTERNALMEASURE("Actual Amount", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Budget Comparison
+		lineageTag: 9f3f0075-49ae-5796-8637-f99c62bd5c47
+		sourceLineageTag: 68b93a20-4deb-41b6-af31-d84cee74d11f
+
+	/// Original budget source amount, retaining account, department and date filters. Ignores the Scenario slicer. Mixed-category totals are gross activity, not profit.
+	measure 'Budget Amount' = EXTERNALMEASURE("Budget Amount", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Budget Comparison
+		lineageTag: e42a137c-b57f-5969-9c16-0197f2956ddc
+		sourceLineageTag: 061d4cbc-a816-4391-b18e-bc307b815465
+
+	/// Actual minus budget. Positive is favorable for revenue but unfavorable for expenses. Use Favorable Variance for a consistent performance sign.
+	measure Variance = EXTERNALMEASURE("Variance", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Budget Comparison
+		lineageTag: 7f4cd3ab-53b4-55a4-a7f4-e014666b66c9
+		sourceLineageTag: d173b1a7-ff26-4f53-a78e-eb52addfe6b3
+
+	/// Raw actual-minus-budget variance divided by absolute budget. Blank when budget is zero or absent.
+	measure 'Variance (%)' = EXTERNALMEASURE("Variance (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Budget Comparison
+		lineageTag: 48466ce1-027b-5531-8874-c1868d0e0cdc
+		sourceLineageTag: 1eaa56b6-b509-467e-a8b1-d8fd3b99282d
+
+	/// Revenue: Actual minus Budget. Expense: Budget minus Actual. Positive always means favorable; full-category total equals profit variance.
+	measure 'Favorable Variance' = EXTERNALMEASURE("Favorable Variance", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Budget Comparison
+		lineageTag: 47c90650-a281-5f9d-a2af-c19382aa1cf4
+		sourceLineageTag: 82dbd084-8969-4537-9d4c-7f9a900d5296
+
+	/// Favorable variance divided by absolute budget in the selected accounts. Mixed-category denominator is gross budget activity; use Profit Variance (%) for profit comparisons.
+	measure 'Favorable Variance (%)' = EXTERNALMEASURE("Favorable Variance (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Budget Comparison
+		lineageTag: fab24a5f-bd59-5349-9301-4f73e21732c4
+		sourceLineageTag: 7ea34796-867a-4a36-a254-08bf33c5f280
+
+	/// Actual revenue from accounts classified as Revenue.
+	measure 'Actual Revenue' = EXTERNALMEASURE("Actual Revenue", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: baaa3bd7-ec0e-5dd4-be3c-56c43cdfc2c4
+		sourceLineageTag: dcf34e09-4271-478e-9cf2-7ce66f179c8c
+
+	/// Original budget revenue from accounts classified as Revenue.
+	measure 'Budget Revenue' = EXTERNALMEASURE("Budget Revenue", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: 61ee0170-bd6c-57f2-a5c6-77b0579f2e89
+		sourceLineageTag: 245aa2eb-4575-466a-bf55-19fb3f43692c
+
+	/// Actual expenses as positive amounts.
+	measure 'Actual Expenses' = EXTERNALMEASURE("Actual Expenses", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: b2f2a049-f9b1-5acd-839b-f2f9bba11192
+		sourceLineageTag: 8a178328-507b-494b-80cb-b358b7664012
+
+	/// Original budget expenses as positive amounts.
+	measure 'Budget Expenses' = EXTERNALMEASURE("Budget Expenses", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: a48ba845-293b-51b9-b152-fa91f4346fc2
+		sourceLineageTag: dac5637f-345e-465e-b2e8-ff0b673f4e81
+
+	/// Revenue less expenses represented in this worksheet. Not a claim of statutory net income or EBITDA.
+	measure 'Actual Profit' = EXTERNALMEASURE("Actual Profit", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: 9573a030-6d79-50c4-a669-95f0df9f6ddc
+		sourceLineageTag: 774f9271-59fe-4b1d-81a5-6fdf864833f9
+
+	/// Original budget revenue less original budget expenses.
+	measure 'Budget Profit' = EXTERNALMEASURE("Budget Profit", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: 9dce99df-6b1a-5702-86a1-aa4297101650
+		sourceLineageTag: e17bd366-a02f-495b-b7c6-e69a37cb5028
+
+	/// Actual profit divided by actual revenue; blank when revenue is zero or absent.
+	measure 'Actual Margin (%)' = EXTERNALMEASURE("Actual Margin (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Profitability
+		lineageTag: e824cd40-cb7b-5594-881b-0300382a8ed4
+		sourceLineageTag: 5853617e-f69c-433e-8a21-8f37462ce1ba
+
+	/// Original budget profit divided by budget revenue.
+	measure 'Budget Margin (%)' = EXTERNALMEASURE("Budget Margin (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Profitability
+		lineageTag: b97fbfdf-66ef-51ae-835e-eec82c1da1cd
+		sourceLineageTag: 9000eee4-7d21-4494-9168-6e7eebef689a
+
+	/// Actual profit less original budget profit. Positive means favorable.
+	measure 'Profit Variance' = EXTERNALMEASURE("Profit Variance", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Profitability
+		lineageTag: 04eb4c33-7ad8-52d9-850f-d7efed283fcd
+		sourceLineageTag: c7986ef3-b8a9-4b87-94ba-f609d8ed57b9
+
+	/// Profit variance divided by absolute original budget profit. Blank for zero budget profit.
+	measure 'Profit Variance (%)' = EXTERNALMEASURE("Profit Variance (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Profitability
+		lineageTag: 5056ffee-7d70-5a64-b086-25fb4525a2c9
+		sourceLineageTag: eb4e8fb0-c424-49e8-a4f1-483e5b7b859a
+
+	/// Actual minus budget profit margin in percentage points, not relative percent change.
+	measure 'Margin Variance (pp)' = EXTERNALMEASURE("Margin Variance (pp)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.00 "pp";(0.00) "pp";-
+		displayFolder: Profitability
+		lineageTag: c11dec23-db49-598f-ad86-aad6d79f2f6c
+		sourceLineageTag: 06c759ef-ecaf-4458-98b9-75c515cc8c82
+
+	/// Actual expenses divided by budget expenses. Above 100% means overspending.
+	measure 'Expense Budget Utilization (%)' = EXTERNALMEASURE("Expense Budget Utilization (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Budget Comparison
+		lineageTag: 5fd8d680-9674-5109-b4c4-d03ec183622e
+		sourceLineageTag: 4738a1ac-ea2f-4d28-9435-6001cfd4d435
+
+	/// Year-to-date actual amount through the last date in the selected calendar context. YTD means year to date, not automatically today's date.
+	measure 'Actual Amount YTD' = EXTERNALMEASURE("Actual Amount YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 3967d358-3c62-5bf9-a272-7451b910edda
+		sourceLineageTag: 3b488db3-a1d0-4cf8-bc35-49e6f3238fd9
+
+	/// Year-to-date original budget through the last date in the selected calendar context.
+	measure 'Budget Amount YTD' = EXTERNALMEASURE("Budget Amount YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 8276a8cd-daa5-5f26-b359-cdd55bc41d46
+		sourceLineageTag: 5ca3474e-3bd8-4c1b-85d7-f1ac58d2488c
+
+	/// Cumulative favorable actual-versus-budget variance through the selected calendar date.
+	measure 'Favorable Variance YTD' = EXTERNALMEASURE("Favorable Variance YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 23d2999d-6ad6-5622-9922-b8768f19b8c1
+		sourceLineageTag: 58688226-c628-4d74-9320-6336ad6344cf
+
+	/// Cumulative actual revenue from January through the selected calendar date.
+	measure 'Actual Revenue YTD' = EXTERNALMEASURE("Actual Revenue YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 6e2b1100-734d-51f2-b11e-443da878e516
+		sourceLineageTag: 70b021e6-c5be-4765-bd5e-710fb8f800be
+
+	/// Cumulative actual expenses from January through the selected calendar date.
+	measure 'Actual Expenses YTD' = EXTERNALMEASURE("Actual Expenses YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 7bc8f9c6-5794-5fbf-ba50-c0f7b6701063
+		sourceLineageTag: ab40b9df-208d-460a-9917-17c7a5644e8d
+
+	/// Cumulative actual profit from January through the selected calendar date.
+	measure 'Actual Profit YTD' = EXTERNALMEASURE("Actual Profit YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: aefe709e-1c84-520a-84d5-16e3baacdce5
+		sourceLineageTag: c06549ec-6702-4204-b0e7-fb25173c2c77
+
+	/// Cumulative original budget profit through the selected calendar date.
+	measure 'Budget Profit YTD' = EXTERNALMEASURE("Budget Profit YTD", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 25596fd0-6f35-57e1-8ef4-ae5cf8fdb308
+		sourceLineageTag: 743e5e07-9e6a-404e-b9f4-5303fb950f8c
+
+	/// Actual amount for the prior month, available only in a single Year Month context. January is blank when no prior-year data exists.
+	measure 'Actual Amount Previous Month' = EXTERNALMEASURE("Actual Amount Previous Month", CURRENCY, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: Time Analysis
+		lineageTag: 6dd8cfe6-48da-583f-a43b-dfbbc3abf1f4
+		sourceLineageTag: d14e2688-9504-4694-9298-27c84e7b7ff2
+
+	/// Month-over-month relative change in actual source amount. Blank without a prior month or for zero prior-month amount.
+	measure 'Actual Amount MoM (%)' = EXTERNALMEASURE("Actual Amount MoM (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: Time Analysis
+		lineageTag: 7cd70069-606f-5062-977a-05383a79109e
+		sourceLineageTag: 3eae6a2b-e632-4f8d-b953-60adafd6fa44
+
+	/// What-if revenue using actual revenue as baseline and a uniform selected growth rate.
+	measure 'Scenario Revenue' = EXTERNALMEASURE("Scenario Revenue", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Scenario
+		lineageTag: eda4848c-e0d5-55da-b716-2365f9ca32a3
+		sourceLineageTag: 2e56601d-4012-4296-b0b9-7e7cf6203fa8
+
+	/// What-if expenses using actual expenses as baseline. Negative selected change reduces costs.
+	measure 'Scenario Expenses' = EXTERNALMEASURE("Scenario Expenses", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Scenario
+		lineageTag: 930922fe-f6f7-556a-81de-3f41926a7cf9
+		sourceLineageTag: a635951d-ab77-4f8d-b88b-6a137d3bc3a9
+
+	/// What-if revenue less what-if expenses. Not a time-based forecast; scales actuals in the current filter context.
+	measure 'Scenario Profit' = EXTERNALMEASURE("Scenario Profit", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Scenario
+		lineageTag: d2dd158b-c503-52f2-b35e-7bf37998b171
+		sourceLineageTag: bcd969ed-f404-4107-bdae-6f4c185cf3d6
+
+	/// What-if profit divided by what-if revenue.
+	measure 'Scenario Margin (%)' = EXTERNALMEASURE("Scenario Margin (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: What If\Scenario
+		lineageTag: e7f0dd83-d29e-5d8d-889c-0cefca5f26fc
+		sourceLineageTag: 34d25615-7806-46e0-8ab5-53dbb3d2991b
+
+	/// What-if source amount for account/category comparisons. Mixed-category totals are gross activity, not profit.
+	measure 'Scenario Amount' = EXTERNALMEASURE("Scenario Amount", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Scenario
+		lineageTag: 55ae0a3b-19a5-583f-8a3f-5200468984a9
+		sourceLineageTag: 6ea63727-84aa-4f6e-97c5-455801301797
+
+	/// Original budget amount multiplied by one plus the selected uniform budget adjustment.
+	measure 'Adjusted Budget Amount' = EXTERNALMEASURE("Adjusted Budget Amount", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Adjusted Budget
+		lineageTag: 3b39c394-995a-594e-b9d5-152eb9ef546f
+		sourceLineageTag: b5e81ef0-c6e4-465a-90f1-96831f328063
+
+	/// Budget revenue after the selected uniform budget adjustment.
+	measure 'Adjusted Budget Revenue' = EXTERNALMEASURE("Adjusted Budget Revenue", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Adjusted Budget
+		lineageTag: ff2811a3-7158-5126-80a6-976ffeec0f1e
+		sourceLineageTag: b41d9393-ad5a-4e9c-8980-8e2e615138dd
+
+	/// Budget expenses after the selected uniform budget adjustment.
+	measure 'Adjusted Budget Expenses' = EXTERNALMEASURE("Adjusted Budget Expenses", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Adjusted Budget
+		lineageTag: 2276a704-0524-550b-8302-201cce023cf1
+		sourceLineageTag: 2729c8b8-fd44-45cc-b2f1-bed1fda16d69
+
+	/// Adjusted budget revenue less adjusted budget expenses. A uniform budget adjustment scales both components.
+	measure 'Adjusted Budget Profit' = EXTERNALMEASURE("Adjusted Budget Profit", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Adjusted Budget
+		lineageTag: 5f35c93e-a963-5a3e-b5c7-c2ff265d3a6d
+		sourceLineageTag: 1d175edb-cb93-46fc-9e5c-02f4eb2a1297
+
+	/// Absolute change in revenue caused by the revenue assumption.
+	measure 'Scenario Revenue Impact' = EXTERNALMEASURE("Scenario Revenue Impact", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Impact
+		lineageTag: 149bffbb-45e8-5df4-897d-9cf6aa20d37f
+		sourceLineageTag: 8ae1bbac-e042-4fec-9754-e9b3f6fa3f5c
+
+	/// Absolute change in expenses caused by the expense assumption. Negative means savings.
+	measure 'Scenario Expense Impact' = EXTERNALMEASURE("Scenario Expense Impact", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Impact
+		lineageTag: 313fc0c5-74ff-5c7b-bb0d-50e21545e2f2
+		sourceLineageTag: cf6cb1d9-0bc6-44fc-9e15-c94c7ec553c9
+
+	/// Change in profit versus unadjusted actual profit. Positive means improvement.
+	measure 'Scenario Profit Impact' = EXTERNALMEASURE("Scenario Profit Impact", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Impact
+		lineageTag: 1f091675-334c-590f-a4fd-a1244d0005a3
+		sourceLineageTag: 1868b87a-018e-47f7-9e7b-7e9b2fd5deef
+
+	/// What-if profit impact divided by absolute actual profit. Blank if actual profit is zero.
+	measure 'Scenario Profit Impact (%)' = EXTERNALMEASURE("Scenario Profit Impact (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: What If\Impact
+		lineageTag: 1077d803-b134-5e37-b935-a00894af28e0
+		sourceLineageTag: 58319d6e-9c1b-479b-b09d-a16ca21d7796
+
+	/// What-if profit less adjusted budget profit. Positive means favorable.
+	measure 'Scenario Profit vs Adjusted Budget' = EXTERNALMEASURE("Scenario Profit vs Adjusted Budget", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Impact
+		lineageTag: 14c82386-d51a-5397-b267-291978fe440a
+		sourceLineageTag: f30e7223-ca57-4adb-a8cd-dedb4a2daa3d
+
+	/// What-if profit variance divided by absolute adjusted budget profit.
+	measure 'Scenario Profit vs Adjusted Budget (%)' = EXTERNALMEASURE("Scenario Profit vs Adjusted Budget (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: What If\Impact
+		lineageTag: 5e7d2c8c-80b1-5c2c-ad08-e36b9e1dd073
+		sourceLineageTag: b470185f-e71a-4c57-b77b-a8276e3c55d3
+
+	/// Category-aware what-if versus adjusted budget variance. Revenue: Scenario minus Budget. Expense: Budget minus Scenario. Total equals scenario profit variance.
+	measure 'Scenario Favorable Variance' = EXTERNALMEASURE("Scenario Favorable Variance", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: $#,##0;($#,##0);-
+		displayFolder: What If\Impact
+		lineageTag: 0266632e-077a-52f4-9f49-591c0f8382d3
+		sourceLineageTag: df71ff05-7442-4cd3-9aed-a85b32fc8cc1
+
+	/// Favorable what-if variance divided by absolute adjusted budget amount. Mixed-category denominator is gross budget activity.
+	measure 'Scenario Favorable Variance (%)' = EXTERNALMEASURE("Scenario Favorable Variance (%)", DOUBLE, "DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a")
+		formatString: 0.0%;(0.0%);-
+		displayFolder: What If\Impact
+		lineageTag: 74e50bb4-5cf4-5f7f-b48f-a0832ffb9ab8
+		sourceLineageTag: 5b51f056-1a26-4aad-b1f4-92bec9c4dd54
+
+	column Date
+		dataType: dateTime
+		lineageTag: c432e771-08ee-5c4c-8547-2458ef21d57c
+		sourceLineageTag: 428288af-8172-45d6-941a-bd626d04e0d2
+		sourceColumn: Date
+
+	column 'Account Key'
+		dataType: int64
+		lineageTag: f01af3ad-ce71-55d2-a4a7-a01a4c808a82
+		sourceLineageTag: 0a35dd04-c4ea-4c2b-a609-57e64b9e5bf7
+		sourceColumn: Account Key
+
+	column 'Department Key'
+		dataType: string
+		lineageTag: 7af7a62b-08de-52cb-bca6-46e6301d18bf
+		sourceLineageTag: cf609ba0-0ec9-48c9-8700-ee870586a2e8
+		sourceColumn: Department Key
+
+	column Scenario
+		dataType: string
+		lineageTag: 6da11b73-6607-5313-97c6-580c0094125d
+		sourceLineageTag: 79cdfd3b-92c3-4309-8979-29aff815318d
+		sourceColumn: Scenario
+
+	column Amount
+		dataType: decimal
+		lineageTag: 349f6483-fabe-5e32-bf8c-5587ef10527e
+		sourceLineageTag: 3f80a11b-30b2-4ae7-99c9-fc640c4ad747
+		sourceColumn: Amount
+
+	/// Technical unique identifier for one Financials row (grain: Month | Account Key | Department Key | Scenario), e.g. 2026-01|5100|D20|Actual. Entity key for the FinancialEntry entity type in BudgetAnalysis_Ontology. Not intended for reporting.
+	column 'Financial Entry Key'
+		dataType: string
+		lineageTag: 9495ec32-aed2-5fc3-825a-1e0d7baefaff
+		sourceLineageTag: 51cb211a-3e2f-4b95-bce3-6abd8a8d3b00
+		sourceColumn: Financial Entry Key
+
+	partition 'Financials-partition' = entity
+		mode: directQuery
+		source
+			entityName: Financials
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

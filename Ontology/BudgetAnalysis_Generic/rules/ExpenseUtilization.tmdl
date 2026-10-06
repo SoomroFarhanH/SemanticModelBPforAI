@@ -1,0 +1,10 @@
+rule ExpenseUtilization
+	lineageTag: 89a4f85d-5c51-5e40-b684-3418b43fdfe9
+	statement: Budget utilization = Actual expenses / Budget expenses for the same scope and period. Above 100 percent indicates overspend and should be flagged; including commitments gives committed utilization.
+	ruleReferencedEntity BudgetLine
+		propertyScope: specific
+		ruleReferencedProperty Amount
+	ruleReferencedEntity Account
+		propertyScope: specific
+		ruleReferencedProperty AccountType
+	ruleReferencedRelationship 'Line Owned By OrgUnit'

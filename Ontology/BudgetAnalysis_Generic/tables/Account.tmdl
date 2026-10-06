@@ -1,0 +1,48 @@
+/// Unique general ledger accounts and Revenue/Expense classification, derived only from Financial Actuals & Budget. Favorable Sign is +1 for revenue and -1 for expenses.
+table Account
+	lineageTag: 4f5d5603-7729-5a26-a43b-02e20600af05
+	sourceLineageTag: e496e9c1-a2c9-47c0-ba86-0a0a8b172f2e
+
+	column 'Account Key'
+		dataType: int64
+		lineageTag: 9ec0aa0e-0baf-5dfa-b440-bc466c207684
+		sourceLineageTag: ec9b5fe3-2336-4c53-9736-3324dc6b4980
+		sourceColumn: Account Key
+
+	/// General ledger account name used for financial line-item analysis.
+	column Account
+		dataType: string
+		lineageTag: ce5399f3-b01a-5b6d-a603-2bce8d8dc5ca
+		sourceLineageTag: a7fe71fc-dae5-41fb-ad6f-17230e336a80
+		sourceColumn: Account Name
+
+	/// Revenue or Expense; both use positive source amounts.
+	column Category
+		dataType: string
+		lineageTag: 45f08108-fbcf-5794-8896-42412a905033
+		sourceLineageTag: e35838fc-9a3b-4c33-ade7-b18a5e61da64
+		sourceColumn: Category
+
+	column 'Favorable Sign'
+		dataType: int64
+		lineageTag: 0ecb24f2-bc79-5baf-95fb-b5c638eb2233
+		sourceLineageTag: 7f4da6f7-94af-4357-b468-41f59400216f
+		sourceColumn: Favorable Sign
+
+	partition 'Account-partition' = entity
+		mode: directQuery
+		source
+			entityName: Account
+			expressionSource: 'DirectQuery to AS - 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d/5475ec3a-7213-482b-ab49-92ecc0932e4a'
+
+		annotation ONT_WorkspaceId = 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+
+		annotation ONT_ItemId = 5475ec3a-7213-482b-ab49-92ecc0932e4a
+
+		annotation ONT_ItemKind = Dataset
+
+		annotation ONT_ItemName = BudgetAnalysis
+
+		annotation ONT_WorkspaceName = PBICopilot
+
+		annotation ONT_PinnedAtUtc = 2026-10-06T19:58:15.0000000+00:00

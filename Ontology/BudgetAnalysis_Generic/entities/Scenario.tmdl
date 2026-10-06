@@ -1,0 +1,30 @@
+/// The case a data set represents: Actual, Budget, Forecast, Reforecast, Plan, Rolling Forecast or What-if.
+entity Scenario
+	lineageTag: 3d02a503-fa9e-5c8b-b41d-c8db9a52bff2
+	backingTable: Scenario
+	keyProperty: ScenarioId
+
+	/// Scenario key.
+	property ScenarioId
+		dataType: string
+		lineageTag: 597fcc14-e04a-5c18-9c9f-2dafd7b8b7f6
+		synonym scenario
+
+		backingConfiguration
+			valueColumn: Scenario.Scenario
+
+	/// Budget Analysis Power BI report built on the same semantic model.
+	resourceLink
+
+		item
+			workspaceId: 9d09d1a8-39f8-48f5-9b1c-eb34930a9b4d
+			itemId: 5360e063-005d-49ca-b2f1-a58c9b63282f
+
+		synonym report
+
+	synonym version
+	synonym category
+	synonym 'plan type'
+	synonym 'budget model'
+	synonym 'actual vs budget'
+	annotation Domain = Core
