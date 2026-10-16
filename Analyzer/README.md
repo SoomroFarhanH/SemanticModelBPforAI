@@ -2,7 +2,7 @@
 
 **What it is:** a read-only, dependency-free Python tool that audits Microsoft Fabric **Dataflow Gen2** items against Microsoft's performance guidance and tells you exactly how to make them faster and cheaper in capacity units (CU). It also recommends when a different Fabric engine (Copy job, pipeline Copy activity, Spark, Eventstream) is a better fit.
 
-**How to use it in 3 steps:** (1) `az login`, (2) `python -m dfg2_advisor scan --workspace "<name>"` (or `--path <exported folder>`), (3) open `reports\<timestamp>\dataflow_gen2_review.html`. Details below.
+**How to use it in 3 steps:** (1) `az login` (or run it in a Fabric notebook, see [Run it inside Microsoft Fabric](#run-it-inside-microsoft-fabric-notebook)), (2) `python -m dfg2_advisor scan --workspace "<name>"` (or `--path <exported folder>`), (3) open `reports\<timestamp>\dataflow_gen2_review.html`. Details below.
 
 Checks Microsoft Fabric **Dataflow Gen2** items against the official guidance and tells you, per dataflow and per query, what to change to get **faster ingestion and lower capacity (CU) usage**. When a different engine would do the job better, it says so and explains how to try it.
 
@@ -36,7 +36,71 @@ python -m dfg2_advisor scan ... --fail-on high   # exit 1 for CI gates
 python -m unittest discover -s tests         # run the tests
 ```
 
+### Reports
+
 Reports are written to `reports\<timestamp>\` (override with `--out`): `dataflow_gen2_review.html` (filterable), `.md`, `.json`, `.csv`. A sample is in [samples/sample_report](samples/sample_report).
+
+## Run it inside Microsoft Fabric (notebook)
+
+No laptop, Azure CLI or secrets needed. The notebook authenticates as **you** and writes the reports to a Lakehouse.
+
+**Prerequisites:** a Fabric workspace on an active capacity, a Lakehouse (attached as the notebook's *default lakehouse*, optional but recommended), and at least **Contributor** on every workspace you want to scan. The analysis is read-only.
+
+### Option A: ready-made notebook (recommended)
+
+1. Download [notebooks/DataflowGen2_Analyzer.ipynb](notebooks/DataflowGen2_Analyzer.ipynb).
+2. In Fabric open your workspace > **Import** > **Notebook** > **From this computer**, pick the file.
+3. Open the notebook and attach your **Lakehouse** (left pane > *Add*). A Spark or a Python notebook both work.
+4. Edit the **Parameters** cell (all optional):
+   ```python
+   WORKSPACES      = ["Sales Analytics", "Finance"]   # empty = the current workspace
+   ALL_WORKSPACES  = False                            # True = everything you can access
+   DATAFLOW_FILTER = None                             # e.g. "Orders"
+   HISTORY_DAYS    = 30
+   SAVE_TO_TABLES  = False                            # True = append results to Delta tables
+   ```
+5. **Run all.** The first cell installs the package from this repo for the session (`%pip install`), the rest run the scan, show the scorecard and findings, and render the HTML report in the notebook.
+6. Open the files under **Lakehouse > Files > dfg2_reports > `<timestamp>`** (`dataflow_gen2_review.html`, `.md`, `.json`, `.csv`) or download them.
+
+### Option B: just use the code in any notebook cell
+
+```python
+%pip install --quiet "https://github.com/SoomroFarhanH/SemanticModelBPforAI/archive/refs/heads/main.zip#subdirectory=Analyzer"
+```
+```python
+from dfg2_advisor.notebook import run, scorecard_rows
+import pandas as pd
+
+out = run(workspaces=["Sales Analytics"], history_days=30)       # or all_workspaces=True
+display(pd.DataFrame(scorecard_rows(out["results"])))
+displayHTML(open(out["paths"]["html"], encoding="utf-8").read())
+```
+
+### Option C: no internet from Fabric (locked-down tenant)
+
+Upload the `Analyzer` folder to **Lakehouse > Files > Analyzer**, then in the first cell use
+```python
+import sys; sys.path.insert(0, "/lakehouse/default/Files/Analyzer")
+```
+instead of `%pip install`. To make it available to every notebook, build a wheel (`python -m pip wheel . --no-deps`) and add it under **Environment > Custom libraries**.
+
+### Scan definitions you exported (Git integration)
+
+Copy the exported `*.Dataflow` folders to **Lakehouse > Files > exported_dataflows** and set `EXPORTED_PATHS = ["/lakehouse/default/Files/exported_dataflows"]`. This also works when a capacity is paused and the live definition cannot be read (no refresh history in that mode).
+
+### Run it on a schedule and track the score over time
+
+1. Set `SAVE_TO_TABLES = True` (Spark notebook with a default lakehouse). Each run **appends** to the Delta tables `dfg2_scorecard` and `dfg2_findings`.
+2. Add the notebook to a **Data Pipeline** as a *Notebook* activity and schedule it (for example weekly).
+3. Build a Power BI report on the two tables (score trend, findings by rule and severity).
+
+### Fabric notes
+
+- **Authentication:** inside a notebook the tool uses `notebookutils.credentials` (your identity). Outside Fabric it uses `FABRIC_TOKEN`, then `az login`.
+- **Permissions:** you only see items in workspaces where you are at least Contributor; others are skipped with a message. If your tenant blocks the Fabric REST API for your account you will see HTTP 401/403.
+- **Paused capacity:** definitions cannot be read (`CapacityNotActive`); those dataflows are listed as *not assessed* (rule DFG-000) instead of getting a score.
+- **Time:** reading definitions is a long-running API call (about 1-3 seconds per dataflow). For very large tenants use `WORKSPACES` or `DATAFLOW_FILTER` instead of `ALL_WORKSPACES`.
+
 
 ### What it reads
 
@@ -132,6 +196,9 @@ dfg2_advisor/
   engine.py      orchestration, scoring, schedule-collision rule
   coverage.py    guidance -> rule traceability and manual checklist
   report.py      HTML / Markdown / JSON / CSV
+  notebook.py    helpers for Fabric notebooks (run(), scorecard/findings rows)
+notebooks/       DataflowGen2_Analyzer.ipynb (import into Fabric)
+pyproject.toml   pip-installable package
 samples/         BadSales.Dataflow (many issues), GoodSales.Dataflow (clean), sample_report/
 tests/           unittest suite
 ```

@@ -265,5 +265,51 @@ class LoaderReportTests(unittest.TestCase):
         self.assertEqual(analyze(ms[0], Config()).telemetry["runs"], 1)
 
 
+class NotebookTests(unittest.TestCase):
+    def test_run_offline_and_rows(self):
+        from dfg2_advisor.notebook import findings_rows, run, scorecard_rows
+
+        with tempfile.TemporaryDirectory() as d:
+            out = run(paths=[SAMPLES], out_dir=d, formats=("html", "json"))
+            self.assertTrue(os.path.exists(out["paths"]["html"]))
+            rows = scorecard_rows(out["results"])
+            self.assertEqual({r["dataflow"] for r in rows}, {"BadSales", "GoodSales"})
+            self.assertTrue(any(f["rule_id"] == "DFG-001" for f in findings_rows(out["results"])))
+
+    def test_run_requires_a_target(self):
+        from dfg2_advisor.notebook import run
+
+        with self.assertRaises(ValueError):
+            run()
+
+    def test_notebook_token_used_when_available(self):
+        import sys
+        import types
+
+        from dfg2_advisor import fabric_api
+
+        fake = types.ModuleType("notebookutils")
+        fake.credentials = types.SimpleNamespace(getToken=lambda aud: f"tok-{aud}")
+        old = sys.modules.get("notebookutils")
+        sys.modules["notebookutils"] = fake
+        try:
+            os.environ.pop("FABRIC_TOKEN", None)
+            self.assertEqual(fabric_api.default_token_provider(fabric_api.FABRIC_SCOPE)(), "tok-pbi")
+        finally:
+            if old is None:
+                sys.modules.pop("notebookutils", None)
+            else:
+                sys.modules["notebookutils"] = old
+
+    def test_notebook_file_is_valid_json(self):
+        p = os.path.join(os.path.dirname(SAMPLES), "notebooks", "DataflowGen2_Analyzer.ipynb")
+        with open(p, encoding="utf-8") as fh:
+            nb = json.load(fh)
+        self.assertEqual(nb["nbformat"], 4)
+        for c in nb["cells"]:
+            if c["cell_type"] == "code":
+                compile("".join(l for l in c["source"] if not l.startswith("%")), "cell", "exec")
+
+
 if __name__ == "__main__":
     unittest.main()

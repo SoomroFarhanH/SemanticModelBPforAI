@@ -28,7 +28,7 @@ class ApiError(RuntimeError):
 def az_token(resource: str) -> str:
     az = shutil.which("az") or shutil.which("az.cmd")
     if not az:
-        raise RuntimeError("Azure CLI not found. Install it and run 'az login', or set FABRIC_TOKEN / POWERBI_TOKEN.")
+        raise RuntimeError("No credentials. Inside Fabric use a notebook (uses your identity); elsewhere install the Azure CLI and run 'az login', or set FABRIC_TOKEN / POWERBI_TOKEN.")
     out = subprocess.run(
         [az, "account", "get-access-token", "--resource", resource, "--query", "accessToken", "-o", "tsv"],
         capture_output=True, text=True, timeout=90,
@@ -38,11 +38,26 @@ def az_token(resource: str) -> str:
     return out.stdout.strip()
 
 
+def notebook_token() -> Optional[str]:
+    """Token for the signed-in user when running inside a Fabric notebook (no az CLI there)."""
+    try:
+        import notebookutils  # type: ignore
+    except ImportError:
+        try:
+            from notebookutils import mssparkutils as notebookutils  # type: ignore
+        except ImportError:
+            return None
+    try:
+        return notebookutils.credentials.getToken("pbi")
+    except Exception:  # noqa: BLE001 - not in a Fabric session or token service unavailable
+        return None
+
+
 def default_token_provider(scope: str) -> Callable[[], str]:
     env = "FABRIC_TOKEN" if scope == FABRIC_SCOPE else "POWERBI_TOKEN"
 
     def provider() -> str:
-        return os.environ.get(env) or az_token(scope)
+        return os.environ.get(env) or notebook_token() or az_token(scope)
 
     return provider
 

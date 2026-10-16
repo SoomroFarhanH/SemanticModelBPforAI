@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dfg2-advisor"
+version = "1.1.0"
+description = "Check Fabric Dataflow Gen2 items against Microsoft best practices and recommend optimisations or alternative engines."
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+dfg2-advisor = "dfg2_advisor.cli:main"
+
+[tool.setuptools]
+packages = ["dfg2_advisor"]
