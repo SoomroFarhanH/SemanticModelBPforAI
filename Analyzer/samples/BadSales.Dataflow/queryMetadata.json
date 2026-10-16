@@ -1,0 +1,22 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowFastCopy": false,
+    "maxConcurrency": 1
+  },
+  "name": "BadSales",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "gatewayObjectId": "33333333-3333-3333-3333-333333333333",
+  "queriesMetadata": {
+    "FactSales":  {"queryId": "a0000000-0000-0000-0000-000000000002", "queryName": "FactSales", "loadEnabled": false},
+    "FactSales_DataDestination": {"queryId": "a0000000-0000-0000-0000-000000000003", "queryName": "FactSales_DataDestination", "isHidden": true, "loadEnabled": false},
+    "DimCustomer": {"queryId": "a0000000-0000-0000-0000-000000000004", "queryName": "DimCustomer", "loadEnabled": true},
+    "RawFiles": {"queryId": "a0000000-0000-0000-0000-000000000005", "queryName": "RawFiles", "loadEnabled": false},
+    "FilesToWarehouse": {"queryId": "a0000000-0000-0000-0000-000000000006", "queryName": "FilesToWarehouse", "loadEnabled": false},
+    "RawFiles_DataDestination": {"queryId": "a0000000-0000-0000-0000-000000000007", "queryName": "RawFiles_DataDestination", "isHidden": true, "loadEnabled": false},
+    "Orphan": {"queryId": "a0000000-0000-0000-0000-000000000008", "queryName": "Orphan", "loadEnabled": false},
+    "Telemetry": {"queryId": "a0000000-0000-0000-0000-000000000009", "queryName": "Telemetry", "loadEnabled": true}
+  },
+  "connections": []
+}

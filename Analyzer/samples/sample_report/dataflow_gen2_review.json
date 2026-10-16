@@ -1,0 +1,1489 @@
+{
+  "summary": {
+    "generated_utc": "2026-10-16T14:19:40Z",
+    "dataflows": 2,
+    "average_score": 50.0,
+    "not_assessed": 0,
+    "severity_counts": {
+      "critical": 0,
+      "high": 7,
+      "medium": 13,
+      "low": 9,
+      "info": 1
+    },
+    "category_counts": {
+      "Performance": 14,
+      "Architecture": 7,
+      "Reliability": 4,
+      "Capacity": 1,
+      "Maintainability": 4
+    },
+    "top_rules": [
+      {
+        "rule": "DFG-020",
+        "title": "Heavy transformations run in the mashup engine without staging",
+        "count": 4
+      },
+      {
+        "rule": "DFG-025",
+        "title": "Staged output is only reachable through the Dataflow connector",
+        "count": 2
+      },
+      {
+        "rule": "DFG-032",
+        "title": "Rows are filtered late in the query",
+        "count": 2
+      },
+      {
+        "rule": "DFG-067",
+        "title": "Unused query",
+        "count": 2
+      },
+      {
+        "rule": "DFG-001",
+        "title": "Fast Copy is disabled for the dataflow",
+        "count": 1
+      },
+      {
+        "rule": "DFG-050",
+        "title": "Gateway runs the whole dataflow, including transformations",
+        "count": 1
+      },
+      {
+        "rule": "DFG-036",
+        "title": "Row-by-row calls to external sources (N+1 pattern)",
+        "count": 1
+      },
+      {
+        "rule": "ARCH-003",
+        "title": "Event/streaming source is a better fit for Eventstream",
+        "count": 1
+      },
+      {
+        "rule": "DFG-023",
+        "title": "Warehouse destination without staging",
+        "count": 1
+      },
+      {
+        "rule": "DFG-026",
+        "title": "Consumes data through the Dataflow connector",
+        "count": 1
+      }
+    ],
+    "estimated_cu_seconds_per_month": null
+  },
+  "dataflows": [
+    {
+      "name": "BadSales",
+      "workspace": "",
+      "workspaceId": "",
+      "id": "BadSales",
+      "format": "cicd",
+      "source": "samples\\BadSales.Dataflow",
+      "score": 0,
+      "grade": "F",
+      "settings": {
+        "allowFastCopy": false,
+        "maxConcurrency": 1
+      },
+      "queries": [
+        {
+          "name": "FactSales",
+          "role": "query",
+          "steps": 11,
+          "staged": false,
+          "sources": [
+            "Sql.Database",
+            "Web.Contents"
+          ],
+          "families": [
+            "sql",
+            "web"
+          ],
+          "canFold": false,
+          "fastCopyConnector": false,
+          "referencedBy": [],
+          "destinations": [
+            {
+              "kind": "lakehouse",
+              "query": "FactSales_DataDestination",
+              "update_method": "Replace",
+              "dynamic_schema": true,
+              "settings_kind": "Manual",
+              "has_column_mappings": true,
+              "type_kind": "Table"
+            }
+          ]
+        },
+        {
+          "name": "FactSales_DataDestination",
+          "role": "destination",
+          "steps": 4,
+          "staged": false,
+          "sources": [
+            "Lakehouse.Contents"
+          ],
+          "families": [
+            "fabric_lakehouse"
+          ],
+          "canFold": true,
+          "fastCopyConnector": true,
+          "referencedBy": [],
+          "destinations": []
+        },
+        {
+          "name": "DimCustomer",
+          "role": "query",
+          "steps": 3,
+          "staged": true,
+          "sources": [
+            "PowerPlatform.Dataflows"
+          ],
+          "families": [
+            "dataflow_connector"
+          ],
+          "canFold": false,
+          "fastCopyConnector": false,
+          "referencedBy": [],
+          "destinations": []
+        },
+        {
+          "name": "RawFiles",
+          "role": "query",
+          "steps": 5,
+          "staged": false,
+          "sources": [
+            "AzureStorage.DataLake"
+          ],
+          "families": [
+            "adls"
+          ],
+          "canFold": false,
+          "fastCopyConnector": true,
+          "referencedBy": [],
+          "destinations": []
+        },
+        {
+          "name": "FilesToWarehouse",
+          "role": "query",
+          "steps": 4,
+          "staged": false,
+          "sources": [
+            "AzureStorage.Blobs"
+          ],
+          "families": [
+            "blob"
+          ],
+          "canFold": false,
+          "fastCopyConnector": true,
+          "referencedBy": [],
+          "destinations": [
+            {
+              "kind": "warehouse",
+              "query": "RawFiles_DataDestination",
+              "update_method": "Append",
+              "dynamic_schema": false,
+              "settings_kind": "Manual",
+              "has_column_mappings": false,
+              "type_kind": "Table"
+            }
+          ]
+        },
+        {
+          "name": "RawFiles_DataDestination",
+          "role": "destination",
+          "steps": 2,
+          "staged": false,
+          "sources": [
+            "Fabric.Warehouse"
+          ],
+          "families": [
+            "fabric_warehouse"
+          ],
+          "canFold": true,
+          "fastCopyConnector": true,
+          "referencedBy": [],
+          "destinations": []
+        },
+        {
+          "name": "Orphan",
+          "role": "query",
+          "steps": 2,
+          "staged": false,
+          "sources": [
+            "File.Contents"
+          ],
+          "families": [
+            "file"
+          ],
+          "canFold": false,
+          "fastCopyConnector": false,
+          "referencedBy": [],
+          "destinations": []
+        },
+        {
+          "name": "Telemetry",
+          "role": "query",
+          "steps": 1,
+          "staged": true,
+          "sources": [
+            "EventHubs.Contents"
+          ],
+          "families": [
+            "stream"
+          ],
+          "canFold": false,
+          "fastCopyConnector": false,
+          "referencedBy": [],
+          "destinations": []
+        }
+      ],
+      "quickWins": [
+        "DFG-001",
+        "DFG-023",
+        "DFG-035",
+        "DFG-011",
+        "DFG-040",
+        "DFG-032",
+        "DFG-050",
+        "DFG-020"
+      ],
+      "findings": [
+        {
+          "rule_id": "DFG-001",
+          "title": "Fast Copy is disabled for the dataflow",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "computeEngineSettings.allowFastCopy = false. Fast-copy capable queries: RawFiles, FilesToWarehouse.",
+          "why": "Fast Copy uses the pipeline Copy-activity backend for high-throughput ingestion. Disabling it forces the slower mashup-engine data path even for eligible sources.",
+          "remediation": [
+            "Open the dataflow > Home > Options > Scale and turn on 'Allow use of fast copy connectors'.",
+            "In the definition set computeEngineSettings.allowFastCopy = true (the default).",
+            "Keep Fast Copy queries free of non-folding transformations; put those in a second, referencing query."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-fast-copy",
+          "confidence": "high",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-050",
+          "title": "Gateway runs the whole dataflow, including transformations",
+          "severity": "high",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "gatewayObjectId set; queries mixing source + transformations: FactSales, RawFiles, FilesToWarehouse, Orphan.",
+          "why": "The gateway executes every transformation on the gateway machine. Keeping only data movement on the gateway reduces latency and capacity pressure.",
+          "remediation": [
+            "Dataflow A (gateway): copy on-premises data to a Lakehouse/Warehouse, Fast Copy where supported, no transformations.",
+            "Dataflow B (cloud, no gateway): read the landed data and apply transformations.",
+            "Alternatively use a pipeline Copy activity/Copy job via the gateway for the movement step."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "high",
+          "impact": [
+            "speed",
+            "capacity",
+            "reliability"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-020",
+          "title": "Heavy transformations run in the mashup engine without staging",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "Query 'FactSales' (staging off) uses Table.AddIndexColumn, Table.Buffer, Table.Group, Table.Sort on a non-folding path.",
+          "why": "Joins, group-by, pivot/unpivot, sort, distinct and buffering that do not fold to the source run in the single-node mashup engine. Staging lets the Lakehouse/Warehouse SQL engine do that work in parallel.",
+          "remediation": [
+            "Right-click the first non-folding step > Extract previous, name the new query, and enable staging on it.",
+            "Apply the heavy transformations in the second query (staging on the second query is optional).",
+            "Re-check folding indicators: the first query should show green (folds to source).",
+            "Sources that never fold (Excel, CSV, JSON, web, SharePoint) benefit most: land the raw data in query 1, then transform in staging compute; prefer Parquet/Delta over CSV/Excel as the landing format."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-020",
+          "title": "Heavy transformations run in the mashup engine without staging",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "RawFiles",
+          "evidence": "Query 'RawFiles' (staging off) uses Table.Combine on a non-folding path.",
+          "why": "Joins, group-by, pivot/unpivot, sort, distinct and buffering that do not fold to the source run in the single-node mashup engine. Staging lets the Lakehouse/Warehouse SQL engine do that work in parallel.",
+          "remediation": [
+            "Right-click the first non-folding step > Extract previous, name the new query, and enable staging on it.",
+            "Apply the heavy transformations in the second query (staging on the second query is optional).",
+            "Re-check folding indicators: the first query should show green (folds to source).",
+            "Sources that never fold (Excel, CSV, JSON, web, SharePoint) benefit most: land the raw data in query 1, then transform in staging compute; prefer Parquet/Delta over CSV/Excel as the landing format."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-020",
+          "title": "Heavy transformations run in the mashup engine without staging",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "Query 'FilesToWarehouse' (staging off) uses Table.Group on a non-folding path.",
+          "why": "Joins, group-by, pivot/unpivot, sort, distinct and buffering that do not fold to the source run in the single-node mashup engine. Staging lets the Lakehouse/Warehouse SQL engine do that work in parallel.",
+          "remediation": [
+            "Right-click the first non-folding step > Extract previous, name the new query, and enable staging on it.",
+            "Apply the heavy transformations in the second query (staging on the second query is optional).",
+            "Re-check folding indicators: the first query should show green (folds to source).",
+            "Sources that never fold (Excel, CSV, JSON, web, SharePoint) benefit most: land the raw data in query 1, then transform in staging compute; prefer Parquet/Delta over CSV/Excel as the landing format."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-020",
+          "title": "Heavy transformations run in the mashup engine without staging",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "Orphan",
+          "evidence": "Query 'Orphan' (staging off) uses Table.Sort on a non-folding path.",
+          "why": "Joins, group-by, pivot/unpivot, sort, distinct and buffering that do not fold to the source run in the single-node mashup engine. Staging lets the Lakehouse/Warehouse SQL engine do that work in parallel.",
+          "remediation": [
+            "Right-click the first non-folding step > Extract previous, name the new query, and enable staging on it.",
+            "Apply the heavy transformations in the second query (staging on the second query is optional).",
+            "Re-check folding indicators: the first query should show green (folds to source).",
+            "Sources that never fold (Excel, CSV, JSON, web, SharePoint) benefit most: land the raw data in query 1, then transform in staging compute; prefer Parquet/Delta over CSV/Excel as the landing format."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-036",
+          "title": "Row-by-row calls to external sources (N+1 pattern)",
+          "severity": "high",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "'FactSales' calls Web.Contents inside a row-level function.",
+          "why": "Calling a connector or web endpoint inside a per-row function (Table.AddColumn each ...) executes one request per row, multiplying latency and billable mashup time.",
+          "remediation": [
+            "Replace per-row calls with a single set-based call and join/merge the result.",
+            "For REST APIs, paginate with List.Generate once, or move ingestion to a pipeline Copy activity / Spark notebook.",
+            "Stage the lookup table and merge instead of invoking a function per row."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity",
+            "reliability"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "ARCH-003",
+          "title": "Event/streaming source is a better fit for Eventstream",
+          "severity": "medium",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "Query 'Telemetry' reads an event/streaming source (EventHubs.Contents) through a scheduled dataflow.",
+          "why": "Eventstream ingests events as they occur without polling schedules.",
+          "remediation": [
+            "Create an Eventstream with the same source and route to Eventhouse or Lakehouse.",
+            "Keep a Dataflow Gen2 / Spark job only for downstream business transformations, reading the landed table.",
+            "Retire the scheduled dataflow once parity is validated."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+          "confidence": "high",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "high",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-023",
+          "title": "Warehouse destination without staging",
+          "severity": "medium",
+          "category": "Reliability",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "Query 'FilesToWarehouse' writes to a Warehouse with staging disabled.",
+          "why": "Loading to a Fabric Warehouse requires staging to be enabled on the query.",
+          "remediation": [
+            "Enable staging on queries that load to a Warehouse destination."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-and-managed-settings",
+          "confidence": "high",
+          "impact": [
+            "reliability"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-026",
+          "title": "Consumes data through the Dataflow connector",
+          "severity": "medium",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": "DimCustomer",
+          "evidence": "Query 'DimCustomer' reads through PowerPlatform.Dataflows.",
+          "why": "Using PowerPlatform.Dataflows as a source chains dataflows via the slower connector instead of destinations.",
+          "remediation": [
+            "Give the upstream dataflow a Lakehouse/Warehouse destination and read that table (Lakehouse.Contents / SQL endpoint)."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "high",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-035",
+          "title": "Table.Buffer / List.Buffer used",
+          "severity": "medium",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "Query 'FactSales' uses Table.Buffer.",
+          "why": "Buffering materialises the table in memory, breaks query folding and can cause out-of-memory failures on large data.",
+          "remediation": [
+            "Remove the buffer unless profiling shows a benefit.",
+            "Stage the data instead; the staging SQL engine handles large intermediate results."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "high",
+          "impact": [
+            "speed",
+            "reliability"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "ARCH-004",
+          "title": "Split into Copy job ingestion + Dataflow Gen2 transformation",
+          "severity": "medium",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "Movement and heavy transformation are mixed in the same dataflow: RawFiles, FilesToWarehouse.",
+          "why": "Mixing raw movement and transformation in one dataflow forfeits Fast Copy / Copy job throughput and burns Standard Compute on movement.",
+          "remediation": [
+            "Stage 1: ingestion-only query (or Copy job) -> Lakehouse.",
+            "Stage 2: referencing query/dataflow/notebook applies Group/Join/Sort logic.",
+            "Wire both in a pipeline so stage 2 starts only after stage 1 succeeds."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "high",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-005",
+          "title": "File-combine queries could use Partitioned Compute",
+          "severity": "medium",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "RawFiles",
+          "evidence": "Query 'RawFiles' combines files from AzureStorage.DataLake without partitioned compute.",
+          "why": "Partitioned compute evaluates each file partition in parallel, cutting wall-clock time on large multi-file loads (ADLS Gen2, Blob, Folder). Recommended over Fast Copy when the source cannot fold your transformations.",
+          "remediation": [
+            "Options > Scale > 'Allow use of partitioned compute' and Privacy > 'Allow combining data from multiple sources'.",
+            "Re-run the Combine files experience so a Table.ReplacePartitionKey step is generated; keep the partition column in the query.",
+            "Stage the query and load directly to staging or a Fabric Warehouse for best results (Preview; each partition is billed for its own duration, so CU can be similar or higher while wall-clock drops)."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-partitioned-compute",
+          "confidence": "medium",
+          "impact": [
+            "speed"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-011",
+          "title": "Fast Copy source loads directly to a non-Lakehouse destination",
+          "severity": "medium",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "Query 'FilesToWarehouse' (Fast Copy connector) writes straight to warehouse without staging.",
+          "why": "Fast Copy can only write directly to a Lakehouse. For any other destination the query must be staged and a second query that references it must hold the destination.",
+          "remediation": [
+            "Stage the ingestion query (no destination).",
+            "Create a referencing query that carries the Warehouse / SQL / KQL destination."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-fast-copy",
+          "confidence": "medium",
+          "impact": [
+            "speed"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-025",
+          "title": "Staged output is only reachable through the Dataflow connector",
+          "severity": "medium",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": "DimCustomer",
+          "evidence": "Query 'DimCustomer' is staged but has no destination and no referencing query.",
+          "why": "Consuming a dataflow through the Dataflow connector is slower and burns more capacity than reading a Lakehouse/Warehouse destination through the SQL analytics endpoint or Direct Lake.",
+          "remediation": [
+            "Add a Lakehouse or Warehouse data destination to the query.",
+            "Point reports/pipelines at the destination table instead of the Dataflow connector."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-025",
+          "title": "Staged output is only reachable through the Dataflow connector",
+          "severity": "medium",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": "Telemetry",
+          "evidence": "Query 'Telemetry' is staged but has no destination and no referencing query.",
+          "why": "Consuming a dataflow through the Dataflow connector is slower and burns more capacity than reading a Lakehouse/Warehouse destination through the SQL analytics endpoint or Direct Lake.",
+          "remediation": [
+            "Add a Lakehouse or Warehouse data destination to the query.",
+            "Point reports/pipelines at the destination table instead of the Dataflow connector."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-040",
+          "title": "Design-time row limit left in the query",
+          "severity": "medium",
+          "category": "Reliability",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "Step 'Top' limits rows with a literal (Table.FirstN(Grouped, 1000)).",
+          "why": "Hard-coded Table.FirstN/Table.Range limits used to keep previews small silently truncate production loads.",
+          "remediation": [
+            "Replace hard-coded limits with a parameter (for example DesignDateFilter) whose value is widened for production runs.",
+            "Use Schema view to design without loading data."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "reliability"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-060",
+          "title": "Full reload (Replace) of a source table on every refresh",
+          "severity": "medium",
+          "category": "Capacity",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "Query 'FactSales' reloads fully into lakehouse and references date/time columns.",
+          "why": "Re-reading and rewriting an unchanged history every run wastes ingestion time and CU. Incremental refresh processes only new/changed buckets.",
+          "remediation": [
+            "Right-click the query > Incremental refresh; pick a Date/DateTime column, bucket size and window; make sure the query fully folds.",
+            "Use a fixed-schema Lakehouse/Warehouse/Azure SQL destination with update method Replace.",
+            "If the source cannot fold, use the incremental amassing pattern (tutorial) or a Copy job with watermark/CDC."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-032",
+          "title": "Rows are filtered late in the query",
+          "severity": "medium",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "First filter is step 10 but a heavier step occurs at step 6 ('Buffered').",
+          "why": "Best practice is to filter early and often so less data flows through every downstream step.",
+          "remediation": [
+            "Move Table.SelectRows (date/ID filters) directly after the source navigation.",
+            "Combine with a Date-parameter filter to also keep design-time previews small."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "low",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-032",
+          "title": "Rows are filtered late in the query",
+          "severity": "medium",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "First filter is step 4 but a heavier step occurs at step 3 ('Grouped').",
+          "why": "Best practice is to filter early and often so less data flows through every downstream step.",
+          "remediation": [
+            "Move Table.SelectRows (date/ID filters) directly after the source navigation.",
+            "Combine with a Date-parameter filter to also keep design-time previews small."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "low",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-037",
+          "title": "Repetitive type/rename/add-column steps",
+          "severity": "low",
+          "category": "Maintainability",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "Query 'FactSales' has 3 separate Table.TransformColumnTypes steps.",
+          "why": "Many repeated Table.TransformColumnTypes / RenameColumns steps add evaluation overhead and bloat the script.",
+          "remediation": [
+            "Merge consecutive type changes into one Table.TransformColumnTypes call and renames into one Table.RenameColumns."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "high",
+          "impact": [
+            "speed"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-062",
+          "title": "Dynamic schema destination",
+          "severity": "low",
+          "category": "Reliability",
+          "dataflow": "BadSales",
+          "query": "FactSales",
+          "evidence": "Query 'FactSales' uses DynamicSchema = true.",
+          "why": "Incremental refresh requires a fixed schema, and dynamic schema lets upstream column drift silently change destination tables.",
+          "remediation": [
+            "Switch the destination mapping to fixed schema (manual mapping) where schema is stable."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+          "confidence": "high",
+          "impact": [
+            "reliability"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-067",
+          "title": "Unused query",
+          "severity": "low",
+          "category": "Maintainability",
+          "dataflow": "BadSales",
+          "query": "RawFiles",
+          "evidence": "Query 'RawFiles' is not loaded, has no destination and is not referenced.",
+          "why": "Queries that are not loaded, not staged and not referenced add clutter and validation time and confuse ownership.",
+          "remediation": [
+            "Delete the query or document why it is kept."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "high",
+          "impact": [],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-067",
+          "title": "Unused query",
+          "severity": "low",
+          "category": "Maintainability",
+          "dataflow": "BadSales",
+          "query": "Orphan",
+          "evidence": "Query 'Orphan' is not loaded, has no destination and is not referenced.",
+          "why": "Queries that are not loaded, not staged and not referenced add clutter and validation time and confuse ownership.",
+          "remediation": [
+            "Delete the query or document why it is kept."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/power-query/best-practices",
+          "confidence": "high",
+          "impact": [],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-004",
+          "title": "V-Order is applied to the staging Lakehouse",
+          "severity": "low",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "enableVorder is not set (default on) and staging is in use.",
+          "why": "The staging Lakehouse is read only by Dataflow Gen2 itself. V-Order adds write-time CPU and lengthens refreshes; it only pays off when staged output is read many times through the Dataflow connector.",
+          "remediation": [
+            "Options > Scale > Staged Data > turn off 'Enable V-Order compression' (enableVorder = false) for most dataflows.",
+            "Keep V-Order for the Lakehouse destination itself when Direct Lake / SQL endpoint / Spark read it (destination-level option)."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-staged-data-options",
+          "confidence": "medium",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-007",
+          "title": "Low maxConcurrency with many independent queries",
+          "severity": "low",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "maxConcurrency = 1 with 6 independent queries.",
+          "why": "A concurrency of 1 evaluates queries one after another, stretching refresh time for independent queries.",
+          "remediation": [
+            "Raise 'Maximum concurrent evaluations' (Options > Scale; computeEngineSettings.maxConcurrency) gradually while watching source throttling.",
+            "Incremental refresh to a Lakehouse supports at most 10 concurrent bucket evaluations."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "medium",
+          "impact": [
+            "speed"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-002",
+          "title": "Modern Evaluator is not enabled",
+          "severity": "low",
+          "category": "Performance",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "allowModernEvaluationEngine is not set in the definition (enabled by default only for newly created CI/CD items; older items may still use the standard engine). Verify under Options > Scale.",
+          "why": "The Modern query evaluation engine (.NET 8) runs mashup transformations substantially faster and more efficiently, especially for non-folding connectors, filters, derived columns and cleansing at volume.",
+          "remediation": [
+            "Dataflow editor > Home > Options > Scale > turn on 'Modern query evaluation engine', then save and run.",
+            "Definition setting: computeEngineSettings.allowModernEvaluationEngine = true.",
+            "Note: Db2, Informix and MQ connectors still route to the standard engine."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-modern-evaluator",
+          "confidence": "low",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-041",
+          "title": "No parameter limits design-time data previews",
+          "severity": "low",
+          "category": "Maintainability",
+          "dataflow": "BadSales",
+          "query": null,
+          "evidence": "4 source query(ies) and no parameter query in the dataflow.",
+          "why": "Large previews slow authoring. A parameter-driven date or ID filter (or Schema view) keeps the editor responsive.",
+          "remediation": [
+            "Manage parameters > add e.g. DesignDateFilter (DateTime) and filter large tables by it.",
+            "Switch to Schema view when only the structure is needed.",
+            "Widen the parameter value before running in production."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "confidence": "low",
+          "impact": [
+            "speed"
+          ],
+          "effort": "low",
+          "snippet": null
+        },
+        {
+          "rule_id": "DFG-061",
+          "title": "Append destination without a visible incremental/dedup pattern",
+          "severity": "low",
+          "category": "Reliability",
+          "dataflow": "BadSales",
+          "query": "FilesToWarehouse",
+          "evidence": "Query 'FilesToWarehouse' appends without reading back the destination to bound the filter.",
+          "why": "Appending each refresh without a filter on already-loaded data duplicates rows and grows tables unbounded, hurting both capacity and downstream performance.",
+          "remediation": [
+            "Use native incremental refresh (Replace per bucket) instead of Append.",
+            "If you must append, filter the source to rows newer than the max timestamp already in the destination, and deduplicate downstream."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+          "confidence": "low",
+          "impact": [
+            "capacity",
+            "reliability"
+          ],
+          "effort": "medium",
+          "snippet": null
+        },
+        {
+          "rule_id": "ARCH-002",
+          "title": "Transformation workload is a better fit for Spark",
+          "severity": "info",
+          "category": "Architecture",
+          "dataflow": "BadSales",
+          "query": "FactSales, RawFiles, FilesToWarehouse, Orphan",
+          "evidence": "Signals: 7 heavy operations (Table.AddIndexColumn, Table.Buffer, Table.Combine, Table.Group, Table.Sort).",
+          "why": "Spark scales out heavy transformation, custom logic and large joins that run on a single mashup engine in Dataflow Gen2.",
+          "remediation": [
+            "Land sources with Copy job / Fast Copy into Lakehouse Delta tables (bronze).",
+            "Re-implement the heavy queries in a notebook (Spark SQL/PySpark), writing silver/gold Delta tables.",
+            "Keep Dataflow Gen2 for light business-user shaping of the gold tables if needed.",
+            "Orchestrate with a Data Pipeline; use incremental MERGE for fact tables; validate row counts against the dataflow output."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+          "confidence": "low",
+          "impact": [
+            "speed",
+            "capacity"
+          ],
+          "effort": "high",
+          "snippet": null
+        }
+      ],
+      "recommendations": [
+        {
+          "engine": "Eventstream",
+          "verdict": "recommended",
+          "confidence": "high",
+          "rationale": [
+            "Query 'Telemetry' reads an event/streaming source (EventHubs.Contents) through a scheduled dataflow.",
+            "Decision guide: Eventstream = event data ingestion/transformation, medium to high volume, no extraction schedule."
+          ],
+          "benefits": [
+            "Events land as they occur instead of per-refresh polling.",
+            "Avoids Standard Compute billing on every poll."
+          ],
+          "tradeoffs": [
+            "Only lightweight transformation; complex shaping stays in Spark/Dataflow downstream."
+          ],
+          "migration_steps": [
+            "Create an Eventstream with the same source and route to Eventhouse or Lakehouse.",
+            "Keep a Dataflow Gen2 / Spark job only for downstream business transformations, reading the landed table.",
+            "Retire the scheduled dataflow once parity is validated."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+          "scope": "dataflow",
+          "query": null
+        },
+        {
+          "engine": "Spark (notebook / Spark job definition)",
+          "verdict": "consider",
+          "confidence": "low",
+          "rationale": [
+            "Signals: 7 heavy operations (Table.AddIndexColumn, Table.Buffer, Table.Combine, Table.Group, Table.Sort).",
+            "Decision guide: Spark = data ingestion, transformation, processing, profiling with native Spark and open-source libraries; low to high complexity and volume."
+          ],
+          "benefits": [
+            "Distributed execution for large joins/aggregations that otherwise run in one mashup engine.",
+            "Direct Delta writes, partition pruning, OPTIMIZE/V-Order and MERGE for upserts.",
+            "Better fit for custom logic, window functions and API pagination."
+          ],
+          "tradeoffs": [
+            "Requires Spark (PySpark/Spark SQL) skills and code review/CI practices.",
+            "Session start-up and Spark CU consumption: validate with the Capacity Metrics app; short, light jobs can cost more than Dataflow.",
+            "For SQL-shaped logic already in OneLake, a Warehouse T-SQL procedure or Materialized Lake Views may be simpler than Spark (outside the decision-guide table; evaluate)."
+          ],
+          "migration_steps": [
+            "Land sources with Copy job / Fast Copy into Lakehouse Delta tables (bronze).",
+            "Re-implement the heavy queries in a notebook (Spark SQL/PySpark), writing silver/gold Delta tables.",
+            "Keep Dataflow Gen2 for light business-user shaping of the gold tables if needed.",
+            "Orchestrate with a Data Pipeline; use incremental MERGE for fact tables; validate row counts against the dataflow output."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+          "scope": "query",
+          "query": "FactSales, RawFiles, FilesToWarehouse, Orphan"
+        },
+        {
+          "engine": "Hybrid: Copy job (ingest) + Dataflow Gen2 or Spark (transform)",
+          "verdict": "recommended",
+          "confidence": "medium",
+          "rationale": [
+            "Movement and heavy transformation are mixed in the same dataflow: RawFiles, FilesToWarehouse.",
+            "Best-practice consideration 1/2/7: separate the Fast Copy / movement step from transformation."
+          ],
+          "benefits": [
+            "Fast Copy / Copy job throughput for the movement step.",
+            "Transformation runs on staging SQL compute or Spark instead of the gateway/mashup engine."
+          ],
+          "tradeoffs": [
+            "Two items to schedule; orchestrate with a Data Pipeline."
+          ],
+          "migration_steps": [
+            "Stage 1: ingestion-only query (or Copy job) -> Lakehouse.",
+            "Stage 2: referencing query/dataflow/notebook applies Group/Join/Sort logic.",
+            "Wire both in a pipeline so stage 2 starts only after stage 1 succeeds."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+          "scope": "dataflow",
+          "query": null
+        }
+      ],
+      "telemetry": {},
+      "cost": {},
+      "historyError": null
+    },
+    {
+      "name": "GoodSales",
+      "workspace": "",
+      "workspaceId": "",
+      "id": "GoodSales",
+      "format": "cicd",
+      "source": "samples\\GoodSales.Dataflow",
+      "score": 100,
+      "grade": "A",
+      "settings": {
+        "allowFastCopy": true,
+        "allowModernEvaluationEngine": true,
+        "allowPartitionedCompute": false,
+        "enableVorder": false,
+        "enableOptimizedCopyToLakehouse": true,
+        "maxConcurrency": 4
+      },
+      "queries": [
+        {
+          "name": "DesignDateFilter",
+          "role": "parameter",
+          "steps": 0,
+          "staged": false,
+          "sources": [],
+          "families": [],
+          "canFold": null,
+          "fastCopyConnector": false,
+          "referencedBy": [
+            "StagedOrders"
+          ],
+          "destinations": []
+        },
+        {
+          "name": "StagedOrders",
+          "role": "query",
+          "steps": 5,
+          "staged": true,
+          "sources": [
+            "Sql.Database"
+          ],
+          "families": [
+            "sql"
+          ],
+          "canFold": true,
+          "fastCopyConnector": true,
+          "referencedBy": [
+            "SalesByCustomer"
+          ],
+          "destinations": []
+        },
+        {
+          "name": "SalesByCustomer",
+          "role": "query",
+          "steps": 2,
+          "staged": true,
+          "sources": [],
+          "families": [],
+          "canFold": null,
+          "fastCopyConnector": false,
+          "referencedBy": [],
+          "destinations": [
+            {
+              "kind": "lakehouse",
+              "query": "SalesByCustomer_DataDestination",
+              "update_method": "Replace",
+              "dynamic_schema": false,
+              "settings_kind": "Manual",
+              "has_column_mappings": true,
+              "type_kind": "Table"
+            }
+          ]
+        },
+        {
+          "name": "SalesByCustomer_DataDestination",
+          "role": "destination",
+          "steps": 3,
+          "staged": false,
+          "sources": [
+            "Lakehouse.Contents"
+          ],
+          "families": [
+            "fabric_lakehouse"
+          ],
+          "canFold": true,
+          "fastCopyConnector": true,
+          "referencedBy": [],
+          "destinations": []
+        }
+      ],
+      "quickWins": [],
+      "findings": [],
+      "recommendations": [
+        {
+          "engine": "Dataflow Gen2 (keep and optimize)",
+          "verdict": "keep",
+          "confidence": "medium",
+          "rationale": [
+            "No signal strong enough to justify a different engine; Dataflow Gen2 fits low-to-medium volume, Power Query skills and multi-destination shaping (decision guide scenario 2).",
+            "Apply the findings above (staging, Fast Copy, Modern Evaluator, incremental refresh) before reconsidering."
+          ],
+          "benefits": [
+            "No migration cost.",
+            "300+ transformations in a low-code UI."
+          ],
+          "tradeoffs": [
+            "Revisit if volume grows or refresh time exceeds your SLA."
+          ],
+          "migration_steps": [
+            "Re-run this advisor after remediation and compare the score and refresh telemetry."
+          ],
+          "reference": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+          "scope": "dataflow",
+          "query": null
+        }
+      ],
+      "telemetry": {},
+      "cost": {},
+      "historyError": null
+    }
+  ],
+  "coverage": [
+    {
+      "section": "BP-KA1",
+      "source": "Performance best practices",
+      "title": "Key areas: data movement",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-007"
+      ],
+      "manual": [
+        "Confirm network path/region between source, gateway and Fabric capacity.",
+        "Check the Engine column in refresh history to see whether Fast Copy was actually used."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-KA2",
+      "source": "Performance best practices",
+      "title": "Key areas: data transformation (query folding, filter early, avoid unnecessary transformations)",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-030",
+        "DFG-031",
+        "DFG-032",
+        "DFG-033",
+        "DFG-035",
+        "DFG-036",
+        "DFG-037",
+        "DFG-039",
+        "DFG-067"
+      ],
+      "manual": [
+        "Confirm folding with the Applied steps indicators and 'View data source query' (static analysis can only approximate folding)."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-KA3",
+      "source": "Performance best practices",
+      "title": "Key areas: staging data and warehouse compute",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-021",
+        "DFG-024"
+      ],
+      "manual": [
+        "Compare run time/CU with staging on vs off for fully folding queries."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C1",
+      "source": "Performance best practices",
+      "title": "Consideration 1: Fast Copy for data movement",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-fast-copy",
+      "rules": [
+        "DFG-001",
+        "DFG-010"
+      ],
+      "manual": [
+        "Decide whether to set 'Require Fast Copy' per query (fails the refresh if Fast Copy cannot be used - good for debugging).",
+        "Verify thresholds: files >= 100 MB (CSV/Parquet on ADLS/Blob) or >= 5 million rows for databases."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C2",
+      "source": "Performance best practices",
+      "title": "Consideration 2: staging + splitting queries for complex transformations",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-020",
+        "DFG-022",
+        "DFG-038",
+        "DFG-069"
+      ],
+      "manual": [
+        "Use 'Extract previous' on the first non-folding step in the editor."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C3",
+      "source": "Performance best practices",
+      "title": "Consideration 3: staging-to-Lakehouse movement / Optimized copy",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-staged-data-options",
+      "rules": [
+        "DFG-003"
+      ],
+      "manual": [],
+      "status": "Automated"
+    },
+    {
+      "section": "BP-C4",
+      "source": "Performance best practices",
+      "title": "Consideration 4: large data previews at design time",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-040",
+        "DFG-041"
+      ],
+      "manual": [
+        "Use Schema view while authoring large tables."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C5",
+      "source": "Performance best practices",
+      "title": "Consideration 5: Gen2 vs Gen1 runtime characteristics (Delta Parquet vs CSV)",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [],
+      "manual": [
+        "Informational: expect longer ETL than Gen1 CSV output but faster downstream (Direct Lake, SQL endpoint). Judge on end-to-end time and CU."
+      ],
+      "status": "Manual / informational"
+    },
+    {
+      "section": "BP-C6",
+      "source": "Performance best practices",
+      "title": "Consideration 6: incremental refresh for large transactional data",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+      "rules": [
+        "DFG-060",
+        "DFG-061",
+        "DFG-062"
+      ],
+      "manual": [
+        "Confirm a Date/DateTime column suitable for bucketing and a fully folding query.",
+        "Review bucket counts (<= 50 per query, <= 150 per dataflow) and Lakehouse concurrency (max 10)."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C7",
+      "source": "Performance best practices",
+      "title": "Consideration 7: on-premises gateway",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-050"
+      ],
+      "manual": [
+        "Check gateway version (>= 3000.270 for incremental refresh to Lakehouse) and host CPU/memory."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "BP-C8",
+      "source": "Performance best practices",
+      "title": "Consideration 8: consume through destinations, not the Dataflow connector",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-025",
+        "DFG-026"
+      ],
+      "manual": [],
+      "status": "Automated"
+    },
+    {
+      "section": "BP-C9",
+      "source": "Performance best practices",
+      "title": "Consideration 9: Modern Evaluator",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-modern-evaluator",
+      "rules": [
+        "DFG-002"
+      ],
+      "manual": [],
+      "status": "Automated"
+    },
+    {
+      "section": "FC-DEST",
+      "source": "Fast Copy",
+      "title": "Fast Copy connectors, transformation limits and Lakehouse-only destination",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflows-gen2-fast-copy",
+      "rules": [
+        "DFG-011"
+      ],
+      "manual": [],
+      "status": "Automated"
+    },
+    {
+      "section": "SD-VORDER",
+      "source": "Staged data options",
+      "title": "V-Order for staging and destination Lakehouse",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-staged-data-options",
+      "rules": [
+        "DFG-004"
+      ],
+      "manual": [
+        "Review the destination-level 'Enable use of V-Order compression' option per Lakehouse destination (depends on how the table is read)."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "PC",
+      "source": "Partitioned compute (Preview)",
+      "title": "Parallel evaluation of file partitions",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-partitioned-compute",
+      "rules": [
+        "DFG-005",
+        "DFG-006"
+      ],
+      "manual": [],
+      "status": "Automated"
+    },
+    {
+      "section": "IR",
+      "source": "Incremental refresh",
+      "title": "Prerequisites and limitations (fixed schema, Replace, destinations, buckets)",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-incremental-refresh",
+      "rules": [
+        "DFG-063"
+      ],
+      "manual": [
+        "Avoid other writers or OPTIMIZE/REORG on Lakehouse tables that use incremental refresh."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "DEST",
+      "source": "Data destinations",
+      "title": "Destination settings, staging requirements, maintenance",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-data-destinations-and-managed-settings",
+      "rules": [
+        "DFG-023"
+      ],
+      "manual": [
+        "Schedule Lakehouse table maintenance: VACUUM (and OPTIMIZE where incremental refresh is not used)."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "PRICE",
+      "source": "Dataflow Gen2 pricing and benchmarks",
+      "title": "CU meters: Standard Compute, High Scale, Fast Copy; CI/CD vs legacy",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/pricing-dataflows-gen2",
+      "rules": [
+        "DFG-008"
+      ],
+      "manual": [
+        "Validate real CU in the Fabric Capacity Metrics app (the cost model here is indicative)."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "OPS",
+      "source": "Operations",
+      "title": "Refresh history: failures, duration, schedule frequency, staleness",
+      "url": "https://learn.microsoft.com/en-us/fabric/data-factory/dataflow-gen2-performance-best-practices",
+      "rules": [
+        "DFG-000",
+        "DFG-090",
+        "DFG-091",
+        "DFG-092",
+        "DFG-093",
+        "DFG-094",
+        "DFG-095"
+      ],
+      "manual": [
+        "Stagger schedules so many dataflows do not start at the same minute."
+      ],
+      "status": "Automated + manual"
+    },
+    {
+      "section": "DG",
+      "source": "Decision guide",
+      "title": "Copy activity / Copy job / Dataflow Gen2 / Eventstream / Spark selection",
+      "url": "https://learn.microsoft.com/en-us/fabric/fundamentals/decision-guide-pipeline-dataflow-spark",
+      "rules": [
+        "ARCH-001",
+        "ARCH-002",
+        "ARCH-003",
+        "ARCH-004"
+      ],
+      "manual": [
+        "Confirm team skill set (M vs Spark vs low-code pipelines) and governance requirements."
+      ],
+      "status": "Automated + manual"
+    }
+  ],
+  "decisionGuideItems": [
+    {
+      "item": "Use case / transformation complexity",
+      "handledBy": "advisor: heavy ops, fold breakers, row-level calls",
+      "rules": [
+        "ARCH-001",
+        "ARCH-002"
+      ]
+    },
+    {
+      "item": "Data volume (low to high)",
+      "handledBy": "advisor: refresh duration (p50) as a proxy; supply real volumes in the review",
+      "rules": [
+        "ARCH-001",
+        "ARCH-002",
+        "DFG-092"
+      ]
+    },
+    {
+      "item": "Sources (50+ vs 150+ vs Spark libraries)",
+      "handledBy": "advisor: copy-supported connector families only trigger Copy job advice",
+      "rules": [
+        "ARCH-001"
+      ]
+    },
+    {
+      "item": "Destinations (40+ vs Lakehouse/SQL/ADX)",
+      "handledBy": "advisor + DFG-011/DFG-023 destination checks",
+      "rules": [
+        "ARCH-001",
+        "DFG-011",
+        "DFG-023"
+      ]
+    },
+    {
+      "item": "Persona / skill set / code vs low-code",
+      "handledBy": "manual (listed in the report checklist)",
+      "rules": []
+    },
+    {
+      "item": "Scenario 1: bronze ingestion at scale -> pipeline Copy activity",
+      "handledBy": "ARCH-001",
+      "rules": [
+        "ARCH-001"
+      ]
+    },
+    {
+      "item": "Scenario 2: low/medium-volume cleansing, multi-destination -> Dataflow Gen2",
+      "handledBy": "'Keep and optimize' recommendation",
+      "rules": []
+    },
+    {
+      "item": "Scenario 3: event data -> Eventstream",
+      "handledBy": "ARCH-003",
+      "rules": [
+        "ARCH-003"
+      ]
+    },
+    {
+      "item": "Scenario 4: large-scale analytics/ML-style processing -> Spark",
+      "handledBy": "ARCH-002",
+      "rules": [
+        "ARCH-002"
+      ]
+    },
+    {
+      "item": "Scenario 5: CDC / incremental replication -> Copy job",
+      "handledBy": "ARCH-001 (incremental copy rationale)",
+      "rules": [
+        "ARCH-001"
+      ]
+    }
+  ],
+  "manualChecklist": [
+    "Key areas: data movement: Confirm network path/region between source, gateway and Fabric capacity.",
+    "Key areas: data movement: Check the Engine column in refresh history to see whether Fast Copy was actually used.",
+    "Key areas: data transformation (query folding, filter early, avoid unnecessary transformations): Confirm folding with the Applied steps indicators and 'View data source query' (static analysis can only approximate folding).",
+    "Key areas: staging data and warehouse compute: Compare run time/CU with staging on vs off for fully folding queries.",
+    "Consideration 1: Fast Copy for data movement: Decide whether to set 'Require Fast Copy' per query (fails the refresh if Fast Copy cannot be used - good for debugging).",
+    "Consideration 1: Fast Copy for data movement: Verify thresholds: files >= 100 MB (CSV/Parquet on ADLS/Blob) or >= 5 million rows for databases.",
+    "Consideration 2: staging + splitting queries for complex transformations: Use 'Extract previous' on the first non-folding step in the editor.",
+    "Consideration 4: large data previews at design time: Use Schema view while authoring large tables.",
+    "Consideration 5: Gen2 vs Gen1 runtime characteristics (Delta Parquet vs CSV): Informational: expect longer ETL than Gen1 CSV output but faster downstream (Direct Lake, SQL endpoint). Judge on end-to-end time and CU.",
+    "Consideration 6: incremental refresh for large transactional data: Confirm a Date/DateTime column suitable for bucketing and a fully folding query.",
+    "Consideration 6: incremental refresh for large transactional data: Review bucket counts (<= 50 per query, <= 150 per dataflow) and Lakehouse concurrency (max 10).",
+    "Consideration 7: on-premises gateway: Check gateway version (>= 3000.270 for incremental refresh to Lakehouse) and host CPU/memory.",
+    "V-Order for staging and destination Lakehouse: Review the destination-level 'Enable use of V-Order compression' option per Lakehouse destination (depends on how the table is read).",
+    "Prerequisites and limitations (fixed schema, Replace, destinations, buckets): Avoid other writers or OPTIMIZE/REORG on Lakehouse tables that use incremental refresh.",
+    "Destination settings, staging requirements, maintenance: Schedule Lakehouse table maintenance: VACUUM (and OPTIMIZE where incremental refresh is not used).",
+    "CU meters: Standard Compute, High Scale, Fast Copy; CI/CD vs legacy: Validate real CU in the Fabric Capacity Metrics app (the cost model here is indicative).",
+    "Refresh history: failures, duration, schedule frequency, staleness: Stagger schedules so many dataflows do not start at the same minute.",
+    "Copy activity / Copy job / Dataflow Gen2 / Eventstream / Spark selection: Confirm team skill set (M vs Spark vs low-code pipelines) and governance requirements."
+  ]
+}

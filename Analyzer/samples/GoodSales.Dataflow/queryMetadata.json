@@ -1,0 +1,21 @@
+{
+  "formatVersion": "202502",
+  "computeEngineSettings": {
+    "allowFastCopy": true,
+    "allowModernEvaluationEngine": true,
+    "allowPartitionedCompute": false,
+    "enableVorder": false,
+    "enableOptimizedCopyToLakehouse": true,
+    "maxConcurrency": 4
+  },
+  "name": "GoodSales",
+  "queryGroups": [],
+  "documentLocale": "en-US",
+  "queriesMetadata": {
+    "DesignDateFilter": {"queryId": "b0000000-0000-0000-0000-000000000001", "queryName": "DesignDateFilter", "loadEnabled": false},
+    "StagedOrders": {"queryId": "b0000000-0000-0000-0000-000000000002", "queryName": "StagedOrders", "loadEnabled": true},
+    "SalesByCustomer": {"queryId": "b0000000-0000-0000-0000-000000000003", "queryName": "SalesByCustomer", "loadEnabled": true},
+    "SalesByCustomer_DataDestination": {"queryId": "b0000000-0000-0000-0000-000000000004", "queryName": "SalesByCustomer_DataDestination", "isHidden": true, "loadEnabled": false}
+  },
+  "connections": []
+}
