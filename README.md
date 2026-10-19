@@ -4,6 +4,8 @@ Toolkit to make Power BI semantic models and Fabric Data Agents AI/Copilot-ready
 
 Each tool lives in its own folder with a dedicated README.
 
+For consolidated copies of the analyzers and related diagnostic tools, start with the [Analyzer collection](Analyzer/README.md).
+
 This repository is built for teams searching for: Power BI Copilot readiness, Fabric Data Agent best practices, semantic model optimization for AI, Copilot diagnostics troubleshooting, DirectQuery tuning, and OneLake data-source readiness.
 
 > **Developed by Farhan Soomro.** These are free community utilities, released under the [MIT License](LICENSE) and provided **"AS IS", with no warranty and no liability**. See [Author, license & disclaimer](#author-license--disclaimer).
@@ -93,7 +95,7 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 | [Copilot-Diagnostics-Troubleshooter](Copilot-Diagnostics-Troubleshooter/) | Parses a Copilot diagnostic export into a prioritized troubleshooting report and a shareable Markdown report, mapping each signal to a model fix. |
 | [Lakehouse-Data-Source-Readiness](Lakehouse-Data-Source-Readiness/) | Assesses a Fabric Lakehouse data source for agent/Copilot readiness. *(Work in progress.)* |
 | [PowerBI-Performance-Analyzer-Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/) | Turns a Power BI Performance Analyzer JSON export into a prioritized root-cause report (DAX, DirectQuery / Direct Lake fallback, rendering, waiting) with overlap-safe timings, data-quality rules, event trees, a timeline, and HTML/Markdown/CSV/JSON outputs. |
-| [Analyzer](Analyzer/) | **Dataflow Gen2 Analyzer**. Checks Fabric Dataflow Gen2 items against the performance best-practices and the copy-activity / dataflow / Spark decision guide (46 rules, refresh-history telemetry, indicative CU cost), then recommends fixes and, where it fits, a better engine (Copy job, Spark, Eventstream). Outputs HTML/Markdown/JSON/CSV. |
+| [Analyzer](Analyzer/) | **Consolidated analyzer collection**. Dataflow Gen2 Advisor, semantic-model and AI-readiness analysis, Fabric Data Agent validation, Copilot diagnostics and insights, Power BI performance diagnostics, OneLake auditing, supporting scripts and references, and distinct source variants. The existing Dataflow package and installation layout are preserved. |
 | [Ontology](Ontology/) | **Fabric IQ ontology for budget vs. actual** (TMDL). Generic budgeting entity types (BudgetLine, Account, OrgUnit, Scenario, CalendarDate), relationships, business rules and 47 metrics, live-bound to a Power BI semantic model. Includes a one-command import script and an end-user guide to import it (script, Git integration or REST API) and use it with the ontology agent, MCP clients and data agents. |
 
 ## How to pick a tool
