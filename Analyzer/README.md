@@ -13,7 +13,7 @@ cloud queries, deployments, remediation, or notifications.
 
 | Tool | Purpose | Entry point |
 | --- | --- | --- |
-| [Dataflow Gen2 Advisor](DataflowGen2_Advisor.md) | Dataflow performance and CU guidance, engine recommendations, CLI and Fabric notebook | [DataflowGen2_Analyzer.ipynb](notebooks/DataflowGen2_Analyzer.ipynb) |
+| [Dataflow Gen2 Advisor](DataflowGen2-Advisor/README.md) | Dataflow performance and CU guidance, engine recommendations, CLI and Fabric notebook | [DataflowGen2_Analyzer.ipynb](DataflowGen2-Advisor/DataflowGen2_Analyzer.ipynb) |
 | [Power BI Performance Analyzer Diagnostics](PowerBI-Performance-Analyzer-Diagnostics/README.md) | Slow visuals, DAX, DirectQuery, rendering, and trace-quality diagnostics | [Performance diagnostics notebook](PowerBI-Performance-Analyzer-Diagnostics/Power%20BI%20Performance%20Analyzer%20Diagnostics.ipynb) |
 | [Semantic model optimization](SemanticModel-Optimization/README.md) | DirectQuery checks, model/report analysis, row groups, schema review, and aggregation candidates | [Notebook and script index](SemanticModel-Optimization/README.md) |
 
@@ -51,9 +51,11 @@ The local CLI is Python 3.9+ with no third-party runtime dependencies. Other
 notebooks have their own dependencies and often require a Fabric runtime and
 permissions; see their individual instructions.
 
-The existing Dataflow Python package, notebook, samples, and tests remain at the
-Analyzer root so the published `#subdirectory=Analyzer` installation URL continues
-to work. Its dedicated instructions are in [DataflowGen2_Advisor.md](DataflowGen2_Advisor.md).
+Every solution has a named subfolder linked above. Start the Dataflow solution in
+[DataflowGen2-Advisor](DataflowGen2-Advisor/README.md); its existing Python package,
+compatibility notebook, samples, and tests remain at the Analyzer root so the
+published `#subdirectory=Analyzer` installation URL and older notebook links
+continue to work. Its full instructions are in [DataflowGen2_Advisor.md](DataflowGen2_Advisor.md).
 For an offline Fabric run, upload this Analyzer folder to
 `Lakehouse > Files > Analyzer` and use the notebook's documented offline import
 instead of the online install cell.

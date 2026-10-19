@@ -48,7 +48,7 @@ No laptop, Azure CLI or secrets needed. The notebook authenticates as **you** an
 
 ### Option A: ready-made notebook (recommended)
 
-1. Download [notebooks/DataflowGen2_Analyzer.ipynb](notebooks/DataflowGen2_Analyzer.ipynb).
+1. Download [DataflowGen2-Advisor/DataflowGen2_Analyzer.ipynb](DataflowGen2-Advisor/DataflowGen2_Analyzer.ipynb).
 2. In Fabric open your workspace > **Import** > **Notebook** > **From this computer**, pick the file.
 3. Open the notebook and attach your **Lakehouse** (left pane > *Add*). A Spark or a Python notebook both work.
 4. Edit the **Parameters** cell (all optional):

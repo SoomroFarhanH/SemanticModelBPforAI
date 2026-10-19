@@ -80,6 +80,24 @@
       "copy_status": "public-copy-adjustment"
     },
     {
+      "destination": "DataflowGen2-Advisor\\DataflowGen2_Analyzer.ipynb",
+      "source_sha256": "e46090aa69c57ba932a87bfe6e3ed4e15964307ab25f2de700d3d4831dfb1f31",
+      "sources": [
+        "DataflowGen2_Advisor\\notebooks\\DataflowGen2_Analyzer.ipynb"
+      ],
+      "destination_sha256": "0af81b483c3773dedec2a019782967b0f7d27a823a4ff074b0c3c1bf1a15ed58",
+      "copy_status": "named-solution-folder-copy"
+    },
+    {
+      "destination": "DataflowGen2_Advisor.md",
+      "source_sha256": "4aa11ff90a3e0f99bfab405d551992ba8d1a153ef7b879c1fe12f90df84d5522",
+      "sources": [
+        "DataflowGen2_Advisor\\README.md"
+      ],
+      "destination_sha256": "c5e17b5d206b97d306c1bc751d9354dc7c115afc3853a30ca8074627e5608c2d",
+      "copy_status": "published-documentation-path-adjustment"
+    },
+    {
       "destination": "dfg2_advisor\\__init__.py",
       "source_sha256": "0cdaacd2460b8f2e86f176e95792b16192bd095f7170bdbf81af9a000ebe3a77",
       "sources": [
@@ -212,123 +230,6 @@
         "DataflowGen2_Advisor\\dfg2_advisor\\telemetry.py"
       ],
       "destination_sha256": "b3cb05b1ee941d5de425ad23e1bce2f459fa0e95f9aeb169c74eb38a1af024fc",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "notebooks\\DataflowGen2_Analyzer.ipynb",
-      "source_sha256": "e46090aa69c57ba932a87bfe6e3ed4e15964307ab25f2de700d3d4831dfb1f31",
-      "sources": [
-        "DataflowGen2_Advisor\\notebooks\\DataflowGen2_Analyzer.ipynb"
-      ],
-      "destination_sha256": "0af81b483c3773dedec2a019782967b0f7d27a823a4ff074b0c3c1bf1a15ed58",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "pyproject.toml",
-      "source_sha256": "067f56bb19feb9359a756375381d828af42aab11fd385b04a2a283ae49f8e3f4",
-      "sources": [
-        "DataflowGen2_Advisor\\pyproject.toml"
-      ],
-      "destination_sha256": "a264ded5a7503536de75abce98bb4dcb8e8841e54d043d3554a7a14124d5d6bb",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "DataflowGen2_Advisor.md",
-      "source_sha256": "4aa11ff90a3e0f99bfab405d551992ba8d1a153ef7b879c1fe12f90df84d5522",
-      "sources": [
-        "DataflowGen2_Advisor\\README.md"
-      ],
-      "destination_sha256": "18e5e0dfbf37ee6b63472a852115895383ece091dcc92585f175b7344d6cdfc0",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "run_advisor.py",
-      "source_sha256": "c3dcd4260d22d794b516e1a87798b28daefb70e02df47355acbbee800495850a",
-      "sources": [
-        "DataflowGen2_Advisor\\run_advisor.py"
-      ],
-      "destination_sha256": "db1216be25b6b3e263b0d20446dd89c39071686e1ee3e2cc6f6b76f8d08b5acd",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\BadSales.Dataflow\\mashup.pq",
-      "source_sha256": "efdb9ae487d9245853cc7cfb5f3795d6f59db23d7a2035b645f99ec23a9f7195",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\mashup.pq"
-      ],
-      "destination_sha256": "041d467a4e267943a72f1af3e8856a515e1c45c879db7e030f559578a5262cb5",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\BadSales.Dataflow\\queryMetadata.json",
-      "source_sha256": "6b738982e44be5aac0a8698d196de7aa80be27a4188069937be8b3b2d62b455b",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\queryMetadata.json"
-      ],
-      "destination_sha256": "b003dc9afdb2d377e1a72b5b0c97057ca5626dda8f91039d18ef96753364516c",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\GoodSales.Dataflow\\mashup.pq",
-      "source_sha256": "98cf96eee708407c3057f81f017d18755d9477450efdc591b76d49868c5b8c2d",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\mashup.pq"
-      ],
-      "destination_sha256": "ff8e552ef93e4aaa3c45813eac2320b6b4924980fd0902be68b071abbc8cacc9",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\GoodSales.Dataflow\\queryMetadata.json",
-      "source_sha256": "3414ac3263b08e4a4d772c50267a4670e43c0bd112da57277a73cad381fd061b",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\queryMetadata.json"
-      ],
-      "destination_sha256": "11362576b5499064acd8c16c292817954d432a4271603da78c97e026bd5a30fd",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\sample_report\\dataflow_gen2_review.csv",
-      "source_sha256": "0f1374779ca50ed9c8387e12819719bd12804c63835a754bf4a977729ee29ba6",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.csv"
-      ],
-      "destination_sha256": "16499a931660d5d59333df2a519dd2ed3687ac053e86a23d2442b02ff08a35fe",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\sample_report\\dataflow_gen2_review.html",
-      "source_sha256": "477bec4c600aac9bbc35f112279b8864257b2320b16199ad0184a65c40bac034",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.html"
-      ],
-      "destination_sha256": "b980ccda368ce081c071472f386c2133fe066f2151656a3e7a20d94fbc24774e",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\sample_report\\dataflow_gen2_review.json",
-      "source_sha256": "53a74e72c99770313cb7051a104e20d6220fd52b32a065786d8cbe4a79ead114",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.json"
-      ],
-      "destination_sha256": "25f4af9dbcc880e7fdd3edbecb5d6f4e6a5d868bbcfe9651e0fdcd2ad7c77fe6",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "samples\\sample_report\\dataflow_gen2_review.md",
-      "source_sha256": "26418bf819478006327093bf400ceee57694992822c95b18a62e0f8d55b24896",
-      "sources": [
-        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.md"
-      ],
-      "destination_sha256": "042ef20627a9723d6479ff575725eeb28ef237665d164586fcda6d9e3b0ae071",
-      "copy_status": "existing-github-dataflow-layout"
-    },
-    {
-      "destination": "tests\\test_advisor.py",
-      "source_sha256": "ae7d51eea35901afc558fb7f93101458521dc521d6b8676bbbbe70a9e274d4b8",
-      "sources": [
-        "DataflowGen2_Advisor\\tests\\test_advisor.py"
-      ],
-      "destination_sha256": "3a61487aef3e6e16abc74c7e6f82accf2db180a5e84b6e029730aca614796c5b",
       "copy_status": "existing-github-dataflow-layout"
     },
     {
@@ -467,6 +368,15 @@
       "copy_status": "public-copy-adjustment"
     },
     {
+      "destination": "notebooks\\DataflowGen2_Analyzer.ipynb",
+      "source_sha256": "e46090aa69c57ba932a87bfe6e3ed4e15964307ab25f2de700d3d4831dfb1f31",
+      "sources": [
+        "DataflowGen2_Advisor\\notebooks\\DataflowGen2_Analyzer.ipynb"
+      ],
+      "destination_sha256": "0af81b483c3773dedec2a019782967b0f7d27a823a4ff074b0c3c1bf1a15ed58",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
       "destination": "OneLake-Shortcut-Auditor\\OneLake Shortcut Auditor.ipynb",
       "source_sha256": "24a47dcfef816393b571098ba9d2c36e5a719bf48c731e3670e88e6777a1019e",
       "sources": [
@@ -569,6 +479,96 @@
       "copy_status": "public-copy-adjustment"
     },
     {
+      "destination": "pyproject.toml",
+      "source_sha256": "067f56bb19feb9359a756375381d828af42aab11fd385b04a2a283ae49f8e3f4",
+      "sources": [
+        "DataflowGen2_Advisor\\pyproject.toml"
+      ],
+      "destination_sha256": "a264ded5a7503536de75abce98bb4dcb8e8841e54d043d3554a7a14124d5d6bb",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "run_advisor.py",
+      "source_sha256": "c3dcd4260d22d794b516e1a87798b28daefb70e02df47355acbbee800495850a",
+      "sources": [
+        "DataflowGen2_Advisor\\run_advisor.py"
+      ],
+      "destination_sha256": "db1216be25b6b3e263b0d20446dd89c39071686e1ee3e2cc6f6b76f8d08b5acd",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\BadSales.Dataflow\\mashup.pq",
+      "source_sha256": "efdb9ae487d9245853cc7cfb5f3795d6f59db23d7a2035b645f99ec23a9f7195",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\mashup.pq"
+      ],
+      "destination_sha256": "041d467a4e267943a72f1af3e8856a515e1c45c879db7e030f559578a5262cb5",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\BadSales.Dataflow\\queryMetadata.json",
+      "source_sha256": "6b738982e44be5aac0a8698d196de7aa80be27a4188069937be8b3b2d62b455b",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\queryMetadata.json"
+      ],
+      "destination_sha256": "b003dc9afdb2d377e1a72b5b0c97057ca5626dda8f91039d18ef96753364516c",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\GoodSales.Dataflow\\mashup.pq",
+      "source_sha256": "98cf96eee708407c3057f81f017d18755d9477450efdc591b76d49868c5b8c2d",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\mashup.pq"
+      ],
+      "destination_sha256": "ff8e552ef93e4aaa3c45813eac2320b6b4924980fd0902be68b071abbc8cacc9",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\GoodSales.Dataflow\\queryMetadata.json",
+      "source_sha256": "3414ac3263b08e4a4d772c50267a4670e43c0bd112da57277a73cad381fd061b",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\queryMetadata.json"
+      ],
+      "destination_sha256": "11362576b5499064acd8c16c292817954d432a4271603da78c97e026bd5a30fd",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.csv",
+      "source_sha256": "0f1374779ca50ed9c8387e12819719bd12804c63835a754bf4a977729ee29ba6",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.csv"
+      ],
+      "destination_sha256": "16499a931660d5d59333df2a519dd2ed3687ac053e86a23d2442b02ff08a35fe",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.html",
+      "source_sha256": "477bec4c600aac9bbc35f112279b8864257b2320b16199ad0184a65c40bac034",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.html"
+      ],
+      "destination_sha256": "b980ccda368ce081c071472f386c2133fe066f2151656a3e7a20d94fbc24774e",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.json",
+      "source_sha256": "53a74e72c99770313cb7051a104e20d6220fd52b32a065786d8cbe4a79ead114",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.json"
+      ],
+      "destination_sha256": "25f4af9dbcc880e7fdd3edbecb5d6f4e6a5d868bbcfe9651e0fdcd2ad7c77fe6",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.md",
+      "source_sha256": "26418bf819478006327093bf400ceee57694992822c95b18a62e0f8d55b24896",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.md"
+      ],
+      "destination_sha256": "042ef20627a9723d6479ff575725eeb28ef237665d164586fcda6d9e3b0ae071",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
       "destination": "SemanticModel-AI-Readiness-Analyzer\\README.md",
       "source_sha256": "e170a93b654df5dcc55e8d6885dfafa61ed4fe5effbb2eccc6cc3b3955a316fc",
       "sources": [
@@ -644,6 +644,15 @@
       "copy_status": "byte-identical"
     },
     {
+      "destination": "tests\\test_advisor.py",
+      "source_sha256": "ae7d51eea35901afc558fb7f93101458521dc521d6b8676bbbbe70a9e274d4b8",
+      "sources": [
+        "DataflowGen2_Advisor\\tests\\test_advisor.py"
+      ],
+      "destination_sha256": "3a61487aef3e6e16abc74c7e6f82accf2db180a5e84b6e029730aca614796c5b",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
       "destination": "Variants\\SemanticModelBPforAI-Root\\DirectQuery_BestPractices_Check.ipynb",
       "source_sha256": "d64a453d3168e02e5b28083d00d2ae7f9e66ab2b57d37d6e1ee3e574403d4cac",
       "sources": [
@@ -687,6 +696,7 @@
     "Saved notebook outputs and execution counts were cleared from the public diagnostic copies.",
     "A client-specific input file path was replaced with an empty configurable INPUT_PATH.",
     "Documentation paths were adapted to this repository layout.",
-    "Text line endings and inherited trailing whitespace in newly copied files were normalized for Git."
+    "Text line endings and inherited trailing whitespace in newly copied files were normalized for Git.",
+    "DataflowGen2-Advisor is the named solution entry folder; the previous notebook path remains for compatibility."
   ]
 }
