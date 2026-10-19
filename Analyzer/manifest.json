@@ -1,0 +1,702 @@
+{
+  "created_utc": "2026-10-19T12:19:03.441964+00:00",
+  "source_root": "Tools workspace; source paths are relative to that workspace.",
+  "scope": "Analyzers and related diagnostic tools in the Tools workspace",
+  "originals_modified": false,
+  "files": [
+    {
+      "destination": "Agent-Readiness-Validator\\Agent Readiness Validator.ipynb",
+      "source_sha256": "126a74aaa3dcd68c414e615c70c079b9db4b443515bed62133b48fc94b1d6b18",
+      "sources": [
+        "SemanticModelBPforAI\\Agent-Readiness-Validator\\Agent Readiness Validator.ipynb"
+      ],
+      "destination_sha256": "217ddd16c49d205dee8b6ececba7db06970c27619a85c5d2dd16758418955ad4",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Agent-Readiness-Validator\\README.md",
+      "source_sha256": "a77dd9b45d7d6e76744dba1ba3822dd76c603e129132ce12b004d48746c0604d",
+      "sources": [
+        "SemanticModelBPforAI\\Agent-Readiness-Validator\\README.md"
+      ],
+      "destination_sha256": "2a94b9ce4361c6092abcbb688f438ab1e6556c13bd2093fd6abde956172c3ea6",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Copilot-Agent-Insights\\Agent Quality Evaluator.ipynb",
+      "source_sha256": "2a7c722607c86f46ec5f6554fd2166e547876dbdcf105bdbb9a67761673627a9",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\Copilot-Agent-Insights\\Agent Quality Evaluator.ipynb",
+        "SemanticModelBPforAI\\Agent Quality Evaluator.ipynb"
+      ],
+      "destination_sha256": "2a7c722607c86f46ec5f6554fd2166e547876dbdcf105bdbb9a67761673627a9",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Copilot-Agent-Insights\\Copilot SKU Estimator.ipynb",
+      "source_sha256": "703addf8c5de442a57e3720fe410bb5092d483e3ae1caaa9c6f39c2df6985663",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\Copilot-Agent-Insights\\Copilot SKU Estimator.ipynb",
+        "SemanticModelBPforAI\\Copilot SKU Estimator.ipynb"
+      ],
+      "destination_sha256": "703addf8c5de442a57e3720fe410bb5092d483e3ae1caaa9c6f39c2df6985663",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Copilot-Agent-Insights\\Fabric Copilot Question Mining.ipynb",
+      "source_sha256": "7c3ad631a3ad4b12e77f3639438d71f5d93e8f4d9ca88c198e05d178bbf4ac91",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\Copilot-Agent-Insights\\Fabric Copilot Question Mining.ipynb",
+        "SemanticModelBPforAI\\Fabric Copilot Question Mining.ipynb"
+      ],
+      "destination_sha256": "7c3ad631a3ad4b12e77f3639438d71f5d93e8f4d9ca88c198e05d178bbf4ac91",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Copilot-Agent-Insights\\README.md",
+      "source_sha256": "d12a58dd772e478b243afe0a660ff3ecbe038de168df7aa5ef6117f5a856b208",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\Copilot-Agent-Insights\\README.md"
+      ],
+      "destination_sha256": "0b6767f6da75afcd31841209d87ec7163491f9a162764da44b106698e0279859",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Copilot-Diagnostics-Troubleshooter\\Copilot_Diagnostics_Troubleshooter.ipynb",
+      "source_sha256": "ec71ef9c900442f91746381fc49c09dc8c87c3a27c44a489e93ff7350f916286",
+      "sources": [
+        "SemanticModelBPforAI\\Copilot-Diagnostics-Troubleshooter\\Copilot_Diagnostics_Troubleshooter.ipynb"
+      ],
+      "destination_sha256": "a9d61dfa27e04746860d62ccba84272bf921cd4a5b0d0eec201fe95d1a433e8e",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Copilot-Diagnostics-Troubleshooter\\README.md",
+      "source_sha256": "df81751f4cde075486aed7c86d7852b15c8ed7417d8081427034e2e50943fb47",
+      "sources": [
+        "SemanticModelBPforAI\\Copilot-Diagnostics-Troubleshooter\\README.md"
+      ],
+      "destination_sha256": "c659d323d51ede2972c64c8dd86b5e02d37e62eb6e6d615f280cb3d250575180",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "DataflowGen2-Advisor\\DataflowGen2_Analyzer.ipynb",
+      "source_sha256": "e46090aa69c57ba932a87bfe6e3ed4e15964307ab25f2de700d3d4831dfb1f31",
+      "sources": [
+        "DataflowGen2_Advisor\\notebooks\\DataflowGen2_Analyzer.ipynb"
+      ],
+      "destination_sha256": "0af81b483c3773dedec2a019782967b0f7d27a823a4ff074b0c3c1bf1a15ed58",
+      "copy_status": "named-solution-folder-copy"
+    },
+    {
+      "destination": "DataflowGen2_Advisor.md",
+      "source_sha256": "4aa11ff90a3e0f99bfab405d551992ba8d1a153ef7b879c1fe12f90df84d5522",
+      "sources": [
+        "DataflowGen2_Advisor\\README.md"
+      ],
+      "destination_sha256": "c5e17b5d206b97d306c1bc751d9354dc7c115afc3853a30ca8074627e5608c2d",
+      "copy_status": "published-documentation-path-adjustment"
+    },
+    {
+      "destination": "dfg2_advisor\\__init__.py",
+      "source_sha256": "0cdaacd2460b8f2e86f176e95792b16192bd095f7170bdbf81af9a000ebe3a77",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\__init__.py"
+      ],
+      "destination_sha256": "4ea1e5f195503aa1c3c7d5dc1c4e25f60c9a62e1c13688f949c50ec609a7b966",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\__main__.py",
+      "source_sha256": "364850756744c348192e2e109030a77749ab113f7b2cef3310504d4c64d34d04",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\__main__.py"
+      ],
+      "destination_sha256": "c6cd277050ead2d11c98b7cbab91ada7d19e495c95e4c86de1f9aaf2b2051d38",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\advisor.py",
+      "source_sha256": "b528162bf7efcb522ed99f8f5e0da19b0ca413ea97e31523e8a7436f5565c3e4",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\advisor.py"
+      ],
+      "destination_sha256": "20b61e8e86afaefa03131174d474c21a8892fe43c033926fa8226c06438f5e26",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\builder.py",
+      "source_sha256": "81b5ee168490e0ea53288c26b7d302b8f9eedb7aea7055c2d088376b6bb91402",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\builder.py"
+      ],
+      "destination_sha256": "983f8b8198a26eb173059927bef68007ab6dbe13bf6f05d4eeca2e38c87fa5d7",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\cli.py",
+      "source_sha256": "9687bf81be6b470f549b2a73ff24f35430aca443c4242097918df4eec6feacb4",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\cli.py"
+      ],
+      "destination_sha256": "7b3c0d06ce998b055679e3f13df5f76fbc7d1259bbc6bd9c1d8491bcc9a3ea63",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\coverage.py",
+      "source_sha256": "5ac5acf6de20a0ccfba744c244d8b369947bf14e7513dad5b265bc8ebd5a3b3d",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\coverage.py"
+      ],
+      "destination_sha256": "9801c463ae6aab5084da923eed4be7ba51c5047855a0ebc655b37da6f4ba5001",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\engine.py",
+      "source_sha256": "281271be5f2e3c12edc90d5787e3873c239cf9439ca249264c46487c0d5e38a4",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\engine.py"
+      ],
+      "destination_sha256": "6c1dd88dd47e27f34edae8a1988152782caec4797753794f4ebe9ef0c4a1ab26",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\fabric_api.py",
+      "source_sha256": "5428484a6a83887f34924fd951d1e98d71b8ea00d601cb1001786db9e4279855",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\fabric_api.py"
+      ],
+      "destination_sha256": "3caacd07f8055a10a31e70e08163a39dcda5afb3599e361a30eea363f97aad4d",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\knowledge.py",
+      "source_sha256": "79562c59bc898ebb0024df9a78c9efd8fb7a087435e063cd632883f02ce024f2",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\knowledge.py"
+      ],
+      "destination_sha256": "f472564d1ecc394404d8152e8b0c04c2fa01071f012a661f6c554def87e23ee5",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\mashup.py",
+      "source_sha256": "a18b20e703ba3c731dc93feb73715c24d476805334720cac7eeb1831b6fa73c1",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\mashup.py"
+      ],
+      "destination_sha256": "7aeb9bcbf48642e2529296996736e28e91e19231c190d5a2f78baed6f8119d92",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\models.py",
+      "source_sha256": "6525c87e6357a858b7b3c96ae1350fcd3e4fcb743ecac776f5bc1f532f9ab278",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\models.py"
+      ],
+      "destination_sha256": "efde389cb4c7ade1f4ca5aa1663edca2537b305aabbbd787cf01f498fd179e27",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\notebook.py",
+      "source_sha256": "c4720ede537396bb41cb21f7ea9852425765b5d643b1129c6b67af8663636b1a",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\notebook.py"
+      ],
+      "destination_sha256": "efcd457b977b8864cfdd1ef3ab2f66704f7b65d7f7ec9e73d83c30f0b1b819aa",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\report.py",
+      "source_sha256": "df428c599cfd5b34981bb19b04ddce44d2804acc7098270bb052c8b56295d5de",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\report.py"
+      ],
+      "destination_sha256": "201dc45db862f120505aa2efea369734a0e1c2ba29ab0fc128339280ad168204",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\rules.py",
+      "source_sha256": "1b258d64a2e828fddc2fcf3100ce0c2b09caf5f3e5671a93556cbf2f4d0d81c8",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\rules.py"
+      ],
+      "destination_sha256": "ea1f93519a7a82a053fa309fc44fe2ff964e642fe3dbaad12aa05aacd0a48f94",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "dfg2_advisor\\telemetry.py",
+      "source_sha256": "13e9d66901e9035cc5dc167adcef5a78b6c7a855185b6142deebd400b544e404",
+      "sources": [
+        "DataflowGen2_Advisor\\dfg2_advisor\\telemetry.py"
+      ],
+      "destination_sha256": "b3cb05b1ee941d5de425ad23e1bce2f459fa0e95f9aeb169c74eb38a1af024fc",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "Docs\\A Practical Guide to Building and Deploying Data Agents.pdf",
+      "source_sha256": "f1631e81686d5e198fac70116bd83321e4a009ca8c7420e6ab8a73a8a5c2e8a4",
+      "sources": [
+        "SemanticModelBPforAI\\Docs\\A Practical Guide to Building and Deploying Data Agents.pdf"
+      ],
+      "destination_sha256": "f1631e81686d5e198fac70116bd83321e4a009ca8c7420e6ab8a73a8a5c2e8a4",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Docs\\autonomous_fabric_-_agentic_data_quality_using_fabric_data_agents.pdf",
+      "source_sha256": "8be4ebe094509cc4b06ca4a1f2f53c84c1cc1050bcf5aa467b1655b5f4b6e685",
+      "sources": [
+        "SemanticModelBPforAI\\Docs\\autonomous_fabric_-_agentic_data_quality_using_fabric_data_agents.pdf"
+      ],
+      "destination_sha256": "8be4ebe094509cc4b06ca4a1f2f53c84c1cc1050bcf5aa467b1655b5f4b6e685",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Docs\\build_smarter_analytics_assistants_with_fabric_data_agents_and_copilot_studio.pdf",
+      "source_sha256": "d8a12218f8e7330988101229ea7b328a47cacffa71fef920954b962f81ae26e2",
+      "sources": [
+        "SemanticModelBPforAI\\Docs\\build_smarter_analytics_assistants_with_fabric_data_agents_and_copilot_studio.pdf"
+      ],
+      "destination_sha256": "d8a12218f8e7330988101229ea7b328a47cacffa71fef920954b962f81ae26e2",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Docs\\mastering_fabric_data_agents_from_setup_to_success.pdf",
+      "source_sha256": "1649ed055710025a2b4a3f5febab1b9c19876d71bde96cb73d791fcb717c433e",
+      "sources": [
+        "SemanticModelBPforAI\\Docs\\mastering_fabric_data_agents_from_setup_to_success.pdf"
+      ],
+      "destination_sha256": "1649ed055710025a2b4a3f5febab1b9c19876d71bde96cb73d791fcb717c433e",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Docs\\Power BI Performance Analyzer Export File Format.pdf",
+      "source_sha256": "3d8b6e9e47a093dac99ffa08ec1422c69c60c536c73e91ab0df244a5c9101b41",
+      "sources": [
+        "SemanticModelBPforAI\\Power BI Performance Analyzer Export File Format.pdf"
+      ],
+      "destination_sha256": "3d8b6e9e47a093dac99ffa08ec1422c69c60c536c73e91ab0df244a5c9101b41",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "Docs\\PowerBI_Report_Authoring_Unified_Checklist.md",
+      "source_sha256": "4160823cfe2d9b69c31048d605c43f2184895c21145b798944ef3d5cd3acdc9b",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI_Report_Authoring_Unified_Checklist.md"
+      ],
+      "destination_sha256": "8041bea2b75c5e5668f063a87e095105a1c35ad187832e1322d09d9da3bf2f2b",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Docs\\README.md",
+      "source_sha256": "8c62589bd6ee02a1d0b51cbf8f0f12f94fe10d5b998a5908e9abc9e93e30efb0",
+      "sources": [
+        "SemanticModelBPforAI\\Docs\\README.md"
+      ],
+      "destination_sha256": "55231be8065e028c30b98c3ee2201b18ebe628b4083fbc15de66438ddb4d9f6a",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "FabricDataAgentAnalyzer\\FabricDataAgentAnalyzer.ipynb",
+      "source_sha256": "a47983ef791e85e0eb000965fe7258320ab49cd91d49140a8dfe003424ea312f",
+      "sources": [
+        "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\FabricDataAgentAnalyzer.ipynb"
+      ],
+      "destination_sha256": "8ae9798bca13b6556075ae913302241f2113f2ccf6457102d73d9cae8deceb39",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "FabricDataAgentAnalyzer\\FabricDataAgentAnalyzer_SemanticModel_TE2.cs",
+      "source_sha256": "081d6e1cbe658c1624ed6a4eb1669847bc7bb8dae7b47559924b3d2af1e73604",
+      "sources": [
+        "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\FabricDataAgentAnalyzer_SemanticModel_TE2.cs"
+      ],
+      "destination_sha256": "1606725933a45c6a4f942562dd7ce6cb3d0ab313bdf977895fd2a1f3e8c951ef",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "FabricDataAgentAnalyzer\\PowerBI_Semantic_Readiness_Remediation_Agent.agent.md",
+      "source_sha256": "accd8e22631510dec00a514f3753244f991fdaee6ea0b680e81fd96da92cfd33",
+      "sources": [
+        "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\PowerBI_Semantic_Readiness_Remediation_Agent.agent.md"
+      ],
+      "destination_sha256": "acdd052b9d638e185304c117ec537ac66a5771e31e640906a43169e1f6f1efca",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "FabricDataAgentAnalyzer\\PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md",
+      "source_sha256": "3b968796074b6772e1f6da613c89ceefd45ed172a95ef9f590f70ada45a80c0c",
+      "sources": [
+        "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\PowerBI_Semantic_Readiness_Remediation_Agent_Quickstart.prompt.md"
+      ],
+      "destination_sha256": "7d9532774ff8a3ad8e859f75d60dda93c98ec780e44f1372d6d373ea9eb726fc",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "FabricDataAgentAnalyzer\\README.md",
+      "source_sha256": "86666814ccdc926b50e0b00c282b9d3d70e990ccd16ccbd43b4340e39a7636b9",
+      "sources": [
+        "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\README.md"
+      ],
+      "destination_sha256": "759287872144ecf494cbbc8a290aeeb493202638403e69389d25f63b7caba2ac",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Lakehouse-Data-Source-Readiness\\Lakehouse Data Source Readiness.code-workspace",
+      "source_sha256": "6ecdaeb363f4616380db072a3d1ddd288e1d05993fe251aa7400660dec9ab1ad",
+      "sources": [
+        "SemanticModelBPforAI\\Lakehouse-Data-Source-Readiness\\Lakehouse Data Source Readiness.code-workspace"
+      ],
+      "destination_sha256": "cf37d58812d33b859aea1526d68910189e458b5e4b4c464447b0decceb925b55",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Lakehouse-Data-Source-Readiness\\Lakehouse Data Source Readiness.ipynb",
+      "source_sha256": "4b30b29fcf598d41faf775bca6598321616d6bb2f3b5e9a45817209eee63dcfe",
+      "sources": [
+        "SemanticModelBPforAI\\Lakehouse-Data-Source-Readiness\\Lakehouse Data Source Readiness.ipynb"
+      ],
+      "destination_sha256": "ab4322a9a3674fe447fab64b207aa5e0353f7e1b2d309e568b41bc972e12b83d",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Lakehouse-Data-Source-Readiness\\README.md",
+      "source_sha256": "92e54f63a81c42ece5d998dab3ae4cd5d1ce28df96db6c74587198d8c040f01a",
+      "sources": [
+        "SemanticModelBPforAI\\Lakehouse-Data-Source-Readiness\\README.md"
+      ],
+      "destination_sha256": "19ff1608f9b78821f1160df33b1f6094276f4325b965f1c926743a0c5951a74a",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "notebooks\\DataflowGen2_Analyzer.ipynb",
+      "source_sha256": "e46090aa69c57ba932a87bfe6e3ed4e15964307ab25f2de700d3d4831dfb1f31",
+      "sources": [
+        "DataflowGen2_Advisor\\notebooks\\DataflowGen2_Analyzer.ipynb"
+      ],
+      "destination_sha256": "0af81b483c3773dedec2a019782967b0f7d27a823a4ff074b0c3c1bf1a15ed58",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "OneLake-Shortcut-Auditor\\OneLake Shortcut Auditor.ipynb",
+      "source_sha256": "24a47dcfef816393b571098ba9d2c36e5a719bf48c731e3670e88e6777a1019e",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\Lakehouse-OneLake\\OneLake Shortcut Auditor.ipynb",
+        "SemanticModelBPforAI\\OneLake Shortcut Auditor.ipynb"
+      ],
+      "destination_sha256": "24a47dcfef816393b571098ba9d2c36e5a719bf48c731e3670e88e6777a1019e",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "PowerBI-Model-Settings\\README.md",
+      "source_sha256": "f0bfa3d5f22212992bc52034ec2201f971c0959a5483cdd9bc62e62f817126d2",
+      "sources": [
+        "SemanticModelBPforAI\\Scripts\\PowerBI-Model-Settings\\README.md"
+      ],
+      "destination_sha256": "de121a6441c546b70009e50c6e9651febc5923ec77540959da971c3ba4cb9a31",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "PowerBI-Model-Settings\\Set-PBIDirectQueryParallelism.ps1",
+      "source_sha256": "8e6f19a1185e29f5c8a6c025d3e1a198c33f85bc602ba5506deccbc22b296875",
+      "sources": [
+        "SemanticModelBPforAI\\Scripts\\PowerBI-Model-Settings\\Set-PBIDirectQueryParallelism.ps1"
+      ],
+      "destination_sha256": "088ffc0ab7eff2e4a1ab6b85edbe828c3d6747a760f70ea0c41258f21bc8b18c",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "PowerBI-Model-Settings\\Set-SemanticModelMaxConnections.ps1",
+      "source_sha256": "e2d48e9d5f62a0a3b9b66533dbba3c35b0c1eda0e8bf4a957625b5e6cf2dd911",
+      "sources": [
+        "SemanticModelBPforAI\\Scripts\\PowerBI-Model-Settings\\Set-SemanticModelMaxConnections.ps1",
+        "SemanticModelBPforAI\\Set-SemanticModelMaxConnections.ps1"
+      ],
+      "destination_sha256": "6b760eecfc0b876f3fcbd48906faf2841298b051f81d12f9855e341dbd77afb4",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\images\\event-tree-timeline.png",
+      "source_sha256": "4837651c75929635ccc554a9ac534a0e8439b2daaabfe65847e121b78142e207",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\images\\event-tree-timeline.png"
+      ],
+      "destination_sha256": "4837651c75929635ccc554a9ac534a0e8439b2daaabfe65847e121b78142e207",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\images\\remediation-priorities.png",
+      "source_sha256": "6a38cb87dd91fca9974b48fee8cd93405bc26d29bc32c44ea36ec0a1c7b90b66",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\images\\remediation-priorities.png"
+      ],
+      "destination_sha256": "6a38cb87dd91fca9974b48fee8cd93405bc26d29bc32c44ea36ec0a1c7b90b66",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\images\\report-overview.png",
+      "source_sha256": "7c72fb21c410bdb5fa7df2cf09a36eee99ad9abba4161ca61dcae37387964617",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\images\\report-overview.png"
+      ],
+      "destination_sha256": "7c72fb21c410bdb5fa7df2cf09a36eee99ad9abba4161ca61dcae37387964617",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\images\\visuals-table.png",
+      "source_sha256": "df29effc72799ad5781d534da5e7827cbf98722bad1862c57d20e9acb5b8eedf",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\images\\visuals-table.png"
+      ],
+      "destination_sha256": "df29effc72799ad5781d534da5e7827cbf98722bad1862c57d20e9acb5b8eedf",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\Power BI Performance Analyzer Diagnostics.ipynb",
+      "source_sha256": "54e06231053222afbd9328ea1c75a8935613af6b15f87104f046b08c0e733184",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\Power BI Performance Analyzer Diagnostics.ipynb"
+      ],
+      "destination_sha256": "6e2b4c631b9cb59ae3f58c491a073bfb56f569502c2156c2c6007dc2be1e35d0",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\Power_BI_Performance_Analyzer_JSON_Solution_Blueprint.md",
+      "source_sha256": "8b23e7f67d8c4f34bec02bb52aea6740b126c9c13aabe05498ebb88f63eb7d4f",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\Power_BI_Performance_Analyzer_JSON_Solution_Blueprint.md",
+        "SemanticModelBPforAI\\Power_BI_Performance_Analyzer_JSON_Solution_Blueprint.md"
+      ],
+      "destination_sha256": "5adf68d950c06fc55dda5691b93917a4c468beea8fdfb8c73d5a3fa5f911f718",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "PowerBI-Performance-Analyzer-Diagnostics\\README.md",
+      "source_sha256": "14e88463ec351ba1a7e8f20e798630780671da30b9704f7fc43eff9e5a997568",
+      "sources": [
+        "SemanticModelBPforAI\\PowerBI-Performance-Analyzer-Diagnostics\\README.md"
+      ],
+      "destination_sha256": "a0c71905550769e573aa4073be43c7e5db0e085b323a993cc18614759c52ec36",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "pyproject.toml",
+      "source_sha256": "067f56bb19feb9359a756375381d828af42aab11fd385b04a2a283ae49f8e3f4",
+      "sources": [
+        "DataflowGen2_Advisor\\pyproject.toml"
+      ],
+      "destination_sha256": "a264ded5a7503536de75abce98bb4dcb8e8841e54d043d3554a7a14124d5d6bb",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "run_advisor.py",
+      "source_sha256": "c3dcd4260d22d794b516e1a87798b28daefb70e02df47355acbbee800495850a",
+      "sources": [
+        "DataflowGen2_Advisor\\run_advisor.py"
+      ],
+      "destination_sha256": "db1216be25b6b3e263b0d20446dd89c39071686e1ee3e2cc6f6b76f8d08b5acd",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\BadSales.Dataflow\\mashup.pq",
+      "source_sha256": "efdb9ae487d9245853cc7cfb5f3795d6f59db23d7a2035b645f99ec23a9f7195",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\mashup.pq"
+      ],
+      "destination_sha256": "041d467a4e267943a72f1af3e8856a515e1c45c879db7e030f559578a5262cb5",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\BadSales.Dataflow\\queryMetadata.json",
+      "source_sha256": "6b738982e44be5aac0a8698d196de7aa80be27a4188069937be8b3b2d62b455b",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\BadSales.Dataflow\\queryMetadata.json"
+      ],
+      "destination_sha256": "b003dc9afdb2d377e1a72b5b0c97057ca5626dda8f91039d18ef96753364516c",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\GoodSales.Dataflow\\mashup.pq",
+      "source_sha256": "98cf96eee708407c3057f81f017d18755d9477450efdc591b76d49868c5b8c2d",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\mashup.pq"
+      ],
+      "destination_sha256": "ff8e552ef93e4aaa3c45813eac2320b6b4924980fd0902be68b071abbc8cacc9",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\GoodSales.Dataflow\\queryMetadata.json",
+      "source_sha256": "3414ac3263b08e4a4d772c50267a4670e43c0bd112da57277a73cad381fd061b",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\GoodSales.Dataflow\\queryMetadata.json"
+      ],
+      "destination_sha256": "11362576b5499064acd8c16c292817954d432a4271603da78c97e026bd5a30fd",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.csv",
+      "source_sha256": "0f1374779ca50ed9c8387e12819719bd12804c63835a754bf4a977729ee29ba6",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.csv"
+      ],
+      "destination_sha256": "16499a931660d5d59333df2a519dd2ed3687ac053e86a23d2442b02ff08a35fe",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.html",
+      "source_sha256": "477bec4c600aac9bbc35f112279b8864257b2320b16199ad0184a65c40bac034",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.html"
+      ],
+      "destination_sha256": "b980ccda368ce081c071472f386c2133fe066f2151656a3e7a20d94fbc24774e",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.json",
+      "source_sha256": "53a74e72c99770313cb7051a104e20d6220fd52b32a065786d8cbe4a79ead114",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.json"
+      ],
+      "destination_sha256": "25f4af9dbcc880e7fdd3edbecb5d6f4e6a5d868bbcfe9651e0fdcd2ad7c77fe6",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "samples\\sample_report\\dataflow_gen2_review.md",
+      "source_sha256": "26418bf819478006327093bf400ceee57694992822c95b18a62e0f8d55b24896",
+      "sources": [
+        "DataflowGen2_Advisor\\samples\\sample_report\\dataflow_gen2_review.md"
+      ],
+      "destination_sha256": "042ef20627a9723d6479ff575725eeb28ef237665d164586fcda6d9e3b0ae071",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "SemanticModel-AI-Readiness-Analyzer\\README.md",
+      "source_sha256": "e170a93b654df5dcc55e8d6885dfafa61ed4fe5effbb2eccc6cc3b3955a316fc",
+      "sources": [
+        "SemanticModelBPforAI\\SemanticModel-AI-Readiness-Analyzer\\README.md"
+      ],
+      "destination_sha256": "363aa32c8241358f2e609a1cf9eff2ef0457fca7fbfe8b92837ab45b70443440",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "SemanticModel-AI-Readiness-Analyzer\\SemanticModelAIReadinessAnalyzer.ipynb",
+      "source_sha256": "6751e95b5b48cd34684ba0db86b9cdc9a6eb8bb493d455c851b69fa64493a0a1",
+      "sources": [
+        "SemanticModelBPforAI\\SemanticModel-AI-Readiness-Analyzer\\SemanticModelAIReadinessAnalyzer.ipynb"
+      ],
+      "destination_sha256": "9b783cc4328f8ad0b6a214784710ee9f5c6adf2e9a4902cff46610b5deeb2a86",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\DirectQuery_BestPractices_Check.ipynb",
+      "source_sha256": "9f1bfd90761469d3b991ee542f4bceb5fd90ce1e0b48b21c078274550531b5b7",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\DirectQuery_BestPractices_Check.ipynb"
+      ],
+      "destination_sha256": "6721ccd3bd5ecc439004890c893a2170749b4a863f4054af55900f4d2eb2876a",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\DirectQuery_BestPractices_Check_TabularEditor2.cs",
+      "source_sha256": "fa44a8401e35665265fe2393e5f2c228ef991d1f9cb5679be4b8cb1efbb3deac",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\DirectQuery_BestPractices_Check_TabularEditor2.cs"
+      ],
+      "destination_sha256": "76e89c694270659982bac19de7adfe5d219f336d248d041ee0f27ffbddfd3263",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\fact_sale_row_group_guidance.ipynb",
+      "source_sha256": "bca93fa9bba0efd0ebb9f5b1e35ee4fb4f2312473258a36f91d99f7e9385a834",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\fact_sale_row_group_guidance.ipynb",
+        "SemanticModelBPforAI\\fact_sale_row_group_guidance.ipynb"
+      ],
+      "destination_sha256": "bca93fa9bba0efd0ebb9f5b1e35ee4fb4f2312473258a36f91d99f7e9385a834",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\Semantic Model Report AnalyzerMK.ipynb",
+      "source_sha256": "aac9135664a0b4036f2601eab6b755bf92736718f603d70efbe6dfb3e0bd20f5",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\Semantic Model Report AnalyzerMK.ipynb",
+        "SemanticModelBPforAI\\Semantic Model Report AnalyzerMK.ipynb"
+      ],
+      "destination_sha256": "aac9135664a0b4036f2601eab6b755bf92736718f603d70efbe6dfb3e0bd20f5",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\SimplifySchemaForAI.ipynb",
+      "source_sha256": "aac9135664a0b4036f2601eab6b755bf92736718f603d70efbe6dfb3e0bd20f5",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\SimplifySchemaForAI.ipynb",
+        "SemanticModelBPforAI\\SimplifySchemaForAI.ipynb"
+      ],
+      "destination_sha256": "aac9135664a0b4036f2601eab6b755bf92736718f603d70efbe6dfb3e0bd20f5",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "SemanticModel-Optimization\\UDFReview.ipynb",
+      "source_sha256": "2783183d34d596a623273376152f851fa970c8f0066697b0553442ba5efe2264",
+      "sources": [
+        "SemanticModelBPforAI\\Notebooks\\SemanticModel-Optimization\\UDFReview.ipynb"
+      ],
+      "destination_sha256": "2783183d34d596a623273376152f851fa970c8f0066697b0553442ba5efe2264",
+      "copy_status": "byte-identical"
+    },
+    {
+      "destination": "tests\\test_advisor.py",
+      "source_sha256": "ae7d51eea35901afc558fb7f93101458521dc521d6b8676bbbbe70a9e274d4b8",
+      "sources": [
+        "DataflowGen2_Advisor\\tests\\test_advisor.py"
+      ],
+      "destination_sha256": "3a61487aef3e6e16abc74c7e6f82accf2db180a5e84b6e029730aca614796c5b",
+      "copy_status": "existing-github-dataflow-layout"
+    },
+    {
+      "destination": "Variants\\SemanticModelBPforAI-Root\\DirectQuery_BestPractices_Check.ipynb",
+      "source_sha256": "d64a453d3168e02e5b28083d00d2ae7f9e66ab2b57d37d6e1ee3e574403d4cac",
+      "sources": [
+        "SemanticModelBPforAI\\DirectQuery_BestPractices_Check.ipynb"
+      ],
+      "destination_sha256": "e91dcbb9b93941a5d49571780f5971f8052e7b80516fe17092adf8f55de64db6",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Variants\\SemanticModelBPforAI-Root\\DirectQuery_BestPractices_Check_TabularEditor2.cs",
+      "source_sha256": "ae58c1174a6a9dffe77495391561b41103d561618759fc6cdc045a3183d5b937",
+      "sources": [
+        "SemanticModelBPforAI\\DirectQuery_BestPractices_Check_TabularEditor2.cs"
+      ],
+      "destination_sha256": "898bd171c3569136be58c07f42b9e0267fce7e07d33a8b8a90cc370dba1a9108",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Variants\\SemanticModelBPforAI-Root\\Power BI Performance Analyzer Diagnostics.ipynb",
+      "source_sha256": "15b4426fa1e69f4796884329457f27f7a25f3e55092f066205fb2828938d32ce",
+      "sources": [
+        "SemanticModelBPforAI\\Power BI Performance Analyzer Diagnostics.ipynb"
+      ],
+      "destination_sha256": "601e29fd968ae7c73258f7a0158da81d8b1479a65a339db93256994a83503c94",
+      "copy_status": "public-copy-adjustment"
+    },
+    {
+      "destination": "Variants\\SemanticModelBPforAI-Root\\Set-PBIDirectQueryParallelism.ps1",
+      "source_sha256": "088ffc0ab7eff2e4a1ab6b85edbe828c3d6747a760f70ea0c41258f21bc8b18c",
+      "sources": [
+        "SemanticModelBPforAI\\Set-PBIDirectQueryParallelism.ps1"
+      ],
+      "destination_sha256": "088ffc0ab7eff2e4a1ab6b85edbe828c3d6747a760f70ea0c41258f21bc8b18c",
+      "copy_status": "byte-identical"
+    }
+  ],
+  "github_base_commit": "c10a1e21c0e3a5bfa47439908fcdd75d61b68fc0",
+  "public_copy_notes": [
+    "Existing Dataflow files remain at the Analyzer root for install compatibility.",
+    "The former Dataflow README is now DataflowGen2_Advisor.md; README.md is the collection index.",
+    "Saved notebook outputs and execution counts were cleared from the public diagnostic copies.",
+    "A client-specific input file path was replaced with an empty configurable INPUT_PATH.",
+    "Documentation paths were adapted to this repository layout.",
+    "Text line endings and inherited trailing whitespace in newly copied files were normalized for Git.",
+    "DataflowGen2-Advisor is the named solution entry folder; the previous notebook path remains for compatibility."
+  ]
+}
