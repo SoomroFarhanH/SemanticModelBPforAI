@@ -1,0 +1,33 @@
+{
+  "name": "data-modeling",
+  "description": "Rayfin data service: turns the database on and plants a starter entity with owner-scoped access, so an agent edits a working schema instead of inventing one.",
+  "rayfin": {
+    "services": {
+      "data": {
+        "enabled": true,
+        "dialect": "mssql"
+      }
+    }
+  },
+  "copy": [
+    {
+      "from": "kit/data/Item.ts",
+      "to": "packages/data/src/Item.ts"
+    },
+    {
+      "from": "kit/data/schema.ts",
+      "to": "packages/data/src/index.ts",
+      "seedReplaceIfPristine": [
+        "aedc965b5baa4cfb05fc3686f13030b0ca7af53fa5a82629809062c489f43510"
+      ]
+    },
+    {
+      "from": "kit/shared/index.ts",
+      "to": "packages/shared/src/index.ts",
+      "seedReplaceIfPristine": [
+        "88a16dd9bb1db2a1d4d794b85c3e21ba6d09c42e35d8db1bc7445a4141a2f51f"
+      ]
+    }
+  ],
+  "next": ["crud-ui", "app-design"]
+}

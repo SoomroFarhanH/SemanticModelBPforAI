@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "node",
+    "AZURE_FUNCTIONS_ENVIRONMENT": "Development",
+    "AzureWebJobsStorage": "",
+    "IsLocal": "true"
+  }
+}

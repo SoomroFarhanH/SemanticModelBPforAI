@@ -1,0 +1,34 @@
+{
+  "testPacks": [
+    {
+      "name": "sales-dashboard-with-charts",
+      "capabilityPacks": ["analytics", "visuals"]
+    },
+    {
+      "name": "sales-dashboard-with-private-notes",
+      "capabilityPacks": ["analytics", "visuals", "data-modeling"]
+    },
+    {
+      "name": "fulfillment-request",
+      "capabilityPacks": ["data-modeling", "functions"]
+    },
+    {
+      "name": "warehouse-dashboard",
+      "capabilityPacks": ["connectors", "visuals"]
+    },
+    {
+      "name": "warehouse-investigation",
+      "capabilityPacks": ["connectors", "visuals", "data-modeling"]
+    },
+    {
+      "name": "complete-stack",
+      "capabilityPacks": [
+        "analytics",
+        "connectors",
+        "data-modeling",
+        "functions",
+        "visuals"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,221 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Bridged tokens — kept in `@theme static` so the CSS vars are always
+   emitted, not tree-shaken when no Tailwind utility consumes them.
+   Required because <VegaVisual> and <DataGrid> read these at runtime via
+   `useCssTheme()` and project them into a JS theme object (Vega's SVG output
+   cannot resolve `var()` references). */
+@theme static {
+  --color-brand: #0e7c74; /* bar/area fills, button-like brand surfaces */
+  --color-brand-foreground: #0b6b63; /* line/point marks, branded text & emphasis */
+  --color-hover: #eef1ef; /* row/cell hover surface in DataGrid + visuals */
+}
+
+@theme {
+  /* Color tokens — light theme: warm paper surface, deep teal ink.
+     Each token has a -foreground pair for text on that surface. */
+  --color-background: #f5f6f3; /* page background */
+  --color-foreground: #16201f; /* default text */
+
+  --color-card: #ffffff; /* card surfaces */
+  --color-card-foreground: #16201f;
+
+  --color-popover: #ffffff; /* popover/dropdown surfaces */
+  --color-popover-foreground: #16201f;
+
+  --color-primary: #0b6b63; /* primary actions & buttons */
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #eef1ee; /* secondary actions */
+  --color-secondary-foreground: #16201f;
+
+  --color-muted: #e8ece9; /* subtle backgrounds */
+  --color-muted-foreground: #53615e; /* subdued text */
+
+  --color-accent: #e1eeeb; /* accent highlights */
+  --color-accent-foreground: #0a4a44;
+
+  --color-destructive: #b42318; /* errors & destructive actions */
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #d8dedb; /* default border */
+  --color-input: #cdd5d2; /* input field borders */
+  --color-ring: #0b6b63; /* focus rings */
+
+  /* Status tones — each has a readable ink and a soft surface. */
+  --color-success: #14754a;
+  --color-success-soft: #e2f3ea;
+  --color-warning: #8f5400;
+  --color-warning-soft: #fbefd6;
+  --color-danger: #b42318;
+  --color-danger-soft: #fce9e6;
+  --color-info: #2557a7;
+  --color-info-soft: #e5edfa;
+
+  --radius-none: 0;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --radius-3xl: 22px;
+  --radius-4xl: 28px;
+  --radius-5xl: 32px;
+  --radius-6xl: 40px;
+  --radius-full: 9999px;
+  --radius: 10px;
+
+  /* Spacing — 4px grid; use only these tokens, no interpolation. *-nudge = base − 2px.
+     Usage: p-*, m-*, gap-* (e.g. p-400 gap-300) */
+  --spacing-none: 0;
+  --spacing-100-nudge: 2px;
+  --spacing-100: 4px;
+  --spacing-200-nudge: 6px;
+  --spacing-200: 8px;
+  --spacing-300-nudge: 10px;
+  --spacing-300: 12px;
+  --spacing-400: 16px;
+  --spacing-500: 20px;
+  --spacing-600: 24px;
+  --spacing-700: 28px;
+  --spacing-800: 32px;
+
+  /* Font Sizes — 100-based scale 
+     Usage: text-* (e.g. text-300, text-hero-900) */
+  --text-100: 10px;
+  --text-200: 12px;
+  --text-300: 14px;
+  --text-400: 16px;
+  --text-500: 20px;
+  --text-600: 24px;
+  --text-hero-700: 28px;
+  --text-hero-800: 32px;
+  --text-hero-900: 40px;
+  --text-hero-1000: 68px;
+
+  /* Line Heights — paired with font sizes
+     Usage: leading-* (e.g. leading-300) */
+  --leading-100: 14px;
+  --leading-200: 16px;
+  --leading-300: 20px;
+  --leading-400: 22px;
+  --leading-500: 28px;
+  --leading-600: 32px;
+  --leading-hero-700: 36px;
+  --leading-hero-800: 40px;
+  --leading-hero-900: 52px;
+  --leading-hero-1000: 92px;
+
+  /* Font Weights
+     Usage: font-* (e.g. font-semibold) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Families
+     Usage: font-* (e.g. font-heading, font-base) */
+  --font-heading:
+    'Bricolage Grotesque', 'Segoe UI', 'Segoe UI Web (West European)',
+    /* headings, titles, display text */ -apple-system, BlinkMacSystemFont,
+    Roboto, 'Helvetica Neue', sans-serif;
+  --font-base:
+    'Instrument Sans', 'Segoe UI', 'Segoe UI Web (West European)',
+    /* body text, labels, UI controls */ -apple-system, BlinkMacSystemFont,
+    Roboto, 'Helvetica Neue', sans-serif;
+  --font-monospace:
+    Consolas, 'Courier New', Courier, monospace; /* code, pre-formatted text */
+  --font-numeric:
+    'Bricolage Grotesque', Bahnschrift, 'Segoe UI',
+    /* KPI values, numeric displays */ 'Segoe UI Web (West European)',
+    -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+
+  /* Icon Sizes — 100-based scale
+     Usage: icon-size-* custom utility (e.g. icon-size-200) */
+  --icon-size-100: 12px;
+  --icon-size-200: 16px;
+  --icon-size-300: 20px;
+  --icon-size-400: 24px;
+  --icon-size-500: 28px;
+  --icon-size-600: 32px;
+  --icon-size-700: 48px;
+}
+
+@utility icon-size-* {
+  width: --value(--icon-size-*);
+  height: --value(--icon-size-*);
+}
+
+@layer base {
+  .dark {
+    /* Color tokens — dark theme */
+    --color-background: #0e1615;
+    --color-foreground: #e8efed;
+
+    --color-card: #152120;
+    --color-card-foreground: #e8efed;
+
+    --color-popover: #152120;
+    --color-popover-foreground: #e8efed;
+
+    --color-primary: #3fb9ab;
+    --color-primary-foreground: #04211e;
+
+    --color-secondary: #1a2927;
+    --color-secondary-foreground: #e8efed;
+
+    --color-muted: #1e2e2c;
+    --color-muted-foreground: #9db0ac;
+
+    --color-accent: #223735;
+    --color-accent-foreground: #d9f1ed;
+
+    --color-destructive: #ff7b72;
+    --color-destructive-foreground: #1a0705;
+
+    --color-border: #2a3b39;
+    --color-input: #334744;
+    --color-ring: #46c2b5;
+
+    --color-success: #4cc38a;
+    --color-success-soft: #123022;
+    --color-warning: #f0b24a;
+    --color-warning-soft: #33260c;
+    --color-danger: #ff7b72;
+    --color-danger-soft: #3a1614;
+    --color-info: #82b1ff;
+    --color-info-soft: #14233d;
+
+    --color-brand: #2aa198;
+    --color-brand-foreground: #46c2b5;
+    --color-hover: #1e2e2c;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-base antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-heading;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}

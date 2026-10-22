@@ -1,0 +1,12 @@
+apiVersion: v1
+metadata:
+  name: universal-app
+  displayName: ✨ Use default template
+  description: >-
+    A lean, Fabric-authenticated React + Vite starter that grows into anything.
+    The base is deliberately small; a built-in capability router picks the right
+    Rayfin services, npm modules, and skills on demand — Power BI analytics
+    dashboards, CRUD apps, or functions.
+entries:
+  - path: .
+    name: universal-app

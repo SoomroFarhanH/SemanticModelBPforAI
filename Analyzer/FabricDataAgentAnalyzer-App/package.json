@@ -1,0 +1,48 @@
+{
+  "name": "data-agent-analyzer-app",
+  "description": "A lean React + Vite starter that grows into anything. A built-in capability router reads what you ask for, then enables the right Rayfin services, installs the right modules, and activates the right skills — Fabric analytics dashboards, CRUD apps, or functions.",
+  "license": "MIT",
+  "author": "Microsoft",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "template": {
+    "name": "universal-app",
+    "displayName": "✨ Use default template",
+    "description": "A lean React + Vite starter that grows into anything. A built-in capability router reads what you ask for, then enables the right Rayfin services, installs the right modules, and activates the right skills — CRUD apps, functions, charts, or Fabric analytics dashboards.",
+    "hidden": true
+  },
+  "scripts": {
+    "dev": "rayfin dev",
+    "dev:frontend": "npm run -w @rayfin-app/frontend dev",
+    "build": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build",
+    "build:fabric": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build:fabric",
+    "lint": "npm run -w @rayfin-app/frontend lint",
+    "preview": "npm run -w @rayfin-app/frontend preview",
+    "test": "npm run -w @rayfin-app/frontend test",
+    "test:watch": "npm run -w @rayfin-app/frontend test:watch",
+    "typecheck": "tsc -b",
+    "pack:add": "node scripts/scaffold.mjs",
+    "test:template": "node scripts/run-template-tests.mjs",
+    "rayfin:up": "rayfin up",
+    "validate:visual": "node scripts/validate-visual.mjs",
+    "validate:visual:preview": "node scripts/validate-visual.mjs --allow-incomplete"
+  },
+  "devDependencies": {
+    "@microsoft/rayfin-cli": "^1.36.0-alpha",
+    "@microsoft/rayfin-guide": "^1.36.0-alpha",
+    "typescript": "~5.7.2"
+  },
+  "rayfinScriptBases": {
+    "build": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build",
+    "build:fabric": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build:fabric",
+    "typecheck": "tsc -b"
+  },
+  "rayfinPacks": [
+    "data-modeling",
+    "visuals"
+  ]
+}

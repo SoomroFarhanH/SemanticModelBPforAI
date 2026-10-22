@@ -1,0 +1,55 @@
+{
+  "name": "connectors",
+  "description": "Adds the frontend connector SDK and composable client wiring for existing Fabric sources; source declarations remain owned by `rayfin connector add`.",
+  "packageJson": "packages/frontend/package.json",
+  "dependencies": {
+    "@microsoft/rayfin-connectors": "match:@microsoft/rayfin-core"
+  },
+  "copy": [
+    {
+      "from": "kit/connectors.ts",
+      "to": "packages/frontend/src/lib/connectors.ts",
+      "initializationOnly": true
+    },
+    {
+      "from": "kit/rayfin-client.ts",
+      "fromVariants": [
+        {
+          "whenPacks": ["functions"],
+          "from": "kit/rayfin-client.with-functions.ts"
+        }
+      ],
+      "to": "packages/frontend/src/lib/rayfin-client.ts",
+      "seedReplaceIfPristine": [
+        "22b8081d4bff0b0bd1c63bd99ca9710c8e8356333a708acec8fac272859ab75b",
+        "fd0a2eccfed80b280dba0d62fb2bab9d2ec8b6ffcf09885ab1a48df4044937af",
+        "408c62876b96c99db2d45daa6f0b6c12cd44ed78c6b6389df15e9241807c1390",
+        "d66bbda5d26de565df23722b56c6350d620fa7b536c1610a87a0bf0cb4c89250",
+        "43eed161a7879e27e37344298c996b2d789781a08b1da02207be3dcf14848c7f",
+        "4eb3a97456f660b82fff62e5adfba2facca44bcaa43c379c7bf6d5addc4c4e5d",
+        "7776f06510b0a67f7c77f3883b80ac82e35e4a25781485f885f9516315580640",
+        "89bcf0c31cca550d204223d6c476326ac0bee5f301c7ae8ef279745646a8802b",
+        "257a4523c1949c9a70ea142afc2060895cf3c185d017b6301074198d49fa0830",
+        "c59d377d84c6af6a920cd85c0013d85f8793a0fe4144b9f12b173c7010ce884f",
+        "60bd8f20b5f11f5ce08ce37368e5a08c2a9cd52cbf78c5950e9b73968bc6db8c",
+        "08c468d49677283143e9d9969a0bf948ca10c677b0f7bfb946ac7df6b8f2bf06",
+        "f84f0a05a1fd2eca6bd6e790e34cb9a6b488d1c225065a399d2140b55b8b6d76",
+        "a527e503eb33e124db9af39572aeb74947c867aa30b4299d8b14fa17a52014cb",
+        "b2c572457fc8c5215dea9d991b10fa73a638d4257664de8b417de819b8bfe555",
+        "e64aec3e58afcaa5e5df71937c316eff4c26a8599ab4fd131a282cef107d2a65",
+        "3c947caa188c09bcbc3ab137ceba0b38544e55f2dda4023a1bd2ebcd2c0b3994",
+        "51d9e78cbcbcaf9238b772145b6dafd844bb0349c3ffec63ce1214e4753128e7",
+        "778868150d50bd52c1f096a1cc3fb87ab0163cf90950288c7097abfb780003b3",
+        "70dd46dac68792f98e8bf82edd3bdcc430bd16033ab51fa905ba72c0430d0f9d",
+        "790f7949c7ca77a2f500a75a5c918a2312acf4a9817befb1c2132dc057fbc58b",
+        "5cd558865fe5a593c5a2cc1b49509b43f914b8880378b6934c252e41b563a102",
+        "02ef7c6d251f0d437782a3e3eab2bcad4992e340882df67dcf496c1dc3e8b2e4",
+        "cdff7f694750cccdc1e4daa3b98bb227b2a9067e7af721101a722fdb3fb7b6bc",
+        "7700766e65b1b785839b362adcef5617ff5d4defeaffe04afaf38c21bda011e7",
+        "e4bf1f990f73a0ac526f8c1195a8375db2cb7fe9c6b13b0ba1c82105a4e85d2f",
+        "a3777b5929bc98f5f87a0f25a0ddfe663a7a5a2b873259c5783b6e722e77de82"
+      ]
+    }
+  ],
+  "next": ["app-design"]
+}

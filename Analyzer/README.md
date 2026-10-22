@@ -23,6 +23,7 @@ cloud queries, deployments, remediation, or notifications.
 | --- | --- | --- |
 | [Semantic Model AI Readiness Analyzer](SemanticModel-AI-Readiness-Analyzer/README.md) | Semantic-model readiness for AI and Copilot | [SemanticModelAIReadinessAnalyzer.ipynb](SemanticModel-AI-Readiness-Analyzer/SemanticModelAIReadinessAnalyzer.ipynb) |
 | [Fabric Data Agent Analyzer](FabricDataAgentAnalyzer/README.md) | Agent and connected-source assessment, with optional remediation assets | [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer/FabricDataAgentAnalyzer.ipynb) |
+| [Fabric Data Agent Analyzer App](FabricDataAgentAnalyzer-App/README.md) | Rayfin (Fabric App) that imports the analyzer's JSON export and shows the readiness score, release gates, and a prioritized remediation list | [README](FabricDataAgentAnalyzer-App/README.md) |
 | [Agent Readiness Validator](Agent-Readiness-Validator/README.md) | Configuration, instructions, examples, and benchmark checks | [Agent Readiness Validator.ipynb](Agent-Readiness-Validator/Agent%20Readiness%20Validator.ipynb) |
 | [Copilot Diagnostics Troubleshooter](Copilot-Diagnostics-Troubleshooter/README.md) | Interprets exported Copilot diagnostic files | [Copilot_Diagnostics_Troubleshooter.ipynb](Copilot-Diagnostics-Troubleshooter/Copilot_Diagnostics_Troubleshooter.ipynb) |
 | [Copilot and agent insights](Copilot-Agent-Insights/README.md) | Agent quality evaluation, Copilot capacity estimation, and question mining | [Notebook index](Copilot-Agent-Insights/README.md) |

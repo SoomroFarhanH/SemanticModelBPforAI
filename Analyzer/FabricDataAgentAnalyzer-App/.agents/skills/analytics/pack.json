@@ -1,0 +1,25 @@
+{
+  "name": "analytics",
+  "description": "Power BI / semantic-model analytics: the `fabric-semanticmodel` connector and the semantic-model query hook. Add the visuals pack alongside it to chart what the queries return.",
+  "packageJson": "packages/frontend/package.json",
+  "rayfin": {
+    "services": {
+      "connectors": {
+        "enabled": true
+      }
+    }
+  },
+  "dependencies": {
+    "@microsoft/rayfin-connectors": "match:@microsoft/rayfin-core",
+    "@microsoft/rayfin-connector-fabric-semanticmodel": "match:@microsoft/rayfin-core"
+  },
+  "copy": [
+    { "from": "kit/hooks", "to": "packages/frontend/src/hooks" },
+    {
+      "from": "kit/lib/connectors.ts",
+      "to": "packages/frontend/src/lib/connectors.ts",
+      "initializationOnly": true
+    }
+  ],
+  "next": ["analytics"]
+}
