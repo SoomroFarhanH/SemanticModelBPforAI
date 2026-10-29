@@ -1,0 +1,37 @@
+# Dependencies, generated assets, and caches
+node_modules/
+dist/
+dist-ssr/
+*.tsbuildinfo
+.tsbuildinfo
+.vite/
+coverage/
+logs/
+*.log
+
+# Never publish credentials, environment overrides, or deployment identity
+.env
+.env.*
+**/.env
+**/.env.*
+.npmrc
+*.pem
+*.key
+rayfin/.deployments.json
+rayfin/.project.json
+rayfin/.lockfile.json
+rayfin/.temp/
+rayfin/.*.tmp
+rayfin.config.json
+packages/functions/local.settings.json
+packages/functions/deploymentdata.json
+
+# Keep private audit exports outside the application source
+private/
+*-evidence.json
+
+# Local editor / OS state
+.idea/
+*.local
+.DS_Store
+Thumbs.db

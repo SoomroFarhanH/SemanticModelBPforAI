@@ -1,0 +1,200 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Bridged tokens — kept in `@theme static` so the CSS vars are always
+   emitted, not tree-shaken when no Tailwind utility consumes them.
+   Required because <VegaVisual> and <DataGrid> read these at runtime via
+   `useCssTheme()` and project them into a JS theme object (Vega's SVG output
+   cannot resolve `var()` references). */
+@theme static {
+  --color-brand: #b11f4b; /* bar/area fills, button-like brand surfaces */
+  --color-brand-foreground: #9a1a41; /* line/point marks, branded text & emphasis */
+  --color-hover: #f5edef; /* row/cell hover surface in DataGrid + visuals */
+}
+
+@theme {
+  /* Color tokens — light theme
+     Usage: bg-*, text-*, border-* (e.g. bg-primary text-primary-foreground)
+     Each token has a -foreground pair for text on that surface. */
+  --color-background: #f7f4ef; /* page background */
+  --color-foreground: #242424; /* default text */
+
+  --color-card: #fcfbf8; /* card surfaces */
+  --color-card-foreground: #242424;
+
+  --color-popover: #fcfbf8; /* popover/dropdown surfaces */
+  --color-popover-foreground: #242424;
+
+  --color-primary: #9a1a41; /* primary actions & buttons */
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #f1ece7; /* secondary actions */
+  --color-secondary-foreground: #242424;
+
+  --color-muted: #eee9e3; /* subtle backgrounds */
+  --color-muted-foreground: #5c5c5c; /* subdued text */
+
+  --color-accent: #f2e7ea; /* accent highlights */
+  --color-accent-foreground: #242424;
+
+  --color-destructive: #c50f1f; /* errors & destructive actions */
+  --color-destructive-foreground: #ffffff;
+
+  --color-border: #e0e0e0; /* default border */
+  --color-input: #e0e0e0; /* input field borders */
+  --color-ring: #9a1a41; /* focus rings */
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 12px;
+  --radius-3xl: 16px;
+  --radius-4xl: 24px;
+  --radius-5xl: 32px;
+  --radius-6xl: 40px;
+  --radius-full: 9999px;
+  --radius: 6px;
+
+  /* Spacing — 4px grid; use only these tokens, no interpolation. *-nudge = base − 2px.
+     Usage: p-*, m-*, gap-* (e.g. p-400 gap-300) */
+  --spacing-none: 0;
+  --spacing-100-nudge: 2px;
+  --spacing-100: 4px;
+  --spacing-200-nudge: 6px;
+  --spacing-200: 8px;
+  --spacing-300-nudge: 10px;
+  --spacing-300: 12px;
+  --spacing-400: 16px;
+  --spacing-500: 20px;
+  --spacing-600: 24px;
+  --spacing-700: 28px;
+  --spacing-800: 32px;
+
+  /* Font Sizes — 100-based scale
+     Usage: text-* (e.g. text-300, text-hero-900) */
+  --text-100: 10px;
+  --text-200: 12px;
+  --text-300: 14px;
+  --text-400: 16px;
+  --text-500: 20px;
+  --text-600: 24px;
+  --text-hero-700: 28px;
+  --text-hero-800: 32px;
+  --text-hero-900: 40px;
+  --text-hero-1000: 68px;
+
+  /* Line Heights — paired with font sizes
+     Usage: leading-* (e.g. leading-300) */
+  --leading-100: 14px;
+  --leading-200: 16px;
+  --leading-300: 20px;
+  --leading-400: 22px;
+  --leading-500: 28px;
+  --leading-600: 32px;
+  --leading-hero-700: 36px;
+  --leading-hero-800: 40px;
+  --leading-hero-900: 52px;
+  --leading-hero-1000: 92px;
+
+  /* Font Weights
+     Usage: font-* (e.g. font-semibold) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Families
+     Usage: font-* (e.g. font-heading, font-base) */
+  --font-heading:
+    'Segoe UI', 'Segoe UI Web (West European)',
+    /* headings, titles, display text */ -apple-system, BlinkMacSystemFont,
+    Roboto, 'Helvetica Neue', sans-serif;
+  --font-base:
+    'Segoe UI', 'Segoe UI Web (West European)',
+    /* body text, labels, UI controls */ -apple-system, BlinkMacSystemFont,
+    Roboto, 'Helvetica Neue', sans-serif;
+  --font-monospace:
+    Consolas, 'Courier New', Courier, monospace; /* code, pre-formatted text */
+  --font-numeric:
+    Bahnschrift, 'Segoe UI',
+    /* KPI values, numeric displays */ 'Segoe UI Web (West European)',
+    -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+
+  /* Icon Sizes — 100-based scale
+     Usage: icon-size-* custom utility (e.g. icon-size-200) */
+  --icon-size-100: 12px;
+  --icon-size-200: 16px;
+  --icon-size-300: 20px;
+  --icon-size-400: 24px;
+  --icon-size-500: 28px;
+  --icon-size-600: 32px;
+  --icon-size-700: 48px;
+}
+
+@utility icon-size-* {
+  width: --value(--icon-size-*);
+  height: --value(--icon-size-*);
+}
+
+@layer base {
+  .dark {
+    /* Color tokens — dark theme */
+    --color-background: #3d3b3a;
+    --color-foreground: #dedede;
+
+    --color-card: #292929;
+    --color-card-foreground: #dedede;
+
+    --color-popover: #292929;
+    --color-popover-foreground: #dedede;
+
+    --color-primary: #fd8ea1;
+    --color-primary-foreground: #1a1a1a;
+
+    --color-secondary: #343231;
+    --color-secondary-foreground: #dedede;
+
+    --color-muted: #2e2e2e;
+    --color-muted-foreground: #b0b0b0;
+
+    --color-accent: #474747;
+    --color-accent-foreground: #dedede;
+
+    --color-destructive: #f87171;
+    --color-destructive-foreground: #ffffff;
+
+    --color-border: #474747;
+    --color-input: #5f5f5f;
+    --color-ring: #fd8ea1;
+
+    --color-brand: #fd8ea1;
+    --color-brand-foreground: #fd8ea1;
+    --color-hover: #343231;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  input,
+  select,
+  textarea,
+  button {
+    font-family: inherit;
+  }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}

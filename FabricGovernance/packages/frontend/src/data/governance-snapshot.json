@@ -1,0 +1,933 @@
+{
+  "dataClassification": "synthetic",
+  "generatedAt": "2026-01-15T10:02:00.000Z",
+  "collectedFrom": "2026-01-15T10:00:00.000Z",
+  "collectedTo": "2026-01-15T10:02:00.000Z",
+  "tenantId": "SYNTHETIC-DEMO-NOT-A-TENANT",
+  "purpose": "Synthetic demonstration — not a tenant review",
+  "skill": "Illustrative OneLake Catalog governance workflow",
+  "readOnly": true,
+  "status": "Synthetic example: availability risk",
+  "interpretation": "This fictional estate demonstrates how to prioritize availability, ownership, protection and discoverability. All names, identities, IDs, counts, dates and findings in this bundled sample are synthetic; no tenant was scanned to create it.",
+  "scope": {
+    "workspaces": 8,
+    "allWorkspaces": 11,
+    "inventoryItems": 24,
+    "rawInventoryItems": 29,
+    "excludedItems": 5,
+    "exclusions": [
+      {
+        "key": "Personal / Active",
+        "count": 1
+      },
+      {
+        "key": "AdminWorkspace / Active",
+        "count": 1
+      },
+      {
+        "key": "Workspace / Deleted",
+        "count": 1
+      }
+    ],
+    "domains": 1,
+    "capacities": 3,
+    "personalWorkspaces": 1,
+    "scannedWorkspaces": 9,
+    "labelArtifacts": 12,
+    "endorsementArtifacts": 11,
+    "scanOnlyArtifacts": 0,
+    "freshness": "Synthetic fixture with illustrative dates, not a real audit or current tenant state. For actual tenant snapshots, admin insights can lag changes by up to 24 hours; last-refresh records are not current workload probes."
+  },
+  "metrics": {
+    "suspended": {
+      "numerator": 3,
+      "denominator": 8,
+      "percent": 37.5,
+      "scope": "Synthetic active standard workspaces",
+      "source": "Synthetic example, no API request"
+    },
+    "singleAdmin": {
+      "numerator": 5,
+      "denominator": 8,
+      "percent": 62.5,
+      "scope": "Synthetic active standard workspaces",
+      "source": "Synthetic example, no API request"
+    },
+    "unlabeled": {
+      "numerator": 8,
+      "denominator": 12,
+      "percent": 66.7,
+      "scope": "Synthetic scanner-supported Power BI artifacts",
+      "source": "Synthetic example, no API request"
+    },
+    "failedRefresh": {
+      "numerator": 2,
+      "denominator": 5,
+      "percent": 40,
+      "scope": "Synthetic returned refreshables",
+      "source": "Synthetic example, no API request"
+    },
+    "domainAssigned": {
+      "numerator": 4,
+      "denominator": 8,
+      "percent": 50,
+      "scope": "Synthetic active standard workspaces",
+      "source": "Synthetic example, no API request"
+    },
+    "described": {
+      "numerator": 15,
+      "denominator": 24,
+      "percent": 62.5,
+      "scope": "Synthetic all-Fabric inventory",
+      "source": "Synthetic example, no API request"
+    },
+    "tagged": {
+      "numerator": 6,
+      "denominator": 24,
+      "percent": 25,
+      "scope": "Synthetic all-Fabric inventory",
+      "source": "Synthetic example, no API request"
+    },
+    "labeled": {
+      "numerator": 4,
+      "denominator": 12,
+      "percent": 33.3,
+      "scope": "Synthetic scanner-supported Power BI artifacts",
+      "source": "Synthetic example, no API request"
+    },
+    "endorsed": {
+      "numerator": 2,
+      "denominator": 11,
+      "percent": 18.2,
+      "scope": "Synthetic eligible artifacts, dashboards excluded",
+      "source": "Synthetic example, no API request"
+    }
+  },
+  "findings": [
+    {
+      "key": "availability",
+      "pillar": "Health",
+      "priority": "Critical",
+      "title": "Example: a suspended capacity hosts production workspaces",
+      "evidence": {
+        "numerator": 3,
+        "denominator": 8,
+        "percent": 37.5,
+        "scope": "Synthetic active standard workspaces",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "In a real tenant, capacity-dependent execution may be unavailable while a capacity is suspended. This synthetic example is not an outage report.",
+      "action": "Ask the capacity resource owner to verify the current state and approve resumption or reassignment, then validate workloads. Resumption can incur costs.",
+      "owner": "Capacity resource owner and workspace admins",
+      "effort": "Owner review; approximately 15–30 minutes",
+      "examples": [
+        "Demo Analytics",
+        "Demo Ingestion",
+        "Demo Staging"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "certified-refresh",
+      "pillar": "Health",
+      "priority": "High",
+      "title": "Example: a certified model has a failed last-recorded refresh",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": 100,
+        "scope": "Synthetic certified models",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "A trusted badge and failed refresh together merit investigation, but do not by themselves prove data is stale.",
+      "action": "Verify the recorded error and intended cadence with the model owner; complete and verify a successful refresh.",
+      "owner": "owner-1-1@example.invalid",
+      "effort": "Model owner triage; approximately 30 minutes",
+      "examples": [
+        "Demo Revenue Model — Demo Analytics"
+      ],
+      "detail": "Synthetic CapacityNotActive example; no real service was called."
+    },
+    {
+      "key": "single-admin",
+      "pillar": "Health",
+      "priority": "High",
+      "title": "Example: workspace administration is concentrated in one person",
+      "evidence": {
+        "numerator": 5,
+        "denominator": 8,
+        "percent": 62.5,
+        "scope": "Synthetic active standard workspaces",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "A single directly assigned human admin concentrates recovery and governance responsibility.",
+      "action": "Ask the named workspace admins to add a backup or appropriately staffed admin group. Tenant-admin status alone does not grant workspace-role write rights.",
+      "owner": "Named workspace admins",
+      "effort": "Per-workspace review; approximately 5–10 minutes",
+      "examples": [
+        "Demo Analytics",
+        "Demo Ingestion",
+        "Demo Staging",
+        "Demo Operations",
+        "Demo Sandbox"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "domain-owner",
+      "pillar": "Health",
+      "priority": "High",
+      "title": "Example: a populated domain has no explicit Admin",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": 100,
+        "scope": "Synthetic root domains",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Membership and curation lack an explicitly accountable domain owner.",
+      "action": "Assign an accountable domain Admin group before expanding membership. Subdomains inherit their parent administrators.",
+      "owner": "Fabric tenant admin",
+      "effort": "Approximately 15 minutes",
+      "examples": [
+        "Demo Core"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "domain-contributors",
+      "pillar": "Health",
+      "priority": "High",
+      "title": "Example: domain contributor scope is EntireTenant",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": 100,
+        "scope": "Synthetic domains",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Broad contributor scope weakens control of domain membership; domain membership is not an item access boundary.",
+      "action": "Agree approved contributor groups and narrow scope before bulk workspace assignment.",
+      "owner": "Tenant and domain admins",
+      "effort": "Approximately 15 minutes plus approval",
+      "examples": [
+        "Demo Core"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "failed-refresh",
+      "pillar": "Health",
+      "priority": "High",
+      "title": "Example: last-recorded refresh failures need owner triage",
+      "evidence": {
+        "numerator": 2,
+        "denominator": 5,
+        "percent": 40,
+        "scope": "Synthetic returned refreshables",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Failed last attempts can leave consumers without expected updates; historical error records are not a current workload probe.",
+      "action": "Prioritize certified and scheduled models. Verify current capacity, gateway and data-source prerequisites before retrying with approval.",
+      "owner": "Configured model owners",
+      "effort": "Approximately 30–60 minutes per error family",
+      "examples": [
+        "Demo Revenue Model — Demo Analytics",
+        "Demo Stock Model — Demo Finance"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "capacity-unknown",
+      "pillar": "Health",
+      "priority": "Medium",
+      "title": "Example: a capacity reference cannot be resolved",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 8,
+        "percent": 12.5,
+        "scope": "Synthetic active standard workspaces",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "The capacity state is unknown, not assumed active or absent.",
+      "action": "Have the workspace and capacity owners resolve the reference through approved administration tools.",
+      "owner": "Workspace and capacity owners",
+      "effort": "Approximately 15 minutes",
+      "examples": [
+        "Demo Shared"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "domain-default-label",
+      "pillar": "Protect",
+      "priority": "Medium",
+      "title": "Example: a domain has no default sensitivity label",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": 100,
+        "scope": "Synthetic domains",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "New and touched-unlabeled items may lack a domain-level classification baseline.",
+      "action": "Agree a label with compliance owners before configuring the default; review dormant unlabeled items separately because they are not automatically backfilled.",
+      "owner": "Tenant admin with compliance owners",
+      "effort": "Approximately 15–30 minutes after approval",
+      "examples": [
+        "Demo Core"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "unlabeled",
+      "pillar": "Protect",
+      "priority": "Medium",
+      "title": "Example: Power BI artifacts need classification review",
+      "evidence": {
+        "numerator": 8,
+        "denominator": 12,
+        "percent": 66.7,
+        "scope": "Synthetic scanner-supported Power BI artifacts",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Missing labels show a classification-coverage gap, not proof of sensitive-data exposure or a DLP violation.",
+      "action": "Prioritize sensitive and authoritative assets, preview the proposed labels and obtain approval before applying them.",
+      "owner": "Data and compliance owners",
+      "effort": "Classification review before bulk changes",
+      "examples": [
+        "Demo Revenue Model",
+        "Demo Sales Report"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "personal-labels",
+      "pillar": "Protect",
+      "priority": "Medium",
+      "title": "Example: report personal-workspace label coverage separately",
+      "evidence": {
+        "numerator": 2,
+        "denominator": 2,
+        "percent": 100,
+        "scope": "Synthetic artifacts in one personal workspace",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Personal workspaces hold real data in a tenant even though they are excluded from domain-assignment statistics.",
+      "action": "Ask the owner to review classification and intended usage. Do not silently include personal workspaces in domain-assignment gaps.",
+      "owner": "Personal-workspace owner",
+      "effort": "Approximately 15 minutes",
+      "examples": [
+        "Demo Personal Report"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "domain-assignment",
+      "pillar": "Health",
+      "priority": "Medium",
+      "title": "Example: some workspaces are outside a domain",
+      "evidence": {
+        "numerator": 4,
+        "denominator": 8,
+        "percent": 50,
+        "scope": "Synthetic active standard workspaces",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "The organizational/delegated governance model has incomplete coverage; this is not an access-control finding.",
+      "action": "After ownership, contributor scope, keep/review decisions and default labels, dry-run an explicit workspace-ID assignment list. Obtain approval before writing.",
+      "owner": "Tenant admin or appropriately authorized object admins",
+      "effort": "Bulk review after prerequisites",
+      "examples": [
+        "Demo Ingestion",
+        "Demo Staging",
+        "Demo Sandbox",
+        "Demo Shared"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "descriptions",
+      "pillar": "Trust",
+      "priority": "Medium",
+      "title": "Example: some Fabric items lack descriptions",
+      "evidence": {
+        "numerator": 9,
+        "denominator": 24,
+        "percent": 37.5,
+        "scope": "Synthetic all-Fabric inventory",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Consumers may lack context for choosing reusable assets. Presence of text does not establish accuracy.",
+      "action": "Choose one named workspace or explicit item list for owner-led curation. Review each proposed change before writing.",
+      "owner": "Item owners with write rights",
+      "effort": "Approximately 1–3 minutes per reviewed item",
+      "examples": [
+        "Demo Stock Model",
+        "Demo Ingestion Pipeline"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "tags",
+      "pillar": "Trust",
+      "priority": "Medium",
+      "title": "Example: tag coverage needs a bounded rollout",
+      "evidence": {
+        "numerator": 18,
+        "denominator": 24,
+        "percent": 75,
+        "scope": "Synthetic all-Fabric inventory",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Inconsistent tagging reduces discoverability, separate from tag-definition hygiene.",
+      "action": "Agree a small applicable taxonomy and obtain item-owner approval for bounded changes. Workspace tags require workspace Admin rights.",
+      "owner": "Item owners and workspace admins",
+      "effort": "Taxonomy review plus a bounded rollout",
+      "examples": [
+        "Demo Research Notebook"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "capacity-admins",
+      "pillar": "Health",
+      "priority": "Medium",
+      "title": "Example: a user-managed capacity has one explicit admin",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 2,
+        "percent": 50,
+        "scope": "Synthetic user-managed capacities; reserved capacity excluded",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Administration is concentrated in one listed principal; group membership was not resolved.",
+      "action": "Ask the capacity owner to verify the listed principal and add an accountable backup or staffed group.",
+      "owner": "Capacity resource / admin-portal owners",
+      "effort": "Approximately 10–15 minutes",
+      "examples": [
+        "Demo Paused Capacity"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "empty-workspaces",
+      "pillar": "Health",
+      "priority": "Low",
+      "title": "Example: empty workspaces need keep/review decisions",
+      "evidence": {
+        "numerator": 2,
+        "denominator": 8,
+        "percent": 25,
+        "scope": "Synthetic active standard workspaces",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Zero inventory items does not prove a workspace is unused or safe to remove.",
+      "action": "Ask the named admins to keep or review these workspaces. Check activity, deployment stages and inbound dependencies before considering cleanup; do not delete from this signal alone.",
+      "owner": "Named workspace admins",
+      "effort": "Approximately 10–20 minutes per candidate",
+      "examples": [
+        "Demo Staging",
+        "Demo Sandbox"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "domain-description",
+      "pillar": "Health",
+      "priority": "Low",
+      "title": "Example: a domain lacks a purpose description",
+      "evidence": {
+        "numerator": 1,
+        "denominator": 1,
+        "percent": 100,
+        "scope": "Synthetic domains",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "The intended purpose and membership are unclear.",
+      "action": "After deciding to retain the domain, have its accountable admins document its purpose.",
+      "owner": "Tenant or domain admins",
+      "effort": "Approximately 5–10 minutes",
+      "examples": [
+        "Demo Core"
+      ],
+      "detail": ""
+    },
+    {
+      "key": "endorsement",
+      "pillar": "Trust",
+      "priority": "Low",
+      "title": "Example: authoritative assets should be intentionally endorsed",
+      "evidence": {
+        "numerator": 9,
+        "denominator": 11,
+        "percent": 81.8,
+        "scope": "Synthetic endorsement-eligible artifacts",
+        "source": "Synthetic example, no API request"
+      },
+      "why": "Consumers may have difficulty identifying approved assets, but not every item should be certified.",
+      "action": "Have approved certifiers verify ownership and refresh health before using the portal endorsement process. Do not blanket-certify.",
+      "owner": "Approved certifiers / item owners",
+      "effort": "Approximately 15–30 minutes per shortlisted asset",
+      "examples": [
+        "Demo Sales Report"
+      ],
+      "detail": ""
+    }
+  ],
+  "capacities": [
+    {
+      "id": "demo-capacity-paused",
+      "name": "Demo Paused Capacity",
+      "sku": "F2",
+      "state": "Suspended",
+      "admins": [
+        "Demo Capacity Owner"
+      ],
+      "serviceManagedReserved": false,
+      "workspaceCount": 3,
+      "workspaceNames": [
+        "Demo Analytics",
+        "Demo Ingestion",
+        "Demo Staging"
+      ],
+      "itemCount": 7
+    },
+    {
+      "id": "demo-capacity-active",
+      "name": "Demo Active Capacity",
+      "sku": "F8",
+      "state": "Active",
+      "admins": [
+        "Demo Capacity Owner",
+        "Demo Capacity Backup"
+      ],
+      "serviceManagedReserved": false,
+      "workspaceCount": 4,
+      "workspaceNames": [
+        "Demo Finance",
+        "Demo Operations",
+        "Demo Research",
+        "Demo Sandbox"
+      ],
+      "itemCount": 15
+    },
+    {
+      "id": "demo-capacity-reserved",
+      "name": "Demo Reserved Capacity",
+      "sku": "PP3",
+      "state": "Active",
+      "admins": [],
+      "serviceManagedReserved": true,
+      "workspaceCount": 0,
+      "workspaceNames": [],
+      "itemCount": 0
+    }
+  ],
+  "domains": [
+    {
+      "id": "demo-domain-core",
+      "displayName": "Demo Core",
+      "description": "",
+      "defaultLabelId": null,
+      "workspaceCount": 4,
+      "workspaceNames": [
+        "Demo Analytics",
+        "Demo Finance",
+        "Demo Operations",
+        "Demo Research"
+      ],
+      "adminCount": 0,
+      "entireTenantContributor": true,
+      "directAdminContacts": []
+    }
+  ],
+  "workspaces": [
+    {
+      "id": "demo-workspace-1",
+      "name": "Demo Analytics",
+      "domain": "Demo Core",
+      "capacityId": "demo-capacity-paused",
+      "capacityState": "Suspended",
+      "capacity": "Demo Paused Capacity",
+      "adminCount": 1,
+      "items": 6,
+      "described": 3,
+      "tagged": 2,
+      "singleHuman": true,
+      "admins": [
+        {
+          "name": "Demo Owner 1-1",
+          "type": "User",
+          "contact": "owner-1-1@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-2",
+      "name": "Demo Ingestion",
+      "domain": "Unassigned",
+      "capacityId": "demo-capacity-paused",
+      "capacityState": "Suspended",
+      "capacity": "Demo Paused Capacity",
+      "adminCount": 1,
+      "items": 1,
+      "described": 0,
+      "tagged": 0,
+      "singleHuman": true,
+      "admins": [
+        {
+          "name": "Demo Owner 2-1",
+          "type": "User",
+          "contact": "owner-2-1@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-3",
+      "name": "Demo Staging",
+      "domain": "Unassigned",
+      "capacityId": "demo-capacity-paused",
+      "capacityState": "Suspended",
+      "capacity": "Demo Paused Capacity",
+      "adminCount": 1,
+      "items": 0,
+      "described": 0,
+      "tagged": 0,
+      "singleHuman": true,
+      "admins": [
+        {
+          "name": "Demo Owner 3-1",
+          "type": "User",
+          "contact": "owner-3-1@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-4",
+      "name": "Demo Finance",
+      "domain": "Demo Core",
+      "capacityId": "demo-capacity-active",
+      "capacityState": "Active",
+      "capacity": "Demo Active Capacity",
+      "adminCount": 2,
+      "items": 8,
+      "described": 6,
+      "tagged": 2,
+      "singleHuman": false,
+      "admins": [
+        {
+          "name": "Demo Owner 4-1",
+          "type": "User",
+          "contact": "owner-4-1@example.invalid"
+        },
+        {
+          "name": "Demo Owner 4-2",
+          "type": "User",
+          "contact": "owner-4-2@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-5",
+      "name": "Demo Operations",
+      "domain": "Demo Core",
+      "capacityId": "demo-capacity-active",
+      "capacityState": "Active",
+      "capacity": "Demo Active Capacity",
+      "adminCount": 1,
+      "items": 5,
+      "described": 3,
+      "tagged": 1,
+      "singleHuman": true,
+      "admins": [
+        {
+          "name": "Demo Owner 5-1",
+          "type": "User",
+          "contact": "owner-5-1@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-6",
+      "name": "Demo Research",
+      "domain": "Demo Core",
+      "capacityId": "demo-capacity-active",
+      "capacityState": "Active",
+      "capacity": "Demo Active Capacity",
+      "adminCount": 2,
+      "items": 2,
+      "described": 2,
+      "tagged": 1,
+      "singleHuman": false,
+      "admins": [
+        {
+          "name": "Demo Owner 6-1",
+          "type": "User",
+          "contact": "owner-6-1@example.invalid"
+        },
+        {
+          "name": "Demo Owner 6-2",
+          "type": "User",
+          "contact": "owner-6-2@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-7",
+      "name": "Demo Sandbox",
+      "domain": "Unassigned",
+      "capacityId": "demo-capacity-active",
+      "capacityState": "Active",
+      "capacity": "Demo Active Capacity",
+      "adminCount": 1,
+      "items": 0,
+      "described": 0,
+      "tagged": 0,
+      "singleHuman": true,
+      "admins": [
+        {
+          "name": "Demo Owner 7-1",
+          "type": "User",
+          "contact": "owner-7-1@example.invalid"
+        }
+      ],
+      "url": ""
+    },
+    {
+      "id": "demo-workspace-8",
+      "name": "Demo Shared",
+      "domain": "Unassigned",
+      "capacityId": "demo-capacity-unknown",
+      "capacityState": "Unknown",
+      "capacity": "Not resolvable",
+      "adminCount": 2,
+      "items": 2,
+      "described": 1,
+      "tagged": 0,
+      "singleHuman": false,
+      "admins": [
+        {
+          "name": "Demo Owner 8-1",
+          "type": "User",
+          "contact": "owner-8-1@example.invalid"
+        },
+        {
+          "name": "Demo Owner 8-2",
+          "type": "User",
+          "contact": "owner-8-2@example.invalid"
+        }
+      ],
+      "url": ""
+    }
+  ],
+  "refreshFailures": [
+    {
+      "id": "demo-model-revenue",
+      "name": "Demo Revenue Model",
+      "workspace": "Demo Analytics",
+      "status": "Failed",
+      "error": "CapacityNotActive",
+      "lastAttempt": "2026-01-14T05:00:00Z",
+      "scheduleEnabled": true,
+      "configuredBy": [
+        "owner-1-1@example.invalid"
+      ],
+      "endorsed": true
+    },
+    {
+      "id": "demo-model-stock",
+      "name": "Demo Stock Model",
+      "workspace": "Demo Finance",
+      "status": "Failed",
+      "error": "GatewayOffline",
+      "lastAttempt": "2026-01-14T06:00:00Z",
+      "scheduleEnabled": true,
+      "configuredBy": [
+        "owner-4-1@example.invalid"
+      ],
+      "endorsed": false
+    }
+  ],
+  "itemTypes": [
+    {
+      "type": "SemanticModel",
+      "total": 6,
+      "described": 4,
+      "tagged": 2
+    },
+    {
+      "type": "Report",
+      "total": 5,
+      "described": 3,
+      "tagged": 1
+    },
+    {
+      "type": "Dashboard",
+      "total": 1,
+      "described": 0,
+      "tagged": 0
+    },
+    {
+      "type": "Notebook",
+      "total": 5,
+      "described": 4,
+      "tagged": 1
+    },
+    {
+      "type": "Lakehouse",
+      "total": 4,
+      "described": 3,
+      "tagged": 1
+    },
+    {
+      "type": "DataPipeline",
+      "total": 3,
+      "described": 1,
+      "tagged": 1
+    }
+  ],
+  "labelTypes": [
+    {
+      "type": "SemanticModel",
+      "total": 6,
+      "labeled": 2
+    },
+    {
+      "type": "Report",
+      "total": 5,
+      "labeled": 2
+    },
+    {
+      "type": "Dashboard",
+      "total": 1,
+      "labeled": 0
+    }
+  ],
+  "errorFamilies": [
+    {
+      "key": "CapacityNotActive",
+      "count": 1
+    },
+    {
+      "key": "GatewayOffline",
+      "count": 1
+    }
+  ],
+  "clean": [
+    "Synthetic example: all 8 workspaces have a directly assigned User admin.",
+    "Synthetic example: no returned capacity is deleting.",
+    "Synthetic example: the one domain is populated.",
+    "Synthetic example: no duplicate tag definitions were modeled."
+  ],
+  "blindSpots": [
+    "No real tenant, capacity, identity, item, refresh, or governance policy was queried for this demo.",
+    "For real audits, capacity CU, overload and throttling require the Capacity Metrics app; workspace counts are not utilization.",
+    "DLP violations and evaluation freshness require the Govern portal or Microsoft Purview; do not infer compliance from label coverage.",
+    "No activity-retention analysis, dependency analysis, directory-status or group-membership resolution is included.",
+    "Refresh coverage is a subset of semantic models; no cadence/SLA or modification-age threshold is assumed.",
+    "Native Fabric types with unverified label metadata remain unassessed. Dashboards are excluded from endorsement eligibility.",
+    "Domain branding and default-domain automatic assignment are portal-only. Domain membership does not control item access."
+  ],
+  "sources": [
+    {
+      "name": "workspaces",
+      "count": 8,
+      "pages": 1,
+      "source": "Illustrative only: /v1/admin/workspaces?type=Workspace&state=Active; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "name": "allWorkspaces",
+      "count": 11,
+      "pages": 1,
+      "source": "Illustrative only: /v1/admin/workspaces; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "name": "items",
+      "count": 29,
+      "pages": 1,
+      "source": "Illustrative only: /v1/admin/items?include=defaultIdentity; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "name": "domains",
+      "count": 1,
+      "pages": 1,
+      "source": "Illustrative only: /v1/admin/domains; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "name": "capacities",
+      "count": 3,
+      "pages": 1,
+      "source": "Illustrative only: Power BI admin capacities; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    },
+    {
+      "name": "refreshables",
+      "count": 5,
+      "pages": 1,
+      "source": "Illustrative only: Power BI admin refreshables; no request made",
+      "complete": true,
+      "fetchedAt": "2026-01-15T10:00:00.000Z"
+    }
+  ],
+  "scanner": [
+    {
+      "id": "demo-scan-no-service-called",
+      "complete": true,
+      "requested": 9,
+      "returned": 9,
+      "startedAt": "2026-01-15T10:00:00.000Z"
+    }
+  ],
+  "remediation": [
+    {
+      "step": 1,
+      "title": "Verify availability and trusted refreshes",
+      "owner": "Capacity and model owners",
+      "action": "Investigate current state and historical error codes; obtain approval before resume, reassignment, or refresh operations."
+    },
+    {
+      "step": 2,
+      "title": "Establish accountable ownership",
+      "owner": "Workspace and tenant/domain admins",
+      "action": "Add resilient administration, assign a domain Admin group and narrow contributor scope before expanding membership."
+    },
+    {
+      "step": 3,
+      "title": "Review what to keep; agree label defaults",
+      "owner": "Object owners and compliance",
+      "action": "Review empty-workspace intent and dependencies without deletion assumptions. Agree label policy before onboarding more workspaces."
+    },
+    {
+      "step": 4,
+      "title": "Expand coverage with bounded approvals",
+      "owner": "Tenant admins and item owners",
+      "action": "Dry-run explicit assignments and label changes. Curate descriptions and tags on one workspace or explicit item list at a time."
+    }
+  ],
+  "docs": [
+    {
+      "title": "OneLake catalog governance",
+      "url": "https://learn.microsoft.com/en-us/fabric/governance/onelake-catalog-govern"
+    },
+    {
+      "title": "Sensitivity labels in Power BI",
+      "url": "https://learn.microsoft.com/en-us/fabric/enterprise/powerbi/service-security-sensitivity-label-overview"
+    }
+  ]
+}

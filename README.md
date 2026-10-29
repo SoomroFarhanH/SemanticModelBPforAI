@@ -16,6 +16,7 @@ This repository is built for teams searching for: Power BI Copilot readiness, Fa
 - For Fabric Data Agent validation and remediation: go to [What this toolkit offers](#what-this-toolkit-offers), [How to pick a tool](#how-to-pick-a-tool), and [Docs included](#docs-included).
 - For Copilot troubleshooting and diagnostics: jump to [Tools](#tools), [How to pick a tool](#how-to-pick-a-tool), and [Reference documentation](#reference-documentation).
 - For OneLake and lakehouse readiness: use [How to pick a tool](#how-to-pick-a-tool) and [Repository organization](#repository-organization).
+- For a client-ready Fabric governance dashboard: see [FabricGovernance](FabricGovernance/), a protected Rayfin app with synthetic sample data and deployment instructions.
 
 ## Table of contents
 
@@ -89,6 +90,7 @@ Power BI, Microsoft Fabric, Copilot, Fabric Data Agent, semantic model, AI readi
 
 | Tool | What it does |
 |------|--------------|
+| [FabricGovernance](FabricGovernance/) | **Fabric Governance Health (Rayfin app)**. Demonstrates tenant health, protection and trust with clearly labeled synthetic data, interactive findings, workspace drill-downs, and JSON/CSV downloads. Includes setup, reviewed-snapshot import, validation, and deployment instructions. Requires access to the pinned Rayfin packages; see its README before installing. |
 | [FabricDataAgentAnalyzer](FabricDataAgentAnalyzer/) | **Fabric Data Agent Analyzer (v3)**. Assesses a data agent and every connected source (Lakehouse, Warehouse, SQL DB, Mirrored DB, Eventhouse, semantic model, Graph, Ontology, Azure AI Search) with readiness, coverage, and release gates. Its Source Run Plan shows which sources the agent uses and which sections to run. Also includes a natural-language remediation agent (agent + prompt + Tabular Editor script) for semantic-model findings. |
 | [SemanticModel-AI-Readiness-Analyzer](SemanticModel-AI-Readiness-Analyzer/) | Validates a Power BI semantic model for Copilot with 18+ severity-weighted checks (naming, descriptions, DAX, AI Data Schema, performance). |
 | [Agent-Readiness-Validator](Agent-Readiness-Validator/) | Validates a Fabric Data Agent's configuration (benchmarks, instructions, examples, join risk, failure diagnosis) against Microsoft best practices. |

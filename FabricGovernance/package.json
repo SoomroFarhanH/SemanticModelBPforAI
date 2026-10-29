@@ -1,0 +1,35 @@
+{
+  "name": "fabric-governance-health",
+  "description": "Protected Rayfin app for read-only Microsoft Fabric governance snapshots, with synthetic demo data.",
+  "license": "MIT",
+  "author": "Microsoft",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "rayfin dev",
+    "dev:frontend": "npm run -w @rayfin-app/frontend dev",
+    "build": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build",
+    "build:fabric": "npm run -w @rayfin-app/data build && npm run -w @rayfin-app/frontend build:fabric",
+    "lint": "npm run -w @rayfin-app/frontend lint",
+    "preview": "npm run -w @rayfin-app/frontend preview",
+    "test": "node --test scripts/snapshot-contract.test.mjs && npm run -w @rayfin-app/frontend test",
+    "test:watch": "npm run -w @rayfin-app/frontend test:watch",
+    "typecheck": "tsc -b",
+    "rayfin:up": "rayfin up",
+    "validate:visual": "node scripts/validate-visual.mjs",
+    "validate:visual:preview": "node scripts/validate-visual.mjs --allow-incomplete",
+    "demo:reset": "node scripts/generate-demo-snapshot.mjs",
+    "snapshot:import": "node scripts/import-governance-snapshot.mjs",
+    "validate:share": "node scripts/validate-sharing.mjs",
+    "test:snapshot": "node --test scripts/snapshot-contract.test.mjs"
+  },
+  "devDependencies": {
+    "@microsoft/rayfin-cli": "1.36.2",
+    "@microsoft/rayfin-guide": "1.36.2",
+    "typescript": "5.7.3"
+  }
+}
