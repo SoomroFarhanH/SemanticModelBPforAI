@@ -1,0 +1,39 @@
+Run a health review of my Fabric tenant with the Fabric governance skill and show me the results visually. Save an import-ready JSON review as well as a visual HTML report.
+
+Skill selection:
+- Use the updated fabric-skills:onelake-catalog-cli skill in admin-audit mode. The former onelake-catalog-govern-cli name is not present in the current consolidated bundle.
+- Follow the installed, current skill and its admin-audit scope/assessment references. Do not invent a skill, an API, a permission, an identity, or a business value.
+
+Scope and safety:
+- Confirm the intended tenant and verify tenant-admin API access before collecting. Ask whether this is production/business-critical or demo/development when priority interpretation needs it.
+- If admin APIs return 401/403, stop and explain the required access. Do not substitute a caller-scoped inventory and call it a tenant-wide audit.
+- Stay read-only: no resume, reassignment, refresh, labeling, role changes, curation, deletion, or other remediation. Read-only metadata-scan jobs are allowed.
+- Follow all pagination and scanner/LRO operations to terminal completion; use the skill's required telemetry header on every Fabric API request.
+- Governable workspaces are type=Workspace AND state=Active. Reconcile exclusions and raw/scoped inventory. Keep personal-workspace classification gaps separate.
+- Assess Health, Protect and Trust using their verified API surfaces. Separate all-Fabric inventory, scanner-supported label artifacts, endorsement-eligible artifacts (excluding dashboards), and returned refreshables.
+- Include collection times, exact scope/denominators, source/page counts, scanner coverage, owner/permission-aware recommendations, priority, effort, clean checks and blind spots.
+- Capacity placement is not utilization. Missing labels are not proof of a DLP violation. Empty workspaces are not proof of disuse. Missing defaultIdentity is not an ownership finding. Historical last-refresh results are not a current workload or SLA probe.
+- Never infer unavailable evidence as zero or healthy. State unassessed areas such as CU/throttling, DLP enforcement, directory status and group membership.
+
+Export contract (this checkout is the source of truth):
+- Read packages/shared/src/governance-review.schema.json and packages/shared/src/governance-snapshot.mjs.
+- Use packages/frontend/src/data/governance-snapshot.json ONLY as an example of the shape, never as audit evidence or a source of values.
+- Create schemaVersion: 1, dataClassification: "tenant", readOnly: true. Derive every exported count, finding and identity from this tenant's collected evidence. Do not retain any synthetic examples, owner contacts, IDs, dates, findings or clean checks.
+- Write the JSON as UTF-8, without Markdown fences, commentary or HTML.
+- Use stable unique IDs from the evidence; verified HTTPS links or a blank workspace URL; string arrays; explicit booleans. Use "Unassigned" for no domain and "Not resolvable" for an unresolved capacity display value. Include a detail string on every finding (empty if not applicable).
+- Include each workspace's observed domainId (empty string when unassigned). Domain display names need not be unique; use IDs for membership calculations and never infer identity from a duplicate name.
+- Percent is round(100 * numerator / denominator, 1); use zero ONLY when the fully assessed eligible population is genuinely empty. Missing evidence is not an empty population.
+- Reconcile workspace/type/capacity item totals; domain workspace names; label totals; endorsement eligibility; returned refresh coverage; scanner requested/returned totals; and workspace exclusions. These source populations need not be interchangeable.
+- Every required source must be completely paginated and scanner results complete. If an unavailable/failed required source prevents a truthful compatible export, keep the partial evidence and HTML explanation private, report the blocker, and do NOT label the JSON import-ready or fabricate values to pass validation.
+
+Deliverables:
+1. Make a run-specific folder under private/ (use a UTC filename-safe timestamp). Keep all actual tenant exports and evidence there, never in the tracked synthetic fixture.
+2. Save fabric-health-results.json conforming to the version 1 contract, and fabric-health-review.html presenting the reviewed findings visually with a clear historical-snapshot warning.
+3. Keep source evidence / calculation notes in the same private run folder, without access tokens, credentials, connection strings or secrets. Do not upload audit data to third parties.
+4. Run the following from the FabricGovernance folder using the ACTUAL export path:
+   npm run snapshot:validate -- ".\private\<actual-run-folder>\fabric-health-results.json"
+   This validation requires Node.js but no Rayfin SDK install. It must not replace the bundled sample. Fix export/calculation errors using evidence and rerun until it passes; do not weaken validation.
+5. Tell me the exact saved paths, assessment scope, freshness/coverage limitations, validation outcome, and recommended priorities. Do not claim incomplete checks passed.
+6. To visualize in Rayfin, tell me to open my protected Fabric Governance Health app, choose Import review JSON, select fabric-health-results.json, review the tenant/date/count preview, then select Show this review.
+
+Privacy: session-only browser import does not upload the JSON, write it to browser storage, or change another viewer's report. Refreshing or restoring the bundled snapshot discards the session import. Screensharing, browser extensions, the review agent/host, explicit downloads, and any separately bundled deployment have their own data-handling implications. Do not commit any tenant exports or private screenshots to the public repository.

@@ -1,6 +1,5 @@
-import snapshot from '@/data/governance-snapshot.json';
+import type { GovernanceWorkspace } from '@rayfin-app/shared';
 
-type Workspace = (typeof snapshot.workspaces)[number];
 export type WorkspaceFilter = 'all' | 'suspended' | 'single-admin' | 'empty' | 'unresolved' | 'unassigned';
 
 export function formatUtc(value: string) {
@@ -13,13 +12,23 @@ export function csvCell(value: string | number) {
   return `"${safe.replaceAll('"', '""')}"`;
 }
 
-export function workspaceMatches(w: Workspace, filter: WorkspaceFilter) {
+export function workspaceMatches(w: GovernanceWorkspace, filter: WorkspaceFilter) {
   switch (filter) {
     case 'suspended': return w.capacityState === 'Suspended';
     case 'single-admin': return w.singleHuman;
     case 'empty': return w.items === 0;
     case 'unresolved': return w.capacity === 'Not resolvable';
-    case 'unassigned': return w.domain === 'Unassigned';
+    case 'unassigned': return w.domainId !== undefined ? !w.domainId : w.domain === 'Unassigned';
     default: return true;
   }
+
+}
+
+export function saveFile(filename: string, contents: string, type: string) {
+  const url = URL.createObjectURL(new Blob([contents], { type }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  link.click();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }

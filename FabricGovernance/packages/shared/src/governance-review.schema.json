@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/SoomroFarhanH/SemanticModelBPforAI/main/FabricGovernance/packages/shared/src/governance-review.schema.json",
+  "title": "Fabric Governance Health review export v1",
+  "description": "Complete, reviewed, read-only snapshot. Structural validation must be followed by the shared semantic validator to reconcile counts and source coverage.",
+  "type": "object",
+  "required": ["schemaVersion", "dataClassification", "readOnly", "tenantId", "purpose", "skill", "status", "interpretation", "collectedFrom", "collectedTo", "scope", "metrics", "workspaces", "capacities", "domains", "findings", "itemTypes", "labelTypes", "refreshFailures", "sources", "scanner", "remediation", "clean", "blindSpots", "docs"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "dataClassification": { "enum": ["synthetic", "tenant"] },
+    "readOnly": { "const": true },
+    "tenantId": { "type": "string" },
+    "purpose": { "type": "string" },
+    "skill": { "type": "string" },
+    "status": { "type": "string" },
+    "interpretation": { "type": "string" },
+    "collectedFrom": { "$ref": "#/definitions/timestamp" },
+    "collectedTo": { "$ref": "#/definitions/timestamp" },
+    "scope": { "$ref": "#/definitions/scope" },
+    "metrics": {
+      "type": "object",
+      "required": ["suspended", "singleAdmin", "unlabeled", "failedRefresh", "domainAssigned", "described", "tagged", "labeled", "endorsed"],
+      "properties": {
+        "suspended": { "$ref": "#/definitions/metric" },
+        "singleAdmin": { "$ref": "#/definitions/metric" },
+        "unlabeled": { "$ref": "#/definitions/metric" },
+        "failedRefresh": { "$ref": "#/definitions/metric" },
+        "domainAssigned": { "$ref": "#/definitions/metric" },
+        "described": { "$ref": "#/definitions/metric" },
+        "tagged": { "$ref": "#/definitions/metric" },
+        "labeled": { "$ref": "#/definitions/metric" },
+        "endorsed": { "$ref": "#/definitions/metric" }
+      },
+      "additionalProperties": { "$ref": "#/definitions/metric" }
+    },
+    "workspaces": { "type": "array", "items": { "$ref": "#/definitions/workspace" } },
+    "capacities": { "type": "array", "items": { "$ref": "#/definitions/capacity" } },
+    "domains": { "type": "array", "items": { "$ref": "#/definitions/domain" } },
+    "findings": { "type": "array", "items": { "$ref": "#/definitions/finding" } },
+    "itemTypes": { "type": "array", "items": { "$ref": "#/definitions/itemType" } },
+    "labelTypes": { "type": "array", "items": { "$ref": "#/definitions/labelType" } },
+    "refreshFailures": { "type": "array", "items": { "$ref": "#/definitions/refreshFailure" } },
+    "sources": { "type": "array", "minItems": 1, "items": { "$ref": "#/definitions/source" } },
+    "scanner": { "type": "array", "items": { "$ref": "#/definitions/scan" } },
+    "remediation": { "type": "array", "items": { "$ref": "#/definitions/remediation" } },
+    "clean": { "$ref": "#/definitions/strings" },
+    "blindSpots": { "$ref": "#/definitions/strings" },
+    "docs": { "type": "array", "items": { "type": "object", "required": ["title", "url"], "properties": { "title": { "type": "string" }, "url": { "type": "string", "pattern": "^https://" } } } }
+  },
+  "definitions": {
+    "count": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+    "strings": { "type": "array", "items": { "type": "string" } },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "metric": {
+      "type": "object", "required": ["numerator", "denominator", "percent", "scope", "source"],
+      "properties": {
+        "numerator": { "$ref": "#/definitions/count" }, "denominator": { "$ref": "#/definitions/count" },
+        "percent": { "type": "number", "minimum": 0, "maximum": 100 },
+        "scope": { "type": "string" }, "source": { "type": "string" }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "required": ["workspaces", "allWorkspaces", "inventoryItems", "rawInventoryItems", "excludedItems", "exclusions", "domains", "capacities", "personalWorkspaces", "scannedWorkspaces", "labelArtifacts", "endorsementArtifacts", "scanOnlyArtifacts", "freshness"],
+      "properties": {
+        "workspaces": { "$ref": "#/definitions/count" }, "allWorkspaces": { "$ref": "#/definitions/count" },
+        "inventoryItems": { "$ref": "#/definitions/count" }, "rawInventoryItems": { "$ref": "#/definitions/count" },
+        "excludedItems": { "$ref": "#/definitions/count" }, "domains": { "$ref": "#/definitions/count" },
+        "capacities": { "$ref": "#/definitions/count" }, "personalWorkspaces": { "$ref": "#/definitions/count" },
+        "scannedWorkspaces": { "$ref": "#/definitions/count" }, "labelArtifacts": { "$ref": "#/definitions/count" },
+        "endorsementArtifacts": { "$ref": "#/definitions/count" }, "scanOnlyArtifacts": { "$ref": "#/definitions/count" },
+        "freshness": { "type": "string" },
+        "exclusions": { "type": "array", "items": { "type": "object", "required": ["key", "count"], "properties": { "key": { "type": "string" }, "count": { "$ref": "#/definitions/count" } } } }
+      }
+    },
+    "workspace": {
+      "type": "object", "required": ["id", "name", "domain", "capacity", "capacityId", "capacityState", "admins", "adminCount", "items", "described", "tagged", "singleHuman", "url"],
+      "properties": {
+        "id": { "type": "string" }, "name": { "type": "string" }, "domain": { "type": "string" }, "domainId": { "type": "string", "description": "Observed domain ID, or empty string when unassigned. Required to disambiguate duplicate or reserved display names." },
+        "capacity": { "type": "string" }, "capacityId": { "type": "string" }, "capacityState": { "type": "string" },
+        "admins": { "type": "array", "items": { "type": "object", "required": ["name", "type", "contact"], "properties": { "name": { "type": "string" }, "type": { "type": "string" }, "contact": { "type": "string" } } } },
+        "adminCount": { "$ref": "#/definitions/count" }, "items": { "$ref": "#/definitions/count" },
+        "described": { "$ref": "#/definitions/count" }, "tagged": { "$ref": "#/definitions/count" },
+        "singleHuman": { "type": "boolean" }, "url": { "type": "string", "pattern": "^(https://|$)" }
+      }
+    },
+    "capacity": {
+      "type": "object", "required": ["id", "name", "sku", "state", "admins", "serviceManagedReserved", "workspaceCount", "workspaceNames", "itemCount"],
+      "properties": {
+        "id": { "type": "string" }, "name": { "type": "string" }, "sku": { "type": "string" }, "state": { "type": "string" },
+        "admins": { "$ref": "#/definitions/strings" }, "serviceManagedReserved": { "type": "boolean" },
+        "workspaceCount": { "$ref": "#/definitions/count" }, "workspaceNames": { "$ref": "#/definitions/strings" },
+        "itemCount": { "$ref": "#/definitions/count" }
+      }
+    },
+    "domain": {
+      "type": "object", "required": ["id", "displayName", "description", "workspaceNames", "workspaceCount", "adminCount", "entireTenantContributor", "directAdminContacts"],
+      "properties": {
+        "id": { "type": "string" }, "displayName": { "type": "string" }, "description": { "type": "string" },
+        "workspaceNames": { "$ref": "#/definitions/strings" }, "workspaceCount": { "$ref": "#/definitions/count" },
+        "adminCount": { "$ref": "#/definitions/count" }, "entireTenantContributor": { "type": "boolean" },
+        "directAdminContacts": { "$ref": "#/definitions/strings" }
+      }
+    },
+    "finding": {
+      "type": "object", "required": ["key", "pillar", "priority", "title", "evidence", "why", "action", "owner", "effort", "examples", "detail"],
+      "properties": {
+        "key": { "type": "string" }, "pillar": { "enum": ["Health", "Protect", "Trust"] },
+        "priority": { "enum": ["Critical", "High", "Medium", "Low"] }, "title": { "type": "string" },
+        "evidence": { "$ref": "#/definitions/metric" }, "why": { "type": "string" }, "action": { "type": "string" },
+        "owner": { "type": "string" }, "effort": { "type": "string" }, "examples": { "$ref": "#/definitions/strings" }, "detail": { "type": "string" }
+      }
+    },
+    "itemType": {
+      "type": "object", "required": ["type", "total", "described", "tagged"],
+      "properties": { "type": { "type": "string" }, "total": { "$ref": "#/definitions/count" }, "described": { "$ref": "#/definitions/count" }, "tagged": { "$ref": "#/definitions/count" } }
+    },
+    "labelType": {
+      "type": "object", "required": ["type", "total", "labeled"],
+      "properties": { "type": { "type": "string" }, "total": { "$ref": "#/definitions/count" }, "labeled": { "$ref": "#/definitions/count" } }
+    },
+    "refreshFailure": {
+      "type": "object", "required": ["id", "name", "workspace", "status", "error", "lastAttempt", "scheduleEnabled", "configuredBy", "endorsed"],
+      "properties": {
+        "id": { "type": "string" }, "name": { "type": "string" }, "workspace": { "type": "string" },
+        "status": { "const": "Failed" }, "error": { "type": "string" }, "lastAttempt": { "$ref": "#/definitions/timestamp" },
+        "scheduleEnabled": { "type": "boolean" }, "configuredBy": { "$ref": "#/definitions/strings" }, "endorsed": { "type": "boolean" }
+      }
+    },
+    "source": {
+      "type": "object", "required": ["name", "source", "complete", "pages", "count", "fetchedAt"],
+      "properties": {
+        "name": { "type": "string" }, "source": { "type": "string" }, "complete": { "const": true },
+        "pages": { "type": "integer", "minimum": 1 }, "count": { "$ref": "#/definitions/count" }, "fetchedAt": { "$ref": "#/definitions/timestamp" }
+      }
+    },
+    "scan": {
+      "type": "object", "required": ["id", "complete", "requested", "returned", "startedAt"],
+      "properties": { "id": { "type": "string" }, "complete": { "const": true }, "requested": { "$ref": "#/definitions/count" }, "returned": { "$ref": "#/definitions/count" }, "startedAt": { "$ref": "#/definitions/timestamp" } }
+    },
+    "remediation": {
+      "type": "object", "required": ["step", "title", "owner", "action"],
+      "properties": { "step": { "$ref": "#/definitions/count" }, "title": { "type": "string" }, "owner": { "type": "string" }, "action": { "type": "string" } }
+    }
+  }
+}

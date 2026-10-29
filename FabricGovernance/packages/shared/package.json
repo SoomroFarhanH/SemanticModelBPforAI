@@ -4,6 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "exports": {
+    "./governance-snapshot": {
+      "types": "./src/governance-snapshot.d.mts",
+      "import": "./src/governance-snapshot.mjs"
+    },
+    "./governance-review.schema.json": "./src/governance-review.schema.json",
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"

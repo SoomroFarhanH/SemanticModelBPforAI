@@ -3,30 +3,18 @@ import { VegaVisual, useCssTheme, type VisualizationSpec } from '@microsoft/fabr
 import type { DataTable, InteractionEvent } from '@microsoft/fabric-visuals-core';
 import { Activity, AlertTriangle, BookOpen, Boxes, Check, Database, Download, Moon, Search, Shield, Sun, Users } from 'lucide-react';
 import { useMemo, useState, type ReactNode } from 'react';
+import type { GovernanceMetric, GovernanceSnapshot } from '@rayfin-app/shared';
 
-import snapshot from '@/data/governance-snapshot.json';
 import { useTheme } from '@/hooks/theme.context';
-import { csvCell, formatUtc, workspaceMatches, type WorkspaceFilter } from '@/lib/governance-snapshot';
+import { csvCell, formatUtc, saveFile, workspaceMatches, type WorkspaceFilter } from '@/lib/governance-snapshot';
 
-type Metric = (typeof snapshot.metrics)[keyof typeof snapshot.metrics];
-const isSynthetic = snapshot.dataClassification === 'synthetic';
-const overviewTitle = snapshot.metrics.suspended.numerator > 0 ? 'Restore availability first.' : 'Review governance priorities.';
-const unresolvedCapacities = snapshot.workspaces.filter(w => w.capacity === 'Not resolvable').length;
-const semanticModels = snapshot.itemTypes.find(t => t.type === 'SemanticModel')?.total ?? 0;
-const endorsedFailures = snapshot.refreshFailures.filter(r => r.endorsed);
+type Metric = GovernanceMetric;
 const workspaceFilters: readonly WorkspaceFilter[] = ['all', 'suspended', 'single-admin', 'empty', 'unresolved', 'unassigned'];
 const priorities = ['Critical', 'High', 'Medium', 'Low'] as const;
 const navigation = [
-  ['Overview', 'overview'], ['Health', 'health'], ['Protect & trust', 'coverage'],
+  ['Import review', 'import'], ['Overview', 'overview'], ['Health', 'health'], ['Protect & trust', 'coverage'],
   ['Findings', 'findings'], ['Workspaces', 'workspaces'], ['Refresh', 'refresh'], ['Scope & evidence', 'scope'],
 ] as const;
-const labelChartData: DataTable = {
-  columns: [
-    { name: 'artifactType', displayName: 'Scanned artifact type' },
-    { name: 'unlabeled', displayName: 'Unlabeled artifacts', format: '#,0' },
-  ],
-  rows: snapshot.labelTypes.map(t => [t.type, t.total - t.labeled]),
-};
 const labelChartSpec: VisualizationSpec = {
   $schema: 'https://vega.github.io/schema/vega-lite/v6.json',
   description: 'Unlabeled Power BI artifacts, by scanner-supported type',
@@ -58,14 +46,6 @@ const input = 'rounded-xl border border-border bg-card px-300 py-200 text-300 fo
 function isWorkspaceFilter(value: string): value is WorkspaceFilter {
   return workspaceFilters.some(filter => filter === value);
 }
-function saveFile(filename: string, contents: string, type: string) {
-  const url = URL.createObjectURL(new Blob([contents], { type }));
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  link.click();
-  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 function Badge({ children, critical = false }: { children: ReactNode; critical?: boolean }) {
   return <span className={`inline-flex rounded-lg border px-200 py-100 text-200 font-semibold ${critical ? 'border-destructive/40 bg-destructive/10 text-destructive' : 'border-primary/30 bg-primary/10 text-primary'}`}>{children}</span>;
 }
@@ -88,7 +68,7 @@ function Coverage({ label, metric }: { label: string; metric: Metric }) {
   </div>;
 }
 
-export function GovernanceDashboard() {
+export function GovernanceDashboard({ snapshot, reviewTools }: { snapshot: GovernanceSnapshot; reviewTools: ReactNode }) {
   const { isDark, toggleTheme } = useTheme();
   const theme = useCssTheme();
   const [query, setQuery] = useState('');
@@ -99,11 +79,23 @@ export function GovernanceDashboard() {
   const [selectedArtifactType, setSelectedArtifactType] = useState<string>();
   const [selectedWorkspace, setSelectedWorkspace] = useState('');
   const metrics = snapshot.metrics;
+  const isSynthetic = snapshot.dataClassification === 'synthetic';
+  const overviewTitle = metrics.suspended.numerator > 0 ? 'Restore availability first.' : 'Review governance priorities.';
+  const unresolvedCapacities = snapshot.workspaces.filter(w => w.capacity === 'Not resolvable').length;
+  const semanticModels = snapshot.itemTypes.find(t => t.type === 'SemanticModel')?.total ?? 0;
+  const endorsedFailures = snapshot.refreshFailures.filter(r => r.endorsed);
+  const labelChartData: DataTable = useMemo(() => ({
+    columns: [
+      { name: 'artifactType', displayName: 'Scanned artifact type' },
+      { name: 'unlabeled', displayName: 'Unlabeled artifacts', format: '#,0' },
+    ],
+    rows: snapshot.labelTypes.map(t => [t.type, t.total - t.labeled]),
+  }), [snapshot]);
   const filteredWorkspaces = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
     return snapshot.workspaces.filter(w => workspaceMatches(w, filter) &&
       `${w.name} ${w.domain} ${w.capacity} ${w.admins.map(a => `${a.name} ${a.contact}`).join(' ')}`.toLocaleLowerCase().includes(needle));
-  }, [filter, query]);
+  }, [filter, query, snapshot]);
   const workspaceRows: Row[] = useMemo(() => filteredWorkspaces.map(w => ({
     _id: w.id, name: w.name, domain: w.domain, capacity: w.capacity, capacityState: w.capacityState,
     adminCount: w.adminCount, items: w.items, described: w.described, tagged: w.tagged,
@@ -145,6 +137,7 @@ export function GovernanceDashboard() {
           <nav aria-label="Mobile report navigation" className="flex gap-200 overflow-x-auto px-400 pb-300 lg:hidden">{navigation.map(([label, target]) => <a key={target} href={`#${target}`} className="shrink-0 rounded-lg px-200 py-100 text-200 text-foreground no-underline hover:bg-muted">{label}</a>)}</nav>
         </header>
         <main className="mx-auto max-w-screen-2xl space-y-800 px-400 py-600 sm:px-600 lg:px-800">
+          {reviewTools}
           <section id="overview" className="scroll-mt-24 space-y-500">
             <div className="flex flex-wrap items-end justify-between gap-400"><div>
               <p className="text-200 font-bold uppercase tracking-widest text-primary">Tenant governance &middot; {snapshot.collectedTo.slice(0, 10)}</p>

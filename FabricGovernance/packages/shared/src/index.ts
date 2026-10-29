@@ -5,3 +5,4 @@
  * entity keys here so every runtime consumes the same schema contract.
  */
 export type UniversalAppSchema = Record<string, never>;
+export type { GovernanceSnapshot, GovernanceMetric, GovernanceWorkspace } from './governance-types';

@@ -19,6 +19,7 @@ const seeds = [
 ];
 const workspaces = seeds.map(([name, domain, capacityId, capacityState, adminCount, items, described, tagged], index) => ({
   id: `demo-workspace-${index + 1}`, name, domain, capacityId, capacityState,
+  domainId: domain === 'Unassigned' ? '' : 'demo-domain-core',
   capacity: capacityState === 'Suspended' ? 'Demo Paused Capacity' : capacityState === 'Active' ? 'Demo Active Capacity' : 'Not resolvable',
   adminCount, items, described, tagged, singleHuman: adminCount === 1,
   admins: Array.from({ length: adminCount }, (_, n) => ({
@@ -135,6 +136,7 @@ finding('endorsement', 'Trust', 'Low', 'Example: authoritative assets should be 
   'Have approved certifiers verify ownership and refresh health before using the portal endorsement process. Do not blanket-certify.',
   'Approved certifiers / item owners', 'Approximately 15–30 minutes per shortlisted asset', ['Demo Sales Report']);
 const report = {
+  schemaVersion: 1,
   dataClassification: 'synthetic', generatedAt: collectedTo, collectedFrom, collectedTo,
   tenantId: 'SYNTHETIC-DEMO-NOT-A-TENANT', purpose: 'Synthetic demonstration — not a tenant review',
   skill: 'Illustrative OneLake Catalog governance workflow', readOnly: true,

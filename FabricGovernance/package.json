@@ -24,6 +24,7 @@
     "validate:visual:preview": "node scripts/validate-visual.mjs --allow-incomplete",
     "demo:reset": "node scripts/generate-demo-snapshot.mjs",
     "snapshot:import": "node scripts/import-governance-snapshot.mjs",
+    "snapshot:validate": "node scripts/validate-review-file.mjs",
     "validate:share": "node scripts/validate-sharing.mjs",
     "test:snapshot": "node --test scripts/snapshot-contract.test.mjs"
   },
