@@ -1,0 +1,87 @@
+{
+  "agent": {
+    "name": "Contoso Retail Sales Agent (demo)",
+    "workspace": "Contoso Analytics (demo)",
+    "stage": "sandbox",
+    "runtime": "standard",
+    "description": "Answers sales, returns and store-telemetry questions for Contoso retail managers.",
+    "instructions": "You are the Contoso retail analytics assistant. Use the Lakehouse for historical sales and returns questions. Use the Eventhouse for live store telemetry from the last 24 hours. Default to the current fiscal year when no date is given. Always show currency in USD. Ask a clarifying question when the store or product is ambiguous.",
+    "owner": "retail-analytics@contoso.example",
+    "review_cadence": "monthly",
+    "git_connected": true,
+    "sources": [
+      {
+        "type": "lakehouse",
+        "display_name": "SalesLakehouse",
+        "workspace": "Contoso Analytics (demo)",
+        "instructions": "Use fact_sales for revenue and units. Join dim_store on store_key and dim_product on product_key. Revenue means net_amount, never gross_amount.",
+        "description": "Curated gold-layer retail sales tables.",
+        "selected_objects": [
+          {
+            "name": "fact_sales",
+            "object_type": "table",
+            "description": "One row per sales order line.",
+            "columns": [
+              {"name": "order_id", "data_type": "string", "description": "Order identifier"},
+              {"name": "store_key", "data_type": "int", "description": "Foreign key to dim_store"},
+              {"name": "product_key", "data_type": "int", "description": "Foreign key to dim_product"},
+              {"name": "order_date", "data_type": "date", "description": "Date the order was placed"},
+              {"name": "net_amount", "data_type": "decimal", "description": "Revenue after discounts, USD"},
+              {"name": "gross_amount", "data_type": "decimal", "description": ""}
+            ]
+          },
+          {
+            "name": "dim_store",
+            "object_type": "table",
+            "description": "Store attributes.",
+            "columns": [
+              {"name": "store_key", "data_type": "int", "description": "Surrogate key"},
+              {"name": "store_name", "data_type": "string", "description": "Store display name"},
+              {"name": "region", "data_type": "string", "description": "Sales region"}
+            ]
+          },
+          {
+            "name": "tbl_tmp1",
+            "object_type": "table",
+            "description": "",
+            "columns": [
+              {"name": "c1", "data_type": "string", "description": ""},
+              {"name": "c2", "data_type": "string", "description": ""}
+            ]
+          }
+        ],
+        "example_queries": [
+          {"question": "What was total revenue by region last month?",
+           "query": "SELECT s.region, SUM(f.net_amount) AS revenue FROM fact_sales f JOIN dim_store s ON f.store_key = s.store_key WHERE f.order_date >= DATEADD(month, -1, GETDATE()) GROUP BY s.region"},
+          {"question": "Show me all sales",
+           "query": "SELECT * FROM fact_sales"}
+        ]
+      },
+      {
+        "type": "eventhouse",
+        "display_name": "StoreTelemetry",
+        "workspace": "Contoso Analytics (demo)",
+        "instructions": "Use StoreEvents for live foot traffic. EventTime is a datetime in UTC.",
+        "description": "Live store sensor and POS events.",
+        "selected_objects": [
+          {
+            "name": "StoreEvents",
+            "object_type": "table",
+            "description": "One row per store event.",
+            "columns": [
+              {"name": "EventTime", "data_type": "datetime", "description": "Event timestamp, UTC"},
+              {"name": "StoreId", "data_type": "string", "description": "Store identifier"},
+              {"name": "EventType", "data_type": "string", "description": "Entry, exit or purchase"}
+            ]
+          }
+        ],
+        "example_queries": [
+          {"question": "How many visitors entered each store in the last hour?",
+           "query": "StoreEvents | where EventTime > ago(1h) | where EventType == 'entry' | summarize visitors = count() by StoreId"},
+          {"question": "Find events mentioning refunds",
+           "query": "StoreEvents | where EventType contains 'refund'"}
+        ]
+      }
+    ]
+  }
+}

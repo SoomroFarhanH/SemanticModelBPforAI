@@ -4,9 +4,16 @@
 
 This folder also includes a [natural-language remediation agent](#power-bi-semantic-readiness-remediation-agent) that fixes the semantic-model findings for you.
 
+- [Watch the walkthrough video](#watch-the-walkthrough-video)
 - [How to use the analyzer](#how-to-use-the-analyzer)
 - [What it checks](#what-it-checks)
 - [Power BI Semantic Readiness Remediation Agent](#power-bi-semantic-readiness-remediation-agent)
+
+## Watch the walkthrough video
+
+[▶ FabricDataAgentAnalyzer_Walkthrough.mp4](video/FabricDataAgentAnalyzer_Walkthrough.mp4) (about 9 minutes, narrated) runs the notebook end to end and explains each section and the scorecard. Select **Download** or **View raw** on GitHub to play it.
+
+It uses a fictional sample agent (a Lakehouse and an Eventhouse) in `MANUAL_MANIFEST` mode, so no tenant data is shown. The video was recorded on v3.0.0 and doesn't cover the later Source Run Plan and source short-circuit additions. To reproduce it, see [video/](video/): `run_notebook.py` executes the notebook against [sample_agent_manifest.json](video/sample_agent_manifest.json), and `build_video.py` records and narrates it.
 
 ## How to use the analyzer
 
