@@ -2,6 +2,8 @@
 
 This interactive guide helps you compare Microsoft Fabric integration options for Snowflake and Databricks based on your source platform and preferred data-movement pattern. It provides a shortlist to explore; it does not connect to your data or configure Fabric.
 
+The guide is based on Gurkamal (GK) Rakhra's blog post, [Modernize data integration strategy with Microsoft Fabric when using Snowflake and Databricks](https://community.fabric.microsoft.com/blog/fbc_fabricupdatesblogs/modernize-data-integration-strategy-with-microsoft-fabric-when-using-snowflake-a/5377581).
+
 ## Open the guide
 
 1. On GitHub, open [index.html](index.html).
