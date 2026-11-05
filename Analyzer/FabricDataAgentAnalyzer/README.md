@@ -2,9 +2,18 @@
 
 This guide helps end users run the readiness analyzer and remediate findings with natural language.
 
-## Fabric Data Agent Analyzer (v3.0.0)
+## Fabric Data Agent Analyzer (v3.1.0)
 
-[FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) (formerly `SemanticModel_DataAgent_Readiness.ipynb`) assesses a **Fabric data agent and every connected source** (up to five), not just a semantic model:
+[FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) (formerly `SemanticModel_DataAgent_Readiness.ipynb`) assesses a **Fabric data agent and every connected source** (up to five), not just a semantic model. Most agents use a Power BI semantic model, so that path gets the most depth.
+
+### How it works for end users
+
+1. **Source router (runs first).** The notebook detects which data sources the agent uses and **skips the checks for source types it doesn't use** (`SHORT_CIRCUIT_UNUSED_SOURCES = True`). It then **loads the matching best practices** with Microsoft Learn links. For a semantic model it also detects the storage mode (Import, DirectQuery, Direct Lake) and the agent runtime, and adds the guidance that fits.
+2. **Checks run** for those sources only.
+3. **What to fix first.** A short list (`MAX_ACTION_ITEMS`, default 10), worst first. Each item shows the priority (Fix first / Next / Later), what is wrong, where, how to fix it, and a documentation link. It leads the HTML and Markdown reports.
+4. **Best-practice checklist.** The loaded best practices are scored as Met, Partly met, Not met, Confirm yourself, or Not evaluated.
+
+### Source families covered
 
 | Source family | Sources | Rule IDs |
 |---|---|---|
@@ -18,7 +27,7 @@ This guide helps end users run the readiness analyzer and remediate findings wit
 - **Collection modes:** `LIVE_SDK` (fabric-data-agent-sdk, preview), `GIT_EXPORT` (data agent Git item definition), and `MANUAL_MANIFEST` (JSON/YAML). Leave `DATA_AGENT_NAME_OR_ID` blank and set `dataset` + `workspace` to run the v2.x standalone semantic-model analysis.
 - **Read-only by default.** Live smoke tests, example-query execution, and SDK evaluation are opt-in (`RUN_LIVE_QUERY_TESTS`, `RUN_EVALUATION`).
 - **Statuses:** `PASS · WARN · FAIL · MANUAL · NOT_APPLICABLE · NOT_EVALUATED · UNKNOWN`. Readiness and evaluation coverage are reported separately, and blocker-based release gates override the average.
-- **Exports** (in `OUTPUT_ROOT`): an HTML report, a Markdown report, a findings CSV, and a JSON evidence bundle. The bundle's `findings[]` has one row per rule/object, with `rule_id`, `severity`, `status`, `source_name`, `object_path`, `evidence`, `recommendation`, and `docs_url`.
+- **Exports** (in `OUTPUT_ROOT`): an HTML report, a Markdown report, a findings CSV, and a JSON evidence bundle. The bundle's `findings[]` has one row per rule/object, with `rule_id`, `severity`, `status`, `source_name`, `object_path`, `evidence`, `recommendation`, and `docs_url`. The bundle also carries `source_route`, `action_items[]`, and `best_practices[]`.
 
 ## 30-second start
 

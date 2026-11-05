@@ -301,7 +301,7 @@
       "sources": [
         "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\FabricDataAgentAnalyzer.ipynb"
       ],
-      "destination_sha256": "8ae9798bca13b6556075ae913302241f2113f2ccf6457102d73d9cae8deceb39",
+      "destination_sha256": "14020dd170b021b5a009f254e219345d63f8a3d612e6312f19e888ee587d9ce4",
       "copy_status": "public-copy-adjustment"
     },
     {
@@ -337,7 +337,7 @@
       "sources": [
         "SemanticModelBPforAI\\FabricDataAgentAnalyzer\\README.md"
       ],
-      "destination_sha256": "759287872144ecf494cbbc8a290aeeb493202638403e69389d25f63b7caba2ac",
+      "destination_sha256": "ab8cbd1a4d0c70f85e8debe7e7876d1a2bc44870ac374eb90330495e3d0fd788",
       "copy_status": "public-copy-adjustment"
     },
     {
