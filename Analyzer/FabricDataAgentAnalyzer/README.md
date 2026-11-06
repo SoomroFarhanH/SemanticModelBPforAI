@@ -2,9 +2,22 @@
 
 This guide helps end users run the readiness analyzer and remediate findings with natural language.
 
-## Fabric Data Agent Analyzer (v3.1.0)
+## Fabric Data Agent Analyzer (v3.2.0)
 
 [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) (formerly `SemanticModel_DataAgent_Readiness.ipynb`) assesses a **Fabric data agent and every connected source** (up to five), not just a semantic model. Most agents use a Power BI semantic model, so that path gets the most depth.
+
+### What's new in v3.2.0 (documentation snapshot 2026-11-06)
+
+Aligned with the updated Microsoft Learn articles on [data source routing](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-routing), [schema object descriptions](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-schema-object-descriptions), [Build agent with AI](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-creator-agent-overview), [example queries](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-example-queries), [topics](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-topics), the [runtime](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-runtime), and the publishing, consumption, and governance articles (MCP server, Microsoft 365 Copilot, Copilot Studio, service principals, Purview audit, code interpreter). The new checks are **advisory** (`INFO` severity): they are listed in the reports but never change readiness, coverage, or release gates. The only scored changes are the capability fixes listed below.
+
+- **Routing (`DA-027` … `DA-029`, multi-source agents only):** checks each source for the routing signals in the order the docs recommend (focused schema selection, a short source description, example queries), flags similar source names or descriptions, and flags routing rules in agent instructions that name a removed or renamed source or that exceed 10 lines.
+- **Schema object descriptions (`SQL-021`, `SQL-005`):** unscored detail rows for table descriptions that don't state what the table represents, its level of detail, or its purpose, for column descriptions that don't define meaning, format, unit, or values, and for abbreviated column names without a description. Recommendations point to **Setup → Schema object descriptions** or the SDK `update_description` (preview runtime) and to data-source instructions (standard runtime).
+- **Example queries (`EXQ-002` … `EXQ-005`):** guiding comments in queries, the 100-examples-per-source limit, conflicts between similarly worded questions that use different tables or aggregation, and question-to-query intent alignment (counts, averages, totals, vague questions). Examples that fail schema validation are reported as not sent to the agent.
+- **Capability fixes (scored):** example queries are recognized for SQL database, mirrored database, and Graph sources; Ontology is feature-detected because the docs disagree (`KL-17`); Graph and Ontology get no schema-selection result (`DA-011` is N/A) because they don't support it. The code interpreter counts as a preview feature in `DA-013`, and `DA-007` accepts a *Handling common topics* section.
+- **Topics (`SQL-022`):** unscored rows for the 1,000,000-character limit, missing Markdown headings, and text repeated between topics and data-source instructions.
+- **Build agent with AI (`DA-030`, `DA-031`):** the source router reports whether the agent is eligible (every source must be SQL or Eventhouse; any other source type blocks it) and lists it as a way to draft instructions, descriptions, and example queries. Accepted updates **replace** existing configuration blocks during the preview, so back up the configuration first. It doesn't manage schema selection, the data agent description, Prep for AI, ontology, graph, or unstructured data.
+- **Publishing and governance (`DA-032` … `DA-039`):** the published runtime (`DA-039`: published or not, standard or preview, draft vs published, preview accepted or not; also in the report header and JSON `agent.published_runtime`), source capacity in the same region as the agent (read through the Fabric REST API when run in Fabric, otherwise a manual attestation), a specific publishing description (it becomes the MCP tool description and the Microsoft 365 Copilot `description_for_model`), code interpreter detection, direct instructions placed correctly, English-only content, consumption channels and data boundary, and the user feedback loop. Recommendations for `DA-015` … `DA-017`, `DA-020`, and `DA-025` now cover Copilot Studio Maker authentication, service principal callers, Purview audit, and co-publishers.
+- **Watch list:** new `KL-14` … `KL-21` entries, including the 25-row answer cap (1,000 rows on the preview runtime), the 100-example limit, English-only content, and the same-region capacity requirement.
 
 ### How it works for end users
 
@@ -17,7 +30,7 @@ This guide helps end users run the readiness analyzer and remediate findings wit
 
 | Source family | Sources | Rule IDs |
 |---|---|---|
-| Common agent checks | Scope, instructions, routing, schema selection, runtime, preview risk, read-only contract | `DA-001` … `DA-026`, `EXQ-001` |
+| Common agent checks | Scope, instructions, routing, schema selection, runtime, preview risk, read-only contract, publishing, governance, advisory routing and Build agent with AI checks | `DA-001` … `DA-039`, `EXQ-001` … `EXQ-005` |
 | SQL | Lakehouse, Warehouse, Fabric SQL Database, Mirrored Database | `SQL-*`, `LH-*`, `WH-*`, `SQLDB-*`, `MIR-*` |
 | KQL | Eventhouse KQL Database | `KQL-*` |
 | Semantic | Power BI semantic model (all v2.2.2 checks, stable IDs) | `SM-000` … `SM-027` |
@@ -28,6 +41,32 @@ This guide helps end users run the readiness analyzer and remediate findings wit
 - **Read-only by default.** Live smoke tests, example-query execution, and SDK evaluation are opt-in (`RUN_LIVE_QUERY_TESTS`, `RUN_EVALUATION`).
 - **Statuses:** `PASS · WARN · FAIL · MANUAL · NOT_APPLICABLE · NOT_EVALUATED · UNKNOWN`. Readiness and evaluation coverage are reported separately, and blocker-based release gates override the average.
 - **Exports** (in `OUTPUT_ROOT`): an HTML report, a Markdown report, a findings CSV, and a JSON evidence bundle. The bundle's `findings[]` has one row per rule/object, with `rule_id`, `severity`, `status`, `source_name`, `object_path`, `evidence`, `recommendation`, and `docs_url`. The bundle also carries `source_route`, `action_items[]`, and `best_practices[]`.
+
+## Run the analyzer in Fabric
+
+1. Import [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) into a Fabric workspace and attach a lakehouse if reports should persist in OneLake.
+2. Set `WORKSPACE_ID_OR_NAME`, `DATA_AGENT_NAME_OR_ID`, and `DATA_AGENT_STAGE` in the parameters cell. Keep query, performance, and evaluation flags disabled for a metadata-only analysis.
+3. Run all cells. Reports are written beneath `OUTPUT_ROOT` when `EXPORT_REPORTS = True`.
+
+### Scheduled and pipeline runs
+
+The dependency cell uses `%pip`. Fabric disables inline installation by default for scheduled and pipeline runs. Enable it for the run by passing notebook parameter `_inlineInstallationEnabled` as Boolean `true`, as documented in [Fabric inline installation](https://learn.microsoft.com/en-us/fabric/data-engineering/library-management#inline-installation).
+
+For the Notebook background-jobs API, include this entry in the top-level `parameters` array, alongside the analyzer's target parameters:
+
+```json
+{
+  "parameters": [
+    {
+      "name": "_inlineInstallationEnabled",
+      "value": true,
+      "type": "Boolean"
+    }
+  ]
+}
+```
+
+If startup fails with `%pip magic command is disabled`, verify this run parameter before troubleshooting agent or semantic-model collection. Enabling dependency installation does not enable live queries, performance tests, or evaluation.
 
 ## 30-second start
 
