@@ -24,6 +24,12 @@ Validates a **Power BI semantic model** for AI-powered analytics (Copilot in Pow
 3. **Run all cells** and review the scored findings, starting with 🔴 Critical.
 4. Remediate, then re-run to confirm improvements.
 
+## Release notes
+
+**Fix (2026-11-09)**
+- Corrected hidden-object and measure-description results. Semantic Link names some columns `Hidden`, `Key`, `Measure Hidden` and `Measure Description`; the analyzer read other names, so hidden columns and measures counted as visible and measure descriptions read as empty. Re-run earlier results.
+- Fixed a syntax error in the CHECK 4 (AI Instructions) cell that stopped the notebook from running.
+
 ## Powered by / references
 
 - [Semantic Link](https://learn.microsoft.com/fabric/data-science/semantic-link-overview) and [Semantic Link Labs](https://github.com/microsoft/semantic-link-labs)
