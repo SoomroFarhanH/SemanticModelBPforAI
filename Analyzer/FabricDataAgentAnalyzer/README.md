@@ -2,9 +2,14 @@
 
 This guide helps end users run the readiness analyzer and remediate findings with natural language.
 
-## Fabric Data Agent Analyzer (v3.2.0)
+## Fabric Data Agent Analyzer (v3.2.1)
 
 [FabricDataAgentAnalyzer.ipynb](FabricDataAgentAnalyzer.ipynb) (formerly `SemanticModel_DataAgent_Readiness.ipynb`) assesses a **Fabric data agent and every connected source** (up to five), not just a semantic model. Most agents use a Power BI semantic model, so that path gets the most depth.
+
+### What's new in v3.2.1 (2026-11-09)
+
+- **Semantic-model best practices now run in every mode.** When the agent uses a Power BI semantic model, the analyzer scores the 28 `SM-*` rules from the [semantic model best practices](https://learn.microsoft.com/en-us/fabric/data-science/semantic-model-best-practices) (AI Data Schema, Verified Answers, AI Instructions, agent-to-schema alignment, descriptions, naming, star schema, and more). Previously a `GIT_EXPORT` run outside Fabric reported all of them as `NOT_EVALUATED`. Without `sempy` the notebook now reads the model definition and the Prep for AI configuration over REST (`SEMANTIC_REST_FALLBACK = True`; run `az login` first; needs read and write permission on the model). `SM-002` (Best Practice Analyzer), `SM-003` (Memory Analyzer) and `SM-020` (measure dependencies) still need a Fabric notebook and stay `NOT_EVALUATED` with the reason.
+- **Corrected scores in Fabric notebooks.** Semantic Link names some columns `Hidden`, `Key`, `Measure Hidden` and `Measure Description`. The analyzer read other names, so hidden columns and measures counted as visible and measure descriptions read as empty (for example, "70 objects missing descriptions" on a model whose visible objects were all described). The frames are now normalized. Re-run earlier semantic-model results.
 
 ### What's new in v3.2.0 (documentation snapshot 2026-11-06)
 
