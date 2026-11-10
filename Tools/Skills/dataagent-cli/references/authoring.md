@@ -61,9 +61,54 @@ def only_select(sql):                                  # read-only lint for SQL 
 
 On Windows call `az.cmd`. Honor `Retry-After` on 429 and re-acquire the token inside long polls. Never log tokens.
 
-## A. Create a new agent
+## Choose the write route
 
-Two routes; choose per source.
+| Change | Preferred route | Why |
+|---|---|---|
+| New agent, any source | **A0** dedicated create + staging APIs (or **Route 2** SDK) | draft-only; the service resolves each source's schema |
+| New lakehouse agent from a known element tree | **Route 1** REST definition | one call, but also creates a published stage |
+| One focused change (agent instructions, one source description/instructions, select/deselect or describe an object, add/fix one example, a topic) | **A0** staging APIs | touches only that field: no full-replace risk |
+| Many changes across parts, restore, promotion | **B** `updateDefinition` | atomic full replace of every part |
+
+The DataAgent configuration APIs (`/dataAgents/{id}/staging/...`, publish, and the published read APIs) are **preview** ("Data Agent configuration management is currently in Preview"). Back up first anyway, and confirm every write by readback.
+
+## A0. Dedicated DataAgent APIs (preview; draft-scoped, granular)
+
+Paths under `{BASE}/workspaces/{WS}/dataAgents`. Scopes `Item.ReadWrite.All` or `DataAgent.ReadWrite.All` (reads: `...Read.All`); users, service principals and managed identities are supported. Only create, create datasource, getDefinition, updateDefinition and topic format are LROs (202); all return 429 with `Retry-After`.
+
+```python
+DA = lambda ws, da="": f"{BASE}/workspaces/{ws}/dataAgents" + (f"/{da}" if da else "")
+ST = lambda ws, da: DA(ws, da) + "/staging"
+
+agent = lro(*request("POST", DA(WS), {"displayName": NAME, "description": SHORT_DESC[:256]}))       # empty draft agent
+AGENT_ID = agent["id"]
+ref = {"referenceType": "ById", "itemId": SOURCE_ID, "workspaceId": SOURCE_WS}
+src = lro(*request("POST", ST(WS, AGENT_ID) + "/datasources",
+                   {"type": "LakehouseTables", "lakehouseReference": ref} if IS_LAKEHOUSE
+                   else {"type": "FabricItem", "itemReference": ref}))                              # one create at a time per source
+DS_ID = src["id"]
+request("PATCH", ST(WS, AGENT_ID) + "/settings", {"aiInstructions": AGENT_INSTRUCTIONS})          # only provided fields change
+request("PATCH", ST(WS, AGENT_ID) + f"/datasources/{DS_ID}",
+        {"description": SOURCE_DESCRIPTION, "instructions": SOURCE_INSTRUCTIONS})                 # not for semantic models
+```
+
+| Task | Call (suffix after `/staging`) | Notes |
+|---|---|---|
+| List / get sources | `GET /datasources`, `GET /datasources/{ds}` | `type` `FabricItem` (with `fabricItemType`: `Lakehouse`, `Warehouse`, `SQLDatabase`, `MirroredDatabase`, `MirroredAzureDatabricksCatalog`, `SemanticModel`, `KQLDatabase`, `GraphModel`, `Ontology`, `Report`) or `LakehouseTables` (lakehouse in tables-only mode) |
+| Remove a source | `DELETE /datasources/{ds}` | the Fabric item itself is not deleted |
+| Browse schema | `GET /datasources/{ds}/elements` (root), then `?rootId={elementId}` one level down | element `state` (`Available`, `AccessDenied`, `SchemaUnavailable`, …) explains missing objects |
+| Select / describe an object | `PATCH /datasources/{ds}/elements?id={elementId}` `{"isSelected": true, "description": "..."}` | deselected configuration is kept and restored on reselect; descriptions are preview-runtime context for SQL |
+| Drop a stale element | `DELETE /datasources/{ds}/elements?id=` | only when it no longer exists in the live schema (`ElementStillAvailable` otherwise) |
+| Examples | `GET/POST /datasources/{ds}/fewshots` `{"question","query"}`; `PATCH`/`DELETE .../fewshots/{id}`; `POST .../fewshots/deleteAll` | not for semantic models or ontology; read back `validationStatus` (`Valid`/`Invalid` + `reason`) |
+| Topics (SQL, preview runtime) | `PUT /datasources/{ds}/topics?fileName=x.md` (raw `text/markdown`, optional YAML front matter `name`/`description`); `GET .../topics`, `GET .../topics/content?fileName=`; `POST .../topics/format?fileName=` returns a formatted copy to upload; `DELETE .../topics?fileName=` | use `If-Match` with the returned `ETag` to avoid overwriting concurrent edits; names unique per source, `.md` only |
+| Discard all draft changes | `POST /reset` | management action — explicit request + backup |
+| Publish | `POST /publish` `{"publishedDescription": "..."}` | management action — see `management.md` |
+
+The `request` helper sends JSON; for topic upload/download send and read the raw body with `Content-Type: text/markdown` instead. Published configuration has matching read-only `GET` paths without `/staging` (useful to compare draft vs published).
+
+## A. Create a new agent (definition or SDK)
+
+Two more routes; choose per source.
 
 **Route 1 — REST definition (verified for lakehouse sources).** Build the parts yourself and create the item with them:
 
@@ -98,7 +143,7 @@ item = lro(*request("POST", f"{BASE}/workspaces/{WS}/items",
                     {"displayName": NAME, "type": "DataAgent", "definition": {"parts": to_parts({p: (t if isinstance(t, str) else json.dumps(t, indent=2)) for p, t in files.items()})}}))
 ```
 
-Creation fails with `The import definition must include 'Files/Config/published/stage_config.json' ...` if the published stage is omitted (verified). Creating this way therefore also creates a **published stage identical to the draft**: treat the new agent as published, keep refining only the draft afterwards, and republish deliberately (`management.md`). Prefer the SDK route when you want a draft-only agent.
+Creation fails with `The import definition must include 'Files/Config/published/stage_config.json' ...` if the published stage is omitted (verified). Creating this way therefore also creates a **published stage identical to the draft**: treat the new agent as published, keep refining only the draft afterwards, and republish deliberately (`management.md`). Prefer A0 or the SDK route when you want a draft-only agent.
 
 **Route 2 — SDK (`fabric-data-agent-sdk`, preview; documented).** Resolves each source's schema server-side, so prefer it for semantic models, KQL, warehouses and other sources whose element trees you have not exported:
 
@@ -112,7 +157,7 @@ ds.update_description({("Schemas", "dbo", "Tables", "orders"): "One row per orde
 ds.add_fewshots({"Question": "SQL"})                                                      # then evaluate_few_shots
 ```
 
-(Outside Fabric authenticate with `AzureCliCredential` + `SetFabricAnalyticsDefaultTokenCredentialsGlobally`.) After SDK steps, export the definition (`get_definition`) and continue with route B for precise edits. For each source type confirm the result by readback and the Analyzer on first use.
+(Outside Fabric authenticate with `AzureCliCredential` + `SetFabricAnalyticsDefaultTokenCredentialsGlobally`.) The runtime switch is `agent.update_configuration(enable_preview_features=True)` (read it with `agent.get_configuration()`); flip it only after the owner accepted the preview runtime. After SDK steps, export the definition (`get_definition`) and continue with route B for precise edits. For each source type confirm the result by readback and the Analyzer on first use.
 
 ## B. Change an existing agent (or finish a new one)
 
@@ -150,7 +195,11 @@ Description keys in the sketch use the object name; in a real run key them by (t
 | Semantic model | no agent-level examples; verified answers are Prep for AI work |
 | Instructions/descriptions | length sane; no secrets or IDs; no routing rule naming an absent source; consistent with the other layers |
 
-Optional extra for SQL: SDK `datasource.evaluate_few_shots(batch_size=20)` (preview).
+Optional extra for SQL: SDK `datasource.evaluate_few_shots(batch_size=20)` (preview) — success rate, failing cases and conflicts; details in [evaluation.md](evaluation.md) section 3, step 3. Examples written through the staging API carry a server `validationStatus`; treat `Invalid` as a failure.
+
+Example-writing rules (from the [example queries guidance](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-example-queries)): realistic user wording; every literal in the question appears in the query; comment non-obvious logic and substituted values in the query; explicit joins and columns; one pattern per example; cover joins, preaggregation, business calculations, relative and fiscal dates and term-to-value filters.
+
+Before handing over, run [preflight-checklist.md](preflight-checklist.md) sections A–F on the exported draft and include the table in the report.
 
 ## D. Readback (step 5, required)
 
@@ -158,7 +207,9 @@ Re-export and check: every approved change present and byte-equal; `published/` 
 
 ## Pitfalls
 
-- `updateDefinition` replaces everything; a missing part is a deleted part.
+- `updateDefinition` replaces everything; a missing part is a deleted part. Staging `PATCH` calls change only the fields you send.
+- Do not mix routes in one step without a re-export in between: a staging write after your export makes the exported copy stale, and a later `updateDefinition` would silently undo it.
+- A second create on the same source while one is running returns `EntityConflict`; wait for the LRO.
 - Never edit `data_agent.json`, `.platform`, `publish_info.json` or any `published/` part.
 - Do not change `enableExperimentalFeatures` without an explicit decision.
 - Agent-level descriptions stop inheriting later source descriptions for those objects.

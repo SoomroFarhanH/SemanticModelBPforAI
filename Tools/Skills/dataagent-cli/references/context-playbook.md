@@ -73,7 +73,8 @@ Tables: entity or event, **grain**, purpose. Columns: meaning, format, unit, exp
 - Leading comments for substituted values or complex logic (SQL `--`, KQL `//`).
 - Explicit columns, no `SELECT *`; bound detail queries (`TOP`, `take`); aggregates need no limit.
 - No overlaps or contradictions; at most **100 per source**; only reads.
-- The top three most relevant examples are retrieved per question by similarity; keep them distinct so the right ones surface. Examples that fail schema validation are not sent to the agent.
+- Only the few most similar examples are retrieved per question (the best-practices article says three, the example-queries article about four); keep them distinct so the right ones surface. Examples that fail schema validation are not sent to the agent; run steps show which were retrieved.
+- Write examples from real user questions, comment the logic inside the query, and make join paths explicit (`JOIN ... ON` with keys) so the pattern is reusable.
 - Cover: multi-table joins, preaggregation, business calculations, relative dates and fiscal periods, term-to-value filters, ranking/window patterns.
 
 ### Agent instructions (cross-source only)

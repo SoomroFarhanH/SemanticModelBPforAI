@@ -3,7 +3,7 @@
 #     apm install microsoft/skills-for-fabric --skill dataagent-cli
 
 name: dataagent-cli
-version: 0.1.0
+version: 0.2.0
 description: "Plans, creates, configures, improves, publishes, and evaluates Fabric data agents over lakehouses, warehouses, SQL databases, mirrored databases, semantic models, Eventhouse KQL, graph, ontology, and AI Search, applying Microsoft's best practices per source type."
 author: Microsoft Fabric
 license: MIT

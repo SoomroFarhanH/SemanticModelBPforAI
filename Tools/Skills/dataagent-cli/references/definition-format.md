@@ -65,6 +65,17 @@ Observed folder names follow the export: `lakehouse-tables-<name>`, `semantic-mo
 
 Other source types use the same item APIs; their element trees and folder names must be confirmed by readback (and the Analyzer) on first use.
 
+The dedicated DataAgent endpoints (`/v1/workspaces/{ws}/dataAgents[/{id}]` with `getDefinition` / `updateDefinition`) take the same definition shape. For edits to a single field, the preview **staging APIs** (`/dataAgents/{id}/staging/settings`, `/datasources`, `/elements`, `/fewshots`, `/topics`) change only what you send and avoid the full-replace risk; they map to these parts as follows. Full table in [authoring.md](authoring.md) section A0.
+
+| Definition field | Staging API |
+|---|---|
+| `stage_config.json` → `aiInstructions` | `PATCH /staging/settings` `{"aiInstructions"}` |
+| `datasource.json` → `userDescription`, `dataSourceInstructions` | `PATCH /staging/datasources/{ds}` `{"description", "instructions"}` |
+| `datasource.json` → `elements[].is_selected`, `.description` | `PATCH /staging/datasources/{ds}/elements?id=` `{"isSelected", "description"}` |
+| `fewshots.json` → `fewShots[]` | `/staging/datasources/{ds}/fewshots` (create, update, delete, deleteAll) |
+| new source folder | `POST /staging/datasources` `{"type": "FabricItem" \| "LakehouseTables", ...Reference}` |
+| topics (preview runtime) | `/staging/datasources/{ds}/topics` (no fixed definition path documented; confirm by export) |
+
 ## Pitfalls
 
 - A part you forget is a part you delete.

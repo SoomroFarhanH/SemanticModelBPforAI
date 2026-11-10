@@ -4,6 +4,8 @@
 
 Output: `_brief/dataagent-spec.md` (or the user-named equivalent), a short chat summary, and an explicit approval question. **The turn ends there.** Do not create the item, write definitions, or call Fabric write APIs in this mode.
 
+For a small, well-scoped request (one or two sources, the user already knows the scope), use the condensed spec in [quickstart.md](quickstart.md) — same approval gate, fewer questions. Design every decision so it will pass [preflight-checklist.md](preflight-checklist.md).
+
 For an **existing** agent, planning means: export it (`management.md`), run the Analyzer or read its evidence (`evaluation.md`), and write `remediation-plan.md` using the same gate (template at the end).
 
 ## 1. Gather requirements (infer first, ask only what is missing)
@@ -13,13 +15,13 @@ Infer from the prompt, workspace items and any existing agent. Ask only for what
 | Topic | What to settle |
 |---|---|
 | Purpose and audience | Who asks, what decisions, what 10–20 representative questions (these become example candidates and the evaluation set) |
-| Sources | Which items answer those questions; **max 5 sources**, any mix of lakehouse, warehouse, SQL database, mirrored database, semantic model, Eventhouse KQL database, graph model, ontology, Azure AI Search index |
+| Sources | Which items answer those questions; **max 5 sources**, any mix of lakehouse, warehouse, SQL database, mirrored database, semantic model, Eventhouse KQL database, graph model, ontology, Azure AI Search index, Microsoft Graph (preview) |
 | Scope per source | Which tables/views/functions (or model tables) the questions need; what must be excluded |
 | Preferred source per topic | Which source is authoritative for which topic (drives routing) |
 | Runtime | Standard (GA, default) or preview. Schema object descriptions, topics, advanced NL2SQL/DAX and 1,000-row answers need the **preview runtime**; preview carries a release gate and needs explicit owner acceptance |
 | Language | English only (questions, instructions, examples) |
 | Security | Consumers' access (the agent uses the caller's permissions; RLS/CLS apply; sharing the agent does not grant data access); Purview/DLP expectations |
-| Delivery | Where users will consume it (portal, MCP, Microsoft 365 Copilot, Copilot Studio); Git/deployment-pipeline needs |
+| Delivery | Where users will consume it (portal, MCP server, Microsoft 365 Copilot, Copilot Studio, Azure AI Foundry, Teams — see [consumption.md](consumption.md)); a draft of the **publishing description** (it becomes the MCP tool description and the orchestrator routing signal); Git/deployment-pipeline needs |
 
 ## 2. Check each source's readiness (read-only)
 
@@ -49,6 +51,7 @@ For each source decide where each piece of context lives (details in [context-pl
 
 **Workspace:** <name> | **Runtime:** standard|preview | **Delivery:** <channels>
 **Audience / purpose:** <one or two lines>
+**Publishing description (draft):** <domain, sources, typical questions, what it does not answer>
 **Representative questions:** <10-20, grouped by source/topic>
 
 ## Sources
@@ -60,7 +63,7 @@ For each source decide where each piece of context lives (details in [context-pl
 |---|---|---|---|---|---|---|
 
 ## Agent instructions outline
-Objective / Data sources and routing / Key terminology / Response guidelines / Handling common topics (only what applies across sources)
+Objective / Data sources (and routing) / Key terminology / Response guidelines / Handling common topics (only what applies across sources)
 
 ## Routing plan
 <single source: "Not applicable"; otherwise the ordered steps from routing.md>

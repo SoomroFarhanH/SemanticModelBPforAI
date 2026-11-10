@@ -9,7 +9,7 @@ Read-only. Run after `authoring`, before publishing, and whenever the user asks 
 1. Export the draft (`management.md`) and compare with the plan: every approved change present, `published/` equal to the backup, unplanned parts unchanged.
 2. Re-run each example query against its source (SQL on the SQL endpoint, KQL through the Eventhouse query endpoint), read-only and bounded. Report pass or fail per example.
 3. **Analyzer before and after.** Run the Fabric Data Agent Analyzer (`Analyzer/FabricDataAgentAnalyzer`) in `GIT_EXPORT` mode on the backup and on the new export (`GIT_EXPORT_ROOT` = the exported `Files/Config` folder; query, performance and evaluation flags `False`). Compare `scorecard.readiness`, `scorecard.coverage` and each `rule_id` status; list improved, unchanged and **regressed** rules. A regression is a defect to fix or roll back.
-
+4. **Pre-flight checklist.** Run [preflight-checklist.md](preflight-checklist.md) on the export (sections A–G; add H when the user wants to publish). It covers best practices the Analyzer does not score, such as the instruction structure, example coverage and the publishing description.
 Verified effect on a small lakehouse agent: readiness 38% → 91%, coverage 57% → 62%, all lakehouse-source rules cleared; release gates still failed.
 
 ## 2. What a static check cannot show (state this in every report)
@@ -33,8 +33,18 @@ Verified effect on a small lakehouse agent: readiness 38% → 91%, coverage 57% 
    ```
 
    The Analyzer can run the same with `RUN_EVALUATION = True` and `EVALUATION_DATASET_PATH`. Evaluation writes results to a table in the attached lakehouse and uses an LLM; it consumes capacity, so run it only when requested.
-3. **Example-query quality (SQL only, preview):** `datasource.evaluate_few_shots(batch_size=20)` returns success rate and clarity/relatedness/mapping scores, and detects conflicting examples.
-4. **Inspect run steps in the portal** for a sample of questions: the generated query, which examples were retrieved (top three by similarity), and which source was chosen; if the routing tool ran, the decision was ambiguous.
+3. **Example-query quality (SQL sources only, preview):**
+
+   ```python
+   result = datasource.evaluate_few_shots(batch_size=20)
+   result.success_rate          # share of examples judged good on all criteria
+   result.failure_cases         # examples to rewrite, with reasons
+   result.conflict_count, result.conflict_details   # contradictory examples, confidence 1-5
+   ```
+
+   Each example is scored on **Clarity** (the question is unambiguous), **Relatedness** (the query answers that question) and **Mapping** (every literal in the question appears in the query). Rewrite or drop failures and resolve every conflict before publishing; re-run until clean. Not available for KQL, graph or semantic-model sources: validate those by running the query (section 1).
+4. **Inspect run steps in the portal** for a sample of questions: the generated query, which examples were retrieved (the three to four most similar), and which source was chosen; if the routing tool ran, the decision was ambiguous.
+5. **Smoke test the published agent** (after `management` publishes, when asked): call it through its MCP endpoint with 3–5 benchmark questions ([consumption.md](consumption.md)). This exercises the published stage, the caller's permissions and the publishing description that MCP clients see as the tool description. Compare with the same questions on the draft (`data_agent_stage="sandbox"`).
 
 ## 4. Diagnose and fix (iterate at the closest layer)
 
@@ -52,4 +62,4 @@ Change one layer at a time, re-run the benchmark, and keep what improved.
 
 ## Output
 
-A concise report: readback result, example results, before/after table (readiness, coverage, improved/regressed rules), benchmark results if run, remaining gaps and why, and recommended next checks. Publishing is a separate decision (`management.md`).
+A concise report: readback result, example results, pre-flight table, before/after table (readiness, coverage, improved/regressed rules), benchmark results if run, remaining gaps and why, and recommended next checks. Publishing is a separate decision (`management.md`).
