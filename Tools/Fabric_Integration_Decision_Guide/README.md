@@ -6,11 +6,17 @@ The guide is based on Gurkamal (GK) Rakhra's blog post, [Modernize data integrat
 
 ## Open the guide
 
-1. On GitHub, open [index.html](index.html).
-2. Select **Download raw file** in the file toolbar and save the file as `index.html`. Alternatively, right-click **Raw** and select **Save link as**.
-3. Open the downloaded file in a modern browser with JavaScript enabled.
+[**Open the interactive guide**](https://soomrofarhanh.github.io/SemanticModelBPforAI/)
 
-GitHub displays the HTML source rather than running the interactive page. The guide runs locally without a server, installation, or Fabric sign-in. An internet connection is needed to open the Microsoft Learn links.
+The guide is hosted on GitHub Pages and opens directly in a modern browser with JavaScript enabled. No download, installation, GitHub account, or Fabric sign-in is required.
+
+For offline use, open [index.html](index.html) on GitHub, select **Download raw file**, and open the saved file in your browser. An internet connection is still needed for the Microsoft Learn links.
+
+## Publishing updates
+
+The [deployment workflow](../../.github/workflows/deploy-integration-guide.yml) publishes this folder to the site's root when changes to this folder or the workflow are pushed to `main`. It can also be run manually from the repository's **Actions** tab. Only this guide's folder is published, not the rest of the repository.
+
+In the repository's **Settings > Pages**, keep **Source** set to **GitHub Actions**. The workflow's deployment summary includes the live site URL.
 
 ## Use the guide
 
